@@ -15,7 +15,8 @@ fork it. improve it. make it yours. PRs are welcome!
 ## install
 
 ```bash
-/add-plugin pstack
+/plugin marketplace add vramirez/claude-skills
+/plugin install pstack@claude-skills
 ```
 
 ## get started

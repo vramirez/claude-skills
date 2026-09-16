@@ -1,16 +1,17 @@
 # Jotform
 
-Cursor plugin that connects agents to [Jotform](https://www.jotform.com) through Jotform's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Jotform](https://www.jotform.com) through Jotform's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 List and create forms, edit existing ones, submit to them, and read submissions in the signed-in Jotform account.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Jotform**.
-3. Click **Install**, then complete the Jotform sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install jotform@claude-skills
+```
 
-Or run `/add-plugin jotform` in chat.
+After installing, complete the Jotform sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin jotform` in chat.
 }
 ```
 
-Auth is OAuth 2.0 and it is required on first connect. Cursor prompts for Jotform sign-in when the plugin connects. Bearer-token access is not supported.
+Auth is OAuth 2.0 and it is required on first connect. Claude Code prompts for Jotform sign-in when the plugin connects. Bearer-token access is not supported.
 
 ## Before you connect
 

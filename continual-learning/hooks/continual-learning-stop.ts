@@ -4,9 +4,11 @@ import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "no
 import { dirname, resolve } from "node:path";
 import { stdin } from "bun";
 
-const STATE_PATH = resolve(".cursor/hooks/state/continual-learning.json");
+const PROJECT_DIR = process.env.CLAUDE_PROJECT_DIR ?? process.cwd();
+const STATE_PATH = resolve(PROJECT_DIR, ".claude/hooks/state/continual-learning.json");
 const INCREMENTAL_INDEX_PATH = resolve(
-  ".cursor/hooks/state/continual-learning-index.json"
+  PROJECT_DIR,
+  ".claude/hooks/state/continual-learning-index.json"
 );
 const DEFAULT_MIN_TURNS = 10;
 const DEFAULT_MIN_MINUTES = 120;
@@ -18,11 +20,11 @@ const FOLLOWUP_MESSAGE =
   `Run the \`continual-learning\` skill now. Use the \`agents-memory-updater\` subagent for the full memory update flow. Use incremental transcript processing with index file \`${INCREMENTAL_INDEX_PATH}\`: only consider transcripts not in the index or transcripts whose mtime is newer than indexed mtime. Have the subagent refresh index mtimes, remove entries for deleted transcripts, and update \`AGENTS.md\` only for high-signal recurring user corrections and durable workspace facts. Exclude one-off/transient details and secrets. If no meaningful updates exist, respond exactly: No high-signal memory updates.`;
 
 interface StopHookInput {
-  conversation_id: string;
-  generation_id?: string;
-  status: "completed" | "aborted" | "error" | string;
-  loop_count: number;
+  session_id: string;
+  prompt_id?: string;
+  stop_hook_active?: boolean;
   transcript_path?: string | null;
+  last_assistant_message?: string;
 }
 
 interface ContinuousLearningState {
@@ -30,7 +32,7 @@ interface ContinuousLearningState {
   lastRunAtMs: number;
   turnsSinceLastRun: number;
   lastTranscriptMtimeMs: number | null;
-  lastProcessedGenerationId: string | null;
+  lastProcessedPromptId: string | null;
   trialStartedAtMs: number | null;
 }
 
@@ -68,7 +70,7 @@ function loadState(): ContinuousLearningState {
     lastRunAtMs: 0,
     turnsSinceLastRun: 0,
     lastTranscriptMtimeMs: null,
-    lastProcessedGenerationId: null,
+    lastProcessedPromptId: null,
     trialStartedAtMs: null,
   };
 
@@ -99,9 +101,9 @@ function loadState(): ContinuousLearningState {
         Number.isFinite(parsed.lastTranscriptMtimeMs)
           ? parsed.lastTranscriptMtimeMs
           : null,
-      lastProcessedGenerationId:
-        typeof parsed.lastProcessedGenerationId === "string"
-          ? parsed.lastProcessedGenerationId
+      lastProcessedPromptId:
+        typeof parsed.lastProcessedPromptId === "string"
+          ? parsed.lastProcessedPromptId
           : null,
       trialStartedAtMs:
         typeof parsed.trialStartedAtMs === "number" &&
@@ -135,7 +137,9 @@ function getTranscriptMtimeMs(transcriptPath: string | null | undefined): number
 }
 
 function shouldCountTurn(input: StopHookInput): boolean {
-  return input.status === "completed" && input.loop_count === 0;
+  // stop_hook_active is true when this stop was itself caused by a hook
+  // continuation; do not count those as user turns.
+  return input.stop_hook_active !== true;
 }
 
 async function parseHookInput<T>(): Promise<T> {
@@ -148,11 +152,11 @@ async function main(): Promise<number> {
     const input = await parseHookInput<StopHookInput>();
     const state = loadState();
 
-    if (input.generation_id && input.generation_id === state.lastProcessedGenerationId) {
+    if (input.prompt_id && input.prompt_id === state.lastProcessedPromptId) {
       console.log(JSON.stringify({}));
       return 0;
     }
-    state.lastProcessedGenerationId = input.generation_id ?? null;
+    state.lastProcessedPromptId = input.prompt_id ?? null;
 
     const countedTurn = shouldCountTurn(input);
     const turnIncrement = countedTurn ? 1 : 0;
@@ -226,7 +230,9 @@ async function main(): Promise<number> {
 
       console.log(
         JSON.stringify({
-          followup_message: FOLLOWUP_MESSAGE,
+          decision: "block",
+          reason: FOLLOWUP_MESSAGE,
+          systemMessage: "Continual learning: memory update triggered.",
         })
       );
       return 0;

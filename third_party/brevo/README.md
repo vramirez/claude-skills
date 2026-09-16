@@ -1,16 +1,17 @@
 # Brevo
 
-Cursor plugin that connects agents to [Brevo](https://www.brevo.com) through Brevo's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Brevo](https://www.brevo.com) through Brevo's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Manage contacts and lists, build email, SMS, and WhatsApp campaigns, and work with the built-in CRM's deals, companies, and tasks in your Brevo account.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Brevo**.
-3. Click **Install**, then set your Brevo MCP token (below).
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install brevo@claude-skills
+```
 
-Or run `/add-plugin brevo` in chat.
+After installing, set your Brevo MCP token (below).
 
 ## MCP
 
@@ -58,7 +59,7 @@ The hosted runtime is the source of truth for tool names and schemas.
 ## Docs
 
 - Brevo MCP protocol: https://developers.brevo.com/docs/mcp-protocol
-- Integration guide (Cursor setup): https://developers.brevo.com/docs/integration-guide
+- Integration guide (Claude Code setup): https://developers.brevo.com/docs/integration-guide
 - Server URL: https://mcp.brevo.com/v1/brevo/mcp
 
 Logo is Brevo's official mark, from the `getbrevo` GitHub organization.

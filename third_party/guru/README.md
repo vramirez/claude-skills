@@ -1,16 +1,17 @@
 # Guru
 
-Cursor plugin that connects agents to [Guru](https://www.getguru.com) through Guru's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Guru](https://www.getguru.com) through Guru's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Ask questions against a company's Guru knowledge base and connected sources, get permission-aware answers with citations, and draft or update Guru Cards.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Guru**.
-3. Click **Install**, then complete the Guru sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install guru@claude-skills
+```
 
-Or run `/add-plugin guru` in chat.
+After installing, complete the Guru sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin guru` in chat.
 }
 ```
 
-Auth is OAuth 2.0. Cursor prompts for Guru sign-in when the plugin connects.
+Auth is OAuth 2.0. Claude Code prompts for Guru sign-in when the plugin connects.
 
 ## What agents can do
 

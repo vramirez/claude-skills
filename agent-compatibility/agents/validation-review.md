@@ -1,8 +1,8 @@
 ---
 name: validation-review
 description: Assess whether an agent can verify a small change without guessing or running an unnecessarily heavy loop
-model: fast
-readonly: true
+model: haiku
+disallowedTools: Edit, Write, MultiEdit, NotebookEdit
 ---
 
 # Validation review

@@ -1,16 +1,17 @@
 # Semrush
 
-Cursor plugin that connects agents to [Semrush](https://www.semrush.com) through Semrush's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Semrush](https://www.semrush.com) through Semrush's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Pull Semrush keyword, backlink, traffic, and competitive-intelligence data into the editor without leaving your work.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Semrush**.
-3. Click **Install**, then complete the Semrush sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install semrush@claude-skills
+```
 
-Or run `/add-plugin semrush` in chat.
+After installing, complete the Semrush sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin semrush` in chat.
 }
 ```
 
-Auth is OAuth 2.1 and the client registers itself, so Cursor just prompts for Semrush sign-in when the plugin connects — there is no client ID to configure.
+Auth is OAuth 2.1 and the client registers itself, so Claude Code just prompts for Semrush sign-in when the plugin connects — there is no client ID to configure.
 
 ## Before you connect
 

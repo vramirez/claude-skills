@@ -1,16 +1,17 @@
 # GitHub
 
-Cursor plugin that connects agents to [GitHub](https://github.com) through GitHub's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [GitHub](https://github.com) through GitHub's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Work with repositories, issues, pull requests, code search, and Actions under the permissions of a personal access token you provide.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **GitHub**.
-3. Click **Install**, then set your GitHub personal access token (below).
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install github@claude-skills
+```
 
-Or run `/add-plugin github` in chat.
+After installing, set your GitHub personal access token (below).
 
 ## MCP
 
@@ -48,7 +49,7 @@ Prefer a fine-grained token scoped to specific repositories when that is enough.
 
 ### 2. Configure the plugin
 
-In **Dashboard → Plugins → Configure**, set **GitHub personal access token** to the value you just created.
+Claude Code prompts for plugin settings at install time. Set **GitHub personal access token** to the value you just created.
 
 Tool calls run with that token's permissions. Rotate or revoke the token from GitHub Settings if it is ever exposed.
 
@@ -57,7 +58,7 @@ Tool calls run with that token's permissions. Rotate or revoke the token from Gi
 - Use the GitHub MCP server: https://docs.github.com/en/copilot/how-tos/context/use-mcp/use-the-github-mcp-server
 - Managing personal access tokens: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
 
-Logo is GitHub's official Octocat mark, placed on a white tile with padding so it reads well in the Cursor UI.
+Logo is GitHub's official Octocat mark, placed on a white tile with padding so it reads well in the marketplace UI.
 
 ## License
 

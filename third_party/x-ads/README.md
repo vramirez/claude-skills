@@ -1,6 +1,6 @@
 # X Ads
 
-Cursor plugin that connects agents to the [X Ads API](https://docs.x.com/x-ads-api/introduction) through X's official hosted [Model Context Protocol](https://modelcontextprotocol.io/) server at `https://ads-api.x.com/mcp`.
+Claude Code plugin that connects agents to the [X Ads API](https://docs.x.com/x-ads-api/introduction) through X's official hosted [Model Context Protocol](https://modelcontextprotocol.io/) server at `https://ads-api.x.com/mcp`.
 
 This plugin signs you in with OAuth as your own X account and works with the ads accounts you can access. Agents can manage campaigns, create ads, set up pixels and conversion tracking, and pull performance stats.
 
@@ -8,11 +8,12 @@ This is a separate plugin from the [X](../x/) plugin: the ads MCP server lives o
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **X Ads**.
-3. Click **Install**, then complete the OAuth sign-in when prompted.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install x-ads@claude-skills
+```
 
-Or run `/add-plugin x-ads` in chat.
+After installing, complete the OAuth sign-in when prompted.
 
 ## MCP
 
@@ -49,7 +50,7 @@ Or run `/add-plugin x-ads` in chat.
 
 ## Setup
 
-No token to paste — the plugin ships with X's OAuth client ID (the same one the X connector uses) and requests the scopes below. On first use, Cursor opens a browser window where you sign in to X and approve access. The `offline.access` scope lets Cursor refresh the session automatically, so you only sign in once.
+No token to paste — the plugin ships with X's OAuth client ID (the same one the X connector uses) and requests the scopes below. On first use, Claude Code opens a browser window where you sign in to X and approve access. The `offline.access` scope lets Claude Code refresh the session automatically, so you only sign in once.
 
 Requests run in your user context against the ads accounts your X account can access. You can revoke access at any time from your X account's connected apps settings.
 

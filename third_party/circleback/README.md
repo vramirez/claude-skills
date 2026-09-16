@@ -1,16 +1,17 @@
 # Circleback
 
-Cursor plugin that connects agents to [Circleback](https://circleback.ai) through Circleback's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Circleback](https://circleback.ai) through Circleback's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Search meetings, transcripts, action items, calendar events, and emails, and look up people and companies in the signed-in Circleback account.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Circleback**.
-3. Click **Install**, then complete the Circleback sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install circleback@claude-skills
+```
 
-Or run `/add-plugin circleback` in chat.
+After installing, complete the Circleback sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin circleback` in chat.
 }
 ```
 
-Auth is OAuth 2.0 against Circleback with Dynamic Client Registration (DCR) and PKCE. Cursor registers itself and prompts for Circleback sign-in when the plugin connects — there is no API key or client ID to configure.
+Auth is OAuth 2.0 against Circleback with Dynamic Client Registration (DCR) and PKCE. Claude Code registers itself and prompts for Circleback sign-in when the plugin connects — there is no API key or client ID to configure.
 
 ## Notes
 

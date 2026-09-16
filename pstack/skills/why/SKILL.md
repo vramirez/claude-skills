@@ -59,7 +59,7 @@ Capture this as seed context (file paths, symbols, commits, PR numbers, linked t
 
 ### Discovery
 
-Before spawning investigators, list the available MCPs from the Cursor environment. Use the available-tools map when present. Otherwise inspect the `mcps/` directory Cursor exposes for enabled MCP servers.
+Before spawning investigators, list the available MCPs from the Claude Code environment. Use the available-tools map when present. Otherwise inspect the MCP servers Claude Code exposes for enabled MCP servers.
 
 Map each available MCP to one evidence category:
 

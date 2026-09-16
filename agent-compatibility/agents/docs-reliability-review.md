@@ -1,8 +1,8 @@
 ---
 name: docs-reliability-review
 description: Check whether the documented setup and run paths reliably lead to the real working path
-model: fast
-readonly: true
+model: haiku
+disallowedTools: Edit, Write, MultiEdit, NotebookEdit
 ---
 
 # Docs reliability review

@@ -1,0 +1,21 @@
+{
+  "name": "pr-review-canvas",
+  "displayName": "PR Review Canvas",
+  "version": "0.1.0",
+  "description": "Render PR diffs as review canvases grouped by importance.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://github.com/vramirez/claude-skills/tree/main/pr-review-canvas",
+  "repository": "https://github.com/vramirez/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "claude-code-plugin",
+    "canvas",
+    "pr-review",
+    "code-review",
+    "diff",
+    "pull-request"
+  ]
+}

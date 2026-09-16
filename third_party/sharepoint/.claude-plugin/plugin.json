@@ -1,0 +1,21 @@
+{
+  "name": "sharepoint",
+  "displayName": "SharePoint",
+  "version": "1.0.0",
+  "description": "Search and read Microsoft SharePoint sites, document libraries, files, and lists.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://github.com/vramirez/claude-skills/tree/main/third_party/sharepoint",
+  "repository": "https://github.com/vramirez/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "sharepoint",
+    "sites",
+    "files",
+    "lists",
+    "microsoft",
+    "mcp"
+  ]
+}

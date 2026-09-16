@@ -1,16 +1,17 @@
 # Attio
 
-Cursor plugin that connects agents to [Attio](https://attio.com) through Attio's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Attio](https://attio.com) through Attio's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Search, create, and update CRM records (people, companies, deals, and custom objects), work with lists, notes, and tasks, and search emails, meetings, and comments in the signed-in Attio workspace.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Attio**.
-3. Click **Install**, then complete the Attio sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install attio@claude-skills
+```
 
-Or run `/add-plugin attio` in chat.
+After installing, complete the Attio sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin attio` in chat.
 }
 ```
 
-Auth is OAuth against Attio. Cursor prompts for Attio user login when the plugin connects — there is no API key or client ID to configure.
+Auth is OAuth against Attio. Claude Code prompts for Attio user login when the plugin connects — there is no API key or client ID to configure.
 
 ## Before you connect
 

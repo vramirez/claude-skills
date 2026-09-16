@@ -1,16 +1,17 @@
 # MailerLite
 
-Cursor plugin that connects agents to [MailerLite](https://www.mailerlite.com) through MailerLite's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [MailerLite](https://www.mailerlite.com) through MailerLite's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Add and update subscribers, organize groups and segments, build and inspect campaigns, and manage forms, automations, and webhooks in the signed-in MailerLite account.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **MailerLite**.
-3. Click **Install**, then complete the MailerLite sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install mailerlite@claude-skills
+```
 
-Or run `/add-plugin mailerlite` in chat.
+After installing, complete the MailerLite sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin mailerlite` in chat.
 }
 ```
 
-Auth is OAuth. Cursor prompts for MailerLite sign-in when the plugin connects — there is no API key or token to paste.
+Auth is OAuth. Claude Code prompts for MailerLite sign-in when the plugin connects — there is no API key or token to paste.
 
 ## What agents can do
 
@@ -43,7 +44,7 @@ The hosted runtime is the source of truth for tool names and schemas. Call `get_
 
 - Tool calls run as the MailerLite user who authorizes the connection.
 - The MCP server is in beta, so the tool catalog can change.
-- The server exposes close to 40 tools. MailerLite notes that Cursor's free plan caps a single connector at 40 active tools, so you may see an "Exceeding total tools limit" warning there.
+- The server exposes close to 40 tools. MailerLite notes that Claude Code's free plan caps a single connector at 40 active tools, so you may see an "Exceeding total tools limit" warning there.
 
 ## Docs
 

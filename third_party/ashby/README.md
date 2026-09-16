@@ -1,16 +1,17 @@
 # Ashby
 
-Cursor plugin that connects agents to [Ashby](https://www.ashbyhq.com) through Ashby's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Ashby](https://www.ashbyhq.com) through Ashby's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Search candidates and jobs, prepare for interviews, review pipeline status and pending tasks, and take recruiting actions in the signed-in Ashby workspace.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Ashby**.
-3. Click **Install**, then complete the Ashby sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install ashby@claude-skills
+```
 
-Or run `/add-plugin ashby` in chat.
+After installing, complete the Ashby sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin ashby` in chat.
 }
 ```
 
-Auth is OAuth 2.0 against Ashby. Cursor prompts for Ashby sign-in when the plugin connects — there is no API key to configure. Ashby supports dynamic client registration.
+Auth is OAuth 2.0 against Ashby. Claude Code prompts for Ashby sign-in when the plugin connects — there is no API key to configure. Ashby supports dynamic client registration.
 
 ## Before you connect
 

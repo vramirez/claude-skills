@@ -1,16 +1,17 @@
 # Outreach
 
-Cursor plugin that connects agents to [Outreach](https://www.outreach.ai) through Outreach's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Outreach](https://www.outreach.ai) through Outreach's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Search sequences, prospects, accounts, and Kaia meetings, then create sequences, tasks, and records in the signed-in Outreach instance.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Outreach**.
-3. Click **Install**, then complete the Outreach sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install outreach@claude-skills
+```
 
-Or run `/add-plugin outreach` in chat.
+After installing, complete the Outreach sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin outreach` in chat.
 }
 ```
 
-Auth is OAuth 2.1 against Outreach with Dynamic Client Registration (DCR) and PKCE. Cursor registers itself and prompts for Outreach sign-in when the plugin connects — there is no API key or client ID to configure.
+Auth is OAuth 2.1 against Outreach with Dynamic Client Registration (DCR) and PKCE. Claude Code registers itself and prompts for Outreach sign-in when the plugin connects — there is no API key or client ID to configure.
 
 ## Before you connect
 

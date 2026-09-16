@@ -1,16 +1,17 @@
 # Fathom
 
-Cursor plugin that connects agents to [Fathom](https://fathom.video) through Fathom's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Fathom](https://fathom.video) through Fathom's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Bring Fathom meeting recordings, transcripts, and AI summaries into the editor to draft follow-ups and extract decisions.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Fathom**.
-3. Click **Install**, then complete the Fathom sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install fathom@claude-skills
+```
 
-Or run `/add-plugin fathom` in chat.
+After installing, complete the Fathom sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin fathom` in chat.
 }
 ```
 
-Auth is OAuth. Cursor prompts for Fathom sign-in when the plugin connects.
+Auth is OAuth. Claude Code prompts for Fathom sign-in when the plugin connects.
 
 ## Before you connect
 

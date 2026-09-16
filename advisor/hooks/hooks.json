@@ -1,26 +1,36 @@
 {
-  "version": 1,
+  "description": "Advisor hooks: track edits since the last consult, log each consult, and nudge a pre-completion consult at the end of a turn",
   "hooks": {
-    "afterFileEdit": [
+    "PostToolUse": [
       {
-        "command": "bash \"${CURSOR_PLUGIN_ROOT}/hooks/mark-pending.sh\""
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/mark-pending.sh\""
+          }
+        ]
       }
     ],
-    "afterAgentResponse": [
+    "SubagentStop": [
       {
-        "command": "bash \"${CURSOR_PLUGIN_ROOT}/hooks/capture-response.sh\""
+        "matcher": "advisor-subagent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/record-consult.sh\""
+          }
+        ]
       }
     ],
-    "subagentStop": [
+    "Stop": [
       {
-        "command": "bash \"${CURSOR_PLUGIN_ROOT}/hooks/record-consult.sh\"",
-        "matcher": "^advisor-subagent$"
-      }
-    ],
-    "stop": [
-      {
-        "command": "bash \"${CURSOR_PLUGIN_ROOT}/hooks/stop-hook.sh\"",
-        "loop_limit": 3
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/stop-hook.sh\""
+          }
+        ]
       }
     ]
   }

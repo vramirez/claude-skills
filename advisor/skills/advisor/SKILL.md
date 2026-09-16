@@ -6,15 +6,13 @@ description: >-
   done. Use when the user types /advisor, asks to turn the advisor on or off,
   picks an advisor model, or explicitly asks for a second opinion from a
   stronger or different model. Never enable it on your own.
-icon: lightbulb
-color: purple
 ---
 
 # Advisor
 
 You are the main model. Advisor mode adds a second, stronger model that you consult at a few key points. The advisor gets your briefing (and the full transcript when available), thinks hard, and returns a verdict with guidance. It does not edit files. You still do the work and make the final call.
 
-State lives in `.cursor/advisor/state.json` at the project root. When that file exists with `"enabled": true`, advisor mode is on for this project.
+State lives in `.claude/advisor/state.json` at the project root. When that file exists with `"enabled": true`, advisor mode is on for this project.
 
 ## Commands
 
@@ -22,9 +20,9 @@ The text after `/advisor` selects the action.
 
 | Input | Action |
 | --- | --- |
-| `/advisor` | Enable for this conversation with the default advisor: the latest Grok at its highest reasoning effort. If a state file already exists, from this or another conversation, re-bind it here, keeping its `model` and `nudge` settings. |
-| `/advisor <model>` | Same, with the given model. Any model available to subagents works: `/advisor cursor-grok-4.6-xhigh-fast`, `/advisor composer-2.5`. |
-| `/advisor off` | Disable: delete `.cursor/advisor/`. |
+| `/advisor` | Enable for this conversation with the default advisor: Claude Opus at its highest reasoning effort. If a state file already exists, from this or another conversation, re-bind it here, keeping its `model` and `nudge` settings. |
+| `/advisor <model>` | Same, with the given model. Any model available to subagents works: `/advisor sonnet`, `/advisor fable`. |
+| `/advisor off` | Disable: delete `.claude/advisor/`. |
 | `/advisor status` | Report model, consult count, and whether the end-of-turn nudge is on. Changes nothing. |
 | `/advisor ask <question>` | Consult now about the current work, regardless of checkpoint. |
 | `/advisor nudge on` / `off` | Toggle the end-of-turn reminder posted by the plugin's stop hook (default on). |
@@ -33,28 +31,28 @@ If the message also contains a task (`/advisor, then refactor the cache layer`),
 
 ### Choosing the model
 
-The default is the latest Grok model at its highest reasoning effort, currently `cursor-grok-4.6-xhigh`. If a newer Grok or a higher effort tier appears in the subagent model list available to you, prefer it and say so.
+The default is Claude Opus at its highest reasoning effort, currently `opus`. Valid values are `sonnet`, `opus`, `haiku`, `fable`, or a full Claude model ID.
 
 For `/advisor <model>`, resolve the request against the subagent model slugs available to you:
 
 - An exact slug: use it as is.
-- A family or version name (`grok fast`, `composer`): that family's latest model at its highest reasoning tier.
+- A family or version name (`sonnet`, `haiku`, `fable`): that family's latest model at its highest reasoning tier.
 - No match: say so, name two or three close options, and keep the current model.
 
-If the Task tool rejects a slug, read the valid slugs from its error message, pick the closest one (same family, highest reasoning tier), save it to `state.json`, and tell the user in one line. Do not block the consult on the slug.
+If the Agent tool rejects a model name, read the valid slugs from its error message, pick the closest one (same family, highest reasoning tier), save it to `state.json`, and tell the user in one line. Do not block the consult on the slug.
 
 ## Enabling
 
 1. Resolve the model as described above.
-2. Write `.cursor/advisor/state.json` with the file-writing tool (not a shell redirect), creating the directory if needed. If a state file already exists, carry over its `model` (unless this command names one) and `nudge`, and reset every other field to the values below. You cannot see which conversation an existing file belongs to, so always rewrite it: that re-binds the mode to this conversation, the hooks re-fill `conversation_id` and `transcript_path`, and the next consult starts a fresh advisor instead of resuming another chat's. Also delete `.cursor/advisor/pending` and `.cursor/advisor/last-response.txt` if they exist, so a marker left by another conversation cannot trigger the end-of-turn nudge here. Keep `log.md`.
+2. Write `.claude/advisor/state.json` with the file-writing tool (not a shell redirect), creating the directory if needed. If a state file already exists, carry over its `model` (unless this command names one) and `nudge`, and reset every other field to the values below. You cannot see which conversation an existing file belongs to, so always rewrite it: that re-binds the mode to this conversation, the hooks re-fill `conversation_id` and `transcript_path`, and the next consult starts a fresh advisor instead of resuming another chat's. Also delete `.claude/advisor/pending` and `.claude/advisor/last-response.txt` if they exist, so a marker left by another conversation cannot trigger the end-of-turn nudge here. Keep `log.md`.
 
    ```json
    {
      "enabled": true,
-     "model": "cursor-grok-4.6-xhigh",
+     "model": "opus",
      "nudge": true,
      "advisor_agent_id": null,
-     "conversation_id": null,
+     "session_id": null,
      "transcript_path": null,
      "consults": 0,
      "last_consult_at": null,
@@ -62,10 +60,10 @@ If the Task tool rejects a slug, read the valid slugs from its error message, pi
    }
    ```
 
-   The plugin's hooks fill in `conversation_id`, `transcript_path`, `consults`, and `last_consult_at`. Leave them alone.
+   The plugin's hooks fill in `session_id`, `transcript_path`, `consults`, and `last_consult_at`. Leave them alone.
 3. Confirm in one line: `Advisor on: <slug>. I'll consult it before major decisions, when I'm stuck, and before I call the task done.` Then continue with any task in the same message.
 
-Never stage or commit `.cursor/advisor/`.
+Never stage or commit `.claude/advisor/`.
 
 ## Checkpoints
 
@@ -80,7 +78,7 @@ Do not consult for routine steps, for things you can verify yourself (run the te
 
 ## How to consult
 
-1. Read `.cursor/advisor/state.json` and decide which situation you are in:
+1. Read `.claude/advisor/state.json` and decide which situation you are in:
    - **Mode on here**: the file exists with `enabled: true` and you ran the Enabling steps in this conversation. Checkpoint consults and `/advisor ask` both follow the steps below in full, including `resume` and state writes.
    - **Not on here**: the file is missing, `enabled` is false, or you did not write it. A file you did not write belongs to another chat; only `/advisor` re-binds it, so leave it alone and never `resume` an `advisor_agent_id` you did not save yourself. Do not consult at checkpoints. If the user explicitly asks for a consult in this message (`/advisor ask ...`, or a request for a second opinion), run it as a one-off: a fresh spawn on the file's `model` if there is one, otherwise the default; no `resume`, no state writes, and no `transcript_path` (another chat's transcript is not yours to share; write "not available"). Mention that `/advisor` turns the mode on for this conversation.
 2. Build the briefing from `references/briefing-template.md`. Give the advisor everything it needs to disagree with you:
@@ -104,15 +102,15 @@ Do not consult for routine steps, for things you can verify yourself (run the te
    - `stop`: do not continue with the plan. Rethink, or bring the disagreement to the user if it is a product or scope question.
    - If the advisor asks for something it needs, provide it via `resume`, once. Do not ping-pong.
    - You are accountable for the result. The advisor is a strong second opinion, not an authority. If it is wrong about the codebase, show it the evidence once, or overrule it and tell the user why.
-5. Report each consult to the user in one or two lines: `Advisor (<model>): <verdict>. <One-line summary>. <What you did about it.>` Keep the advisor's full response out of the chat unless the user asks; the hooks also append it to `.cursor/advisor/log.md`.
+5. Report each consult to the user in one or two lines: `Advisor (<model>): <verdict>. <One-line summary>. <What you did about it.>` Keep the advisor's full response out of the chat unless the user asks; the hooks also append it to `.claude/advisor/log.md`.
 
 ## End-of-turn nudge
 
-When files changed since the last consult and a turn ends without one, the plugin's `stop` hook posts a follow-up that starts with `[Advisor]`. Treat it as the "before declaring done" checkpoint: run the pre-completion consult, or answer in one line that the change was trivial, or that you are waiting on the user, and stop. It fires at most once per batch of edits. `/advisor nudge off` disables it.
+When files changed since the last consult and a turn ends without one, the plugin's `Stop` hook posts a follow-up that starts with `[Advisor]`. Treat it as the "before declaring done" checkpoint: run the pre-completion consult, or answer in one line that the change was trivial, or that you are waiting on the user, and stop. It fires at most once per batch of edits. `/advisor nudge off` disables it.
 
 ## Disabling
 
-`/advisor off`: delete `.cursor/advisor/` and confirm in one line. Do not consult again in this conversation unless the user re-enables the mode or explicitly asks for a one-off consult.
+`/advisor off`: delete `.claude/advisor/` and confirm in one line. Do not consult again in this conversation unless the user re-enables the mode or explicitly asks for a one-off consult.
 
 ## Guardrails
 

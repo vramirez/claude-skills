@@ -1,16 +1,17 @@
 # Craft
 
-Cursor plugin that connects agents to [Craft](https://www.craft.do) through Craft's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Craft](https://www.craft.do) through Craft's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Search, read, create, and update documents, daily notes, tasks, and collections in a connected Craft space.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Craft**.
-3. Click **Install**, then complete the Craft sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install craft@claude-skills
+```
 
-Or run `/add-plugin craft` in chat.
+After installing, complete the Craft sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin craft` in chat.
 }
 ```
 
-Auth is OAuth. Cursor prompts for Craft sign-in when the plugin connects, and you pick which space to grant access to on the authorization screen.
+Auth is OAuth. Claude Code prompts for Craft sign-in when the plugin connects, and you pick which space to grant access to on the authorization screen.
 
 ## Before you connect
 
@@ -52,7 +53,7 @@ The hosted runtime is the source of truth for tool names and schemas.
 ## Docs
 
 - Craft MCP guide: https://www.craft.do/imagine/guide/mcp
-- Connect Craft to Cursor: https://www.craft.do/imagine/guide/mcp/cursor
+- Connect Craft to Claude Code: https://www.craft.do/imagine/guide/mcp/cursor
 - MCP support article: https://support.craft.do/en/integrate/mcp
 - Server URL: https://mcp.craft.do/my/mcp
 

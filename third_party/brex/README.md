@@ -1,16 +1,17 @@
 # Brex
 
-Cursor plugin that connects agents to [Brex](https://www.brex.com) through Brex's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Brex](https://www.brex.com) through Brex's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Query company spend — expenses, receipts, bills, vendors, cards, balances, and travel — and annotate expenses, all within your own Brex permissions.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Brex**.
-3. Click **Install**, then complete the Brex sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install brex@claude-skills
+```
 
-Or run `/add-plugin brex` in chat.
+After installing, complete the Brex sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin brex` in chat.
 }
 ```
 
-Auth is OAuth with Dynamic Client Registration. Cursor registers itself and prompts for Brex sign-in when the plugin connects — there is no API key or client ID to configure.
+Auth is OAuth with Dynamic Client Registration. Claude Code registers itself and prompts for Brex sign-in when the plugin connects — there is no API key or client ID to configure.
 
 ## Before you connect
 

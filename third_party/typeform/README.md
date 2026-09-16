@@ -1,16 +1,17 @@
 # Typeform
 
-Cursor plugin that connects agents to [Typeform](https://www.typeform.com) through Typeform's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Typeform](https://www.typeform.com) through Typeform's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Create and edit forms, explore response insights, and manage contacts and workspaces in the signed-in Typeform account.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Typeform**.
-3. Click **Install**, then complete the Typeform sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install typeform@claude-skills
+```
 
-Or run `/add-plugin typeform` in chat.
+After installing, complete the Typeform sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin typeform` in chat.
 }
 ```
 
-Auth is OAuth. Cursor prompts for Typeform sign-in when the plugin connects. Personal access tokens are explicitly rejected by the MCP server, so OAuth is the only path.
+Auth is OAuth. Claude Code prompts for Typeform sign-in when the plugin connects. Personal access tokens are explicitly rejected by the MCP server, so OAuth is the only path.
 
 ## Before you connect
 

@@ -1,0 +1,20 @@
+{
+  "name": "outlook",
+  "displayName": "Outlook",
+  "version": "1.0.0",
+  "description": "Search, read, and send Microsoft Outlook email, and look up contacts.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://github.com/vramirez/claude-skills/tree/main/third_party/outlook",
+  "repository": "https://github.com/vramirez/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "outlook",
+    "email",
+    "microsoft",
+    "mcp",
+    "contacts"
+  ]
+}

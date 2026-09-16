@@ -1,0 +1,30 @@
+{
+  "name": "similarweb",
+  "displayName": "Similarweb",
+  "version": "1.0.0",
+  "description": "Analyze website traffic, audiences, and competitors.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://docs.similarweb.com/api-v5/similarweb-mcp",
+  "repository": "https://github.com/vramirez/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "similarweb",
+    "traffic",
+    "analytics",
+    "competitive-intelligence",
+    "audience",
+    "mcp"
+  ],
+  "userConfig": {
+    "SIMILARWEB_API_KEY": {
+      "type": "string",
+      "title": "Similarweb API key",
+      "description": "REST API key from Similarweb under Account Settings → Data Tools → REST API.",
+      "sensitive": true,
+      "required": true
+    }
+  }
+}

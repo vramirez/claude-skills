@@ -1,16 +1,17 @@
 # Mem
 
-Cursor plugin that connects agents to [Mem](https://mem.ai) through Mem's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Mem](https://mem.ai) through Mem's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Capture, search, and organize notes and collections in Mem using semantic search, straight from the editor.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Mem**.
-3. Click **Install**, then complete the Mem sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install mem@claude-skills
+```
 
-Or run `/add-plugin mem` in chat.
+After installing, complete the Mem sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin mem` in chat.
 }
 ```
 
-Auth is OAuth. Cursor prompts for Mem sign-in when the plugin connects.
+Auth is OAuth. Claude Code prompts for Mem sign-in when the plugin connects.
 
 ## What agents can do
 

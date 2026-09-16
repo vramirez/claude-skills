@@ -1,16 +1,15 @@
 # Excalidraw
 
-Cursor plugin that connects agents to [Excalidraw](https://github.com/excalidraw/excalidraw-mcp) through Excalidraw's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Excalidraw](https://github.com/excalidraw/excalidraw-mcp) through Excalidraw's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Draw and export hand-drawn diagrams from chat.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Excalidraw**.
-3. Click **Install**.
-
-Or run `/add-plugin excalidraw` in chat.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install excalidraw@claude-skills
+```
 
 ## MCP
 

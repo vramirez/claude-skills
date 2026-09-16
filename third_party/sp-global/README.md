@@ -1,16 +1,17 @@
 # S&P Global
 
-Cursor plugin that connects agents to [S&P Global](https://docs.kensho.com/llmreadyapi/overview) through S&P Global's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [S&P Global](https://docs.kensho.com/llmreadyapi/overview) through S&P Global's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Query S&P Capital IQ financials, prices, and transcripts.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **S&P Global**.
-3. Click **Install**, then complete the S&P Global sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install sp-global@claude-skills
+```
 
-Or run `/add-plugin sp-global` in chat.
+After installing, complete the S&P Global sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin sp-global` in chat.
 }
 ```
 
-Auth is OAuth. Cursor prompts for S&P Global sign-in when the plugin connects — there is no client ID or personal access token to configure.
+Auth is OAuth. Claude Code prompts for S&P Global sign-in when the plugin connects — there is no client ID or personal access token to configure.
 
 ## Before you connect
 

@@ -1,16 +1,15 @@
 # GoDaddy
 
-Cursor plugin that connects agents to [GoDaddy](https://www.godaddy.com) through GoDaddy's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [GoDaddy](https://www.godaddy.com) through GoDaddy's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Brainstorm domain names, check availability and pricing in bulk, and get registration links — all from public domain data.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **GoDaddy**.
-3. Click **Install**. There is no sign-in step.
-
-Or run `/add-plugin godaddy` in chat.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install godaddy@claude-skills
+```
 
 ## MCP
 

@@ -11,15 +11,15 @@ The user wants to cancel or stop an active Ralph loop.
 
 ## Workflow
 
-1. Check if `.cursor/ralph/scratchpad.md` exists.
+1. Check if `.claude/ralph/scratchpad.md` exists.
 
 2. **If it does not exist**: Tell the user "No active Ralph loop found."
 
 3. **If it exists**:
-   - Read `.cursor/ralph/scratchpad.md` to get the current iteration from the `iteration:` field.
+   - Read `.claude/ralph/scratchpad.md` to get the current iteration from the `iteration:` field.
    - Remove the state file and any done flag:
      ```bash
-     rm -rf .cursor/ralph
+     rm -rf .claude/ralph
      ```
    - Report: "Cancelled Ralph loop (was at iteration N)."
 

@@ -1,16 +1,17 @@
 # Workable
 
-Cursor plugin that connects agents to [Workable](https://www.workable.com) through Workable's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Workable](https://www.workable.com) through Workable's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Search and advance candidates, manage jobs, offers, and requisitions, and work with employee, time-off, and performance records in the signed-in Workable account.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Workable**.
-3. Click **Install**, then complete the Workable sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install workable@claude-skills
+```
 
-Or run `/add-plugin workable` in chat.
+After installing, complete the Workable sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin workable` in chat.
 }
 ```
 
-Auth is OAuth 2.0 with dynamic discovery and Dynamic Client Registration. Cursor registers itself and prompts for Workable sign-in when the plugin connects — there is no API key to configure.
+Auth is OAuth 2.0 with dynamic discovery and Dynamic Client Registration. Claude Code registers itself and prompts for Workable sign-in when the plugin connects — there is no API key to configure.
 
 ## Before you connect
 

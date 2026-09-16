@@ -14,7 +14,7 @@ Build a canvas that presents a PR diff reorganized for reviewer comprehension �
 
 ## Prerequisites
 
-Read `~/.cursor/skills-cursor/canvas/SKILL.md` first. It contains the generation policy, design guidance, slop rules, self-check, and file-path conventions you must follow. The full component and hook surface is declared in `~/.cursor/skills-cursor/canvas/sdk/index.d.ts` and its sibling `.d.ts` files — read them to discover exact exports and prop shapes rather than guessing.
+Read the canvas skill (`~/.claude/skills/canvas/SKILL.md`, if installed) first. It contains the generation policy, design guidance, slop rules, self-check, and file-path conventions you must follow. The full component and hook surface is declared in `~/.claude/skills-cursor/canvas/sdk/index.d.ts` and its sibling `.d.ts` files — read them to discover exact exports and prop shapes rather than guessing.
 
 ## Gather the diff
 

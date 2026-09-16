@@ -1,11 +1,12 @@
 # Thermos plugin
 
-Thermo-nuclear branch review for Cursor agents: deep correctness and security audits, harsh maintainability rubrics, and parallel subagent orchestration.
+Thermo-nuclear branch review for Claude Code agents: deep correctness and security audits, harsh maintainability rubrics, and parallel subagent orchestration.
 
 ## Installation
 
 ```bash
-/add-plugin thermos
+/plugin marketplace add vramirez/claude-skills
+/plugin install thermos@claude-skills
 ```
 
 ## Architecture

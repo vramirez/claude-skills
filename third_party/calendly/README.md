@@ -1,16 +1,17 @@
 # Calendly
 
-Cursor plugin that connects agents to [Calendly](https://calendly.com) through Calendly's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Calendly](https://calendly.com) through Calendly's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Check and update availability, generate scheduling links, and book, cancel, or reschedule meetings in the signed-in Calendly account.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Calendly**.
-3. Click **Install**, then complete the Calendly sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install calendly@claude-skills
+```
 
-Or run `/add-plugin calendly` in chat.
+After installing, complete the Calendly sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin calendly` in chat.
 }
 ```
 
-Auth is OAuth 2.1 with PKCE and Dynamic Client Registration. Cursor registers itself and prompts for Calendly sign-in when the plugin connects — there is no client ID or personal access token to configure. Calendly does not accept personal access tokens on the MCP server.
+Auth is OAuth 2.1 with PKCE and Dynamic Client Registration. Claude Code registers itself and prompts for Calendly sign-in when the plugin connects — there is no client ID or personal access token to configure. Calendly does not accept personal access tokens on the MCP server.
 
 ## What agents can do
 

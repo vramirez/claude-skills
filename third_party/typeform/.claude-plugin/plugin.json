@@ -1,0 +1,21 @@
+{
+  "name": "typeform",
+  "displayName": "Typeform",
+  "version": "1.0.0",
+  "description": "Build forms, analyze responses, and manage contacts.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://developers.typeform.com/developers/get-started/mcp/",
+  "repository": "https://github.com/vramirez/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "typeform",
+    "forms",
+    "surveys",
+    "responses",
+    "insights",
+    "mcp"
+  ]
+}

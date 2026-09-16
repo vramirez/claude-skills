@@ -1,16 +1,17 @@
 # Klaviyo
 
-Cursor plugin that connects agents to [Klaviyo](https://www.klaviyo.com) through Klaviyo's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Klaviyo](https://www.klaviyo.com) through Klaviyo's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Build segments, draft campaigns and flows, look up profiles and events, and pull reporting from the signed-in Klaviyo account.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Klaviyo**.
-3. Click **Install**, then complete the Klaviyo sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install klaviyo@claude-skills
+```
 
-Or run `/add-plugin klaviyo` in chat.
+After installing, complete the Klaviyo sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin klaviyo` in chat.
 }
 ```
 
-Auth is OAuth with Dynamic Client Registration. Cursor registers itself and prompts for Klaviyo sign-in when the plugin connects — there is no API key or client ID to configure.
+Auth is OAuth with Dynamic Client Registration. Claude Code registers itself and prompts for Klaviyo sign-in when the plugin connects — there is no API key or client ID to configure.
 
 ## Before you connect
 

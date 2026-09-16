@@ -1,16 +1,17 @@
 # Webull
 
-Cursor plugin that connects agents to [Webull](https://developer.webull.com/apis/docs/AI-friendly-Resources/mcp/) through Webull's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Webull](https://developer.webull.com/apis/docs/AI-friendly-Resources/mcp/) through Webull's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 View accounts, positions, orders, watchlists, and market data.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Webull**.
-3. Click **Install**, then complete the Webull sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install webull@claude-skills
+```
 
-Or run `/add-plugin webull` in chat.
+After installing, complete the Webull sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin webull` in chat.
 }
 ```
 
-Auth is OAuth. Cursor prompts for Webull sign-in when the plugin connects — there is no client ID or personal access token to configure.
+Auth is OAuth. Claude Code prompts for Webull sign-in when the plugin connects — there is no client ID or personal access token to configure.
 
 ## Before you connect
 

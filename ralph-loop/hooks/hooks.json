@@ -1,15 +1,14 @@
 {
-  "version": 1,
+  "description": "Ralph Loop stop hook: feeds the same prompt back until the completion promise or iteration limit is reached",
   "hooks": {
-    "afterAgentResponse": [
+    "Stop": [
       {
-        "command": "./hooks/capture-response.sh"
-      }
-    ],
-    "stop": [
-      {
-        "command": "./hooks/stop-hook.sh",
-        "loop_limit": null
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/stop-hook.sh\""
+          }
+        ]
       }
     ]
   }

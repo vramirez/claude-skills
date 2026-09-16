@@ -1,16 +1,17 @@
 # Mercury
 
-Cursor plugin that connects agents to [Mercury](https://mercury.com) through Mercury's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Mercury](https://mercury.com) through Mercury's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Answer questions about a Mercury business banking account — balances, transactions, statements, cards, and recipients — without exposing any way to move money.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Mercury**.
-3. Click **Install**, then complete the Mercury sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install mercury@claude-skills
+```
 
-Or run `/add-plugin mercury` in chat.
+After installing, complete the Mercury sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin mercury` in chat.
 }
 ```
 
-Auth is OAuth 2.1 with Dynamic Client Registration and PKCE. Cursor registers itself and prompts for Mercury sign-in when the plugin connects — there is no API key or client ID to configure.
+Auth is OAuth 2.1 with Dynamic Client Registration and PKCE. Claude Code registers itself and prompts for Mercury sign-in when the plugin connects — there is no API key or client ID to configure.
 
 ## What agents can do
 

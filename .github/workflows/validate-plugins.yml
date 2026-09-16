@@ -3,9 +3,17 @@ name: Validate plugins
 on:
   pull_request:
     paths:
-      - ".cursor-plugin/marketplace.json"
-      - "**/plugin.json"
-      - "schemas/**"
+      - ".claude-plugin/marketplace.json"
+      - "**/.claude-plugin/plugin.json"
+      - "**/skills/**"
+      - "**/agents/**"
+      - "**/commands/**"
+      - "**/hooks/hooks.json"
+      - "**/.mcp.json"
+      - "scripts/validate-plugins.sh"
+      - ".github/workflows/validate-plugins.yml"
+  push:
+    branches: [main]
 
 jobs:
   validate:
@@ -17,8 +25,8 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependencies
-        run: npm install --no-save ajv ajv-formats
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
 
-      - name: Validate plugin definitions
-        run: node scripts/validate-plugins.mjs
+      - name: Validate marketplace and plugins
+        run: scripts/validate-plugins.sh

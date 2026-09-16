@@ -1,16 +1,17 @@
 # Similarweb
 
-Cursor plugin that connects agents to [Similarweb](https://www.similarweb.com) through Similarweb's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Similarweb](https://www.similarweb.com) through Similarweb's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Pull Similarweb digital-intelligence data — website traffic and engagement, competitor comparison, audience demographics, and keyword metrics — for research without leaving the editor.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Similarweb**.
-3. Click **Install**, then set your Similarweb API key (below).
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install similarweb@claude-skills
+```
 
-Or run `/add-plugin similarweb` in chat.
+After installing, set your Similarweb API key (below).
 
 ## MCP
 
@@ -47,14 +48,14 @@ The hosted runtime is the source of truth for tool names and schemas.
 ## Notes
 
 - Tool calls run with the permissions and credit balance attached to the API key.
-- Similarweb's own Cursor guide routes through `npx mcp-remote`. That is not necessary — Cursor connects to the remote endpoint directly and sends the `api-key` header, which is the same shape Similarweb documents for Microsoft Copilot Studio.
+- Similarweb's own Claude Code guide routes through `npx mcp-remote`. That is not necessary — Claude Code connects to the remote endpoint directly and sends the `api-key` header, which is the same shape Similarweb documents for Microsoft Copilot Studio.
 - Similarweb runs two documentation portals, `docs.similarweb.com` and `developers.similarweb.com`, whose MCP paths drift. Both give the same endpoint.
 
 ## Docs
 
 - Similarweb MCP: https://docs.similarweb.com/api-v5/similarweb-mcp
 - Similarweb MCP (developer portal): https://developers.similarweb.com/docs/similarweb-mcp
-- Cursor integration guide: https://developers.similarweb.com/docs/cursor-mcp-integration
+- Claude Code integration guide: https://developers.similarweb.com/docs/cursor-mcp-integration
 - Server URL: https://mcp.similarweb.com
 
 Logo is Similarweb's official mark, from the `similarweb` GitHub organization.

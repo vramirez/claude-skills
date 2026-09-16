@@ -1,16 +1,17 @@
 # Gamma
 
-Cursor plugin that connects agents to [Gamma](https://developers.gamma.app/mcp/gamma-mcp-server.md) through Gamma's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Gamma](https://developers.gamma.app/mcp/gamma-mcp-server.md) through Gamma's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Generate presentations, documents, and webpages.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Gamma**.
-3. Click **Install**, then complete the Gamma sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install gamma@claude-skills
+```
 
-Or run `/add-plugin gamma` in chat.
+After installing, complete the Gamma sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin gamma` in chat.
 }
 ```
 
-Auth is OAuth. Cursor prompts for Gamma sign-in when the plugin connects — there is no client ID or personal access token to configure.
+Auth is OAuth. Claude Code prompts for Gamma sign-in when the plugin connects — there is no client ID or personal access token to configure.
 
 ## Before you connect
 

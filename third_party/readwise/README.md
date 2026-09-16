@@ -1,16 +1,17 @@
 # Readwise
 
-Cursor plugin that connects agents to [Readwise](https://readwise.io) through Readwise's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Readwise](https://readwise.io) through Readwise's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Search everything you have read — hybrid semantic and full-text search across Readwise highlights and Reader documents — and save, tag, and triage new material.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Readwise**.
-3. Click **Install**, then complete the Readwise sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install readwise@claude-skills
+```
 
-Or run `/add-plugin readwise` in chat.
+After installing, complete the Readwise sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin readwise` in chat.
 }
 ```
 
-Auth is OAuth. Cursor prompts for Readwise sign-in when the plugin connects — there is no API key to configure.
+Auth is OAuth. Claude Code prompts for Readwise sign-in when the plugin connects — there is no API key to configure.
 
 ## What agents can do
 

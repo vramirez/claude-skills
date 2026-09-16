@@ -1,0 +1,22 @@
+{
+  "name": "workable",
+  "displayName": "Workable",
+  "version": "1.0.0",
+  "description": "Search candidates, move pipelines, and manage HR records.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://workable.readme.io/reference/workable-mcp-server",
+  "repository": "https://github.com/vramirez/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "workable",
+    "ats",
+    "recruiting",
+    "candidates",
+    "hris",
+    "hiring",
+    "mcp"
+  ]
+}

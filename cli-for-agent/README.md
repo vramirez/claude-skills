@@ -1,6 +1,6 @@
 # CLI for Agents
 
-Cursor plugin with a single skill that encodes patterns for **CLIs meant to be driven by coding agents**: non-interactive flags first, layered `--help` with examples, stdin and pipelines, fast actionable errors, idempotency, `--dry-run`, and predictable command structure.
+Claude Code plugin with a single skill that encodes patterns for **CLIs meant to be driven by coding agents**: non-interactive flags first, layered `--help` with examples, stdin and pipelines, fast actionable errors, idempotency, `--dry-run`, and predictable command structure.
 
 ## What it includes
 

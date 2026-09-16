@@ -1,9 +1,14 @@
 {
-  "version": 1,
+  "description": "Continual learning: after enough completed turns and elapsed time, block the stop once and ask the agent to run the continual-learning skill.",
   "hooks": {
-    "stop": [
+    "Stop": [
       {
-        "command": "bun run ${CURSOR_PLUGIN_ROOT}/hooks/continual-learning-stop.ts"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun run \"${CLAUDE_PLUGIN_ROOT}/hooks/continual-learning-stop.ts\""
+          }
+        ]
       }
     ]
   }

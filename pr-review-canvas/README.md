@@ -1,6 +1,6 @@
 # PR Review Canvas
 
-Cursor plugin for rendering pull request diffs as an interactive Cursor Canvas organised for reviewer comprehension rather than file-tree order.
+Claude Code plugin for rendering pull request diffs as an interactive Cursor Canvas organised for reviewer comprehension rather than file-tree order.
 
 ## What it includes
 
@@ -26,7 +26,7 @@ It then layers in pseudocode for dense logic, concrete before/after example trac
 
 ## Requirements
 
-- Cursor with Canvas enabled.
+- A Canvas-capable client. Claude Code renders the output as markdown when Canvas is unavailable.
 - Access to the diff source: a local branch/ref (`git diff`), a GitHub PR URL or number (`gh pr diff`), or a Graphite stack (`gt` CLI / `gh`).
 
 ## License
