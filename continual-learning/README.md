@@ -29,7 +29,7 @@ The skill is marked `disable-model-invocation: true`, so it will not be auto-sel
 
 The hook keeps local runtime state in:
 
-- `.claude/hooks/state/continual-learning.json` (cadence state)
+- `.claude/hooks/state/continual-learning-<session_id>.json` (cadence state, one file per session so concurrent sessions in the same project do not share a turn counter)
 
 The updater uses an incremental transcript index at:
 
