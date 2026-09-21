@@ -9,11 +9,27 @@ on:
       - "**/agents/**"
       - "**/commands/**"
       - "**/hooks/hooks.json"
+      - "**/hooks/*.sh"
+      - "**/hooks/*.ts"
       - "**/.mcp.json"
       - "scripts/validate-plugins.sh"
+      - "scripts/check-frontmatter.rb"
       - ".github/workflows/validate-plugins.yml"
   push:
     branches: [main]
+    paths:
+      - ".claude-plugin/marketplace.json"
+      - "**/.claude-plugin/plugin.json"
+      - "**/skills/**"
+      - "**/agents/**"
+      - "**/commands/**"
+      - "**/hooks/hooks.json"
+      - "**/hooks/*.sh"
+      - "**/hooks/*.ts"
+      - "**/.mcp.json"
+      - "scripts/validate-plugins.sh"
+      - "scripts/check-frontmatter.rb"
+      - ".github/workflows/validate-plugins.yml"
 
 jobs:
   validate:
