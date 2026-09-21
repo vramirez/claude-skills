@@ -58,7 +58,7 @@ The skill caps this at roughly four consults per task and never consults for rou
 
 ## Models
 
-The default is Claude Opus at its highest reasoning effort (`opus`, `effort: xhigh`). `/advisor <model>` accepts `sonnet`, `opus`, `haiku`, `fable`, or a full model ID; a family name resolves to that family's latest model at its highest reasoning tier. If Cursor rejects a slug, the skill picks the closest valid one from the error, saves it, and tells you. Team model restrictions and plan limits apply to the advisor like any subagent.
+The default is Claude Opus at its highest reasoning effort (`opus`, `effort: xhigh`). `/advisor <model>` accepts `sonnet`, `opus`, `haiku`, `fable`, or a full model ID; a family name resolves to that family's latest model at its highest reasoning tier. If the Agent tool rejects a model name, the skill picks the closest valid one from the error, saves it, and tells you. Team model restrictions and plan limits apply to the advisor like any subagent.
 
 ## State
 
@@ -66,16 +66,15 @@ Everything lives in `.claude/advisor/` at the project root and is safe to delete
 
 | File | Purpose |
 | --- | --- |
-| `state.json` | Mode, model, nudge setting, consult count, bound session, transcript path. |
+| `state.json` | Mode, model, nudge setting, consecutive-nudge count, consult count, bound session, transcript path. |
 | `log.md` | Every completed consult with its verdict, for later review. |
 | `pending` | Marker: files changed since the last consult. |
-| `last-response.txt` | Tail of the latest reply, used to avoid nudging over a question to you. |
 
 Add `.claude/advisor/` to your `.gitignore` if you do not want it in the repository; the skill never stages it.
 
 ## Cost
 
-Each consult is one call to the advisor model with a briefing of a few thousand tokens plus whatever the advisor chooses to read. Selective use is the point: a typical feature takes one to three consults. The default advisor, Grok 4.6, draws from the Cursor Models usage pool, so it is the cheapest of the strong options; switch models when you want a different family's perspective.
+Each consult is one call to the advisor model with a briefing of a few thousand tokens plus whatever the advisor chooses to read. Selective use is the point: a typical feature takes one to three consults. The advisor runs as a subagent on your own plan, so a consult costs what any subagent call on that model costs; switch models when you want a different family's perspective.
 
 ## Limitations
 

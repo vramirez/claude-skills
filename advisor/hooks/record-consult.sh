@@ -23,18 +23,25 @@ case "$AGENT_TYPE" in
   *) exit 0 ;;
 esac
 
+# SubagentStop carries no status field, so a non-empty final message is the
+# only available signal that the consult actually produced a verdict. An
+# interrupted or errored subagent must not count as a consult and must not
+# clear the pending marker: leaving the marker armed lets the Stop hook nudge
+# again for a real consult, instead of shipping the edits unreviewed while
+# `/advisor status` reports a consult that never happened.
+SUMMARY=$(jq -r '.last_assistant_message // empty' <<< "$HOOK_INPUT" | head -c 6000)
+if [[ -z "${SUMMARY//[[:space:]]/}" ]]; then
+  echo "Advisor: subagent stopped without a verdict. Not recording a consult." >&2
+  exit 0
+fi
+
 NOW=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 advisor_state_update '.consults = ((.consults // 0) + 1) | .last_consult_at = $now' --arg now "$NOW"
 rm -f "$PENDING_FILE"
 
-SUMMARY=$(jq -r '.last_assistant_message // empty' <<< "$HOOK_INPUT" | head -c 6000)
 {
   printf '## %s\n\n' "$NOW"
-  if [[ -n "$SUMMARY" ]]; then
-    printf '%s\n\n' "$SUMMARY"
-  else
-    printf '_No summary captured._\n\n'
-  fi
+  printf '%s\n\n' "$SUMMARY"
 } >> "$LOG_FILE"
 
 exit 0

@@ -44,13 +44,14 @@ If the Agent tool rejects a model name, read the valid slugs from its error mess
 ## Enabling
 
 1. Resolve the model as described above.
-2. Write `.claude/advisor/state.json` with the file-writing tool (not a shell redirect), creating the directory if needed. If a state file already exists, carry over its `model` (unless this command names one) and `nudge`, and reset every other field to the values below. You cannot see which conversation an existing file belongs to, so always rewrite it: that re-binds the mode to this conversation, the hooks re-fill `conversation_id` and `transcript_path`, and the next consult starts a fresh advisor instead of resuming another chat's. Also delete `.claude/advisor/pending` and `.claude/advisor/last-response.txt` if they exist, so a marker left by another conversation cannot trigger the end-of-turn nudge here. Keep `log.md`.
+2. Write `.claude/advisor/state.json` with the file-writing tool (not a shell redirect), creating the directory if needed. If a state file already exists, carry over its `model` (unless this command names one) and `nudge`, and reset every other field to the values below. You cannot see which conversation an existing file belongs to, so always rewrite it: that re-binds the mode to this conversation, the hooks re-fill `session_id` and `transcript_path`, and the next consult starts a fresh advisor instead of resuming another chat's. Also delete `.claude/advisor/pending` if it exists, so a marker left by another conversation cannot trigger the end-of-turn nudge here. Keep `log.md`.
 
    ```json
    {
      "enabled": true,
      "model": "opus",
      "nudge": true,
+     "nudge_chain": 0,
      "advisor_agent_id": null,
      "session_id": null,
      "transcript_path": null,
