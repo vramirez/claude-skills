@@ -1,16 +1,17 @@
 # Ahrefs
 
-Cursor plugin that connects agents to [Ahrefs](https://ahrefs.com) through Ahrefs's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Ahrefs](https://ahrefs.com) through Ahrefs's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Query live Ahrefs SEO data — backlinks, keyword metrics, rank tracking, and site audits — from the signed-in Ahrefs account.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Ahrefs**.
-3. Click **Install**, then complete the Ahrefs sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install ahrefs@claude-skills
+```
 
-Or run `/add-plugin ahrefs` in chat.
+After installing, complete the Ahrefs sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin ahrefs` in chat.
 }
 ```
 
-Auth is OAuth. Cursor prompts for Ahrefs sign-in when the plugin connects, and the consent screen mints an MCP-scoped key on the Ahrefs side. Leave any OAuth client ID and secret blank.
+Auth is OAuth. Claude Code prompts for Ahrefs sign-in when the plugin connects, and the consent screen mints an MCP-scoped key on the Ahrefs side. Leave any OAuth client ID and secret blank.
 
 ## Before you connect
 

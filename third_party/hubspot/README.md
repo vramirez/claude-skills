@@ -1,6 +1,6 @@
 # HubSpot
 
-Cursor plugin that connects agents to [HubSpot](https://www.hubspot.com) through HubSpot's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [HubSpot](https://www.hubspot.com) through HubSpot's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Search and update CRM records, work with activities and conversations, and manage marketing email drafts in the signed-in HubSpot account.
 
@@ -8,11 +8,12 @@ This is HubSpot's remote CRM MCP server — not the [developer MCP server](https
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **HubSpot**.
-3. Click **Install**, then set the client ID and secret (below) and complete the HubSpot sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install hubspot@claude-skills
+```
 
-Or run `/add-plugin hubspot` in chat.
+After installing, set the client ID and secret (below) and complete the HubSpot sign-in prompt.
 
 ## MCP
 
@@ -39,8 +40,8 @@ HubSpot's remote MCP server requires a dedicated MCP auth app with OAuth (PKCE).
 2. Register both redirect URLs on that app:
    - Desktop: `http://localhost:8787/callback`
    - Web and Cloud Agents: `https://www.cursor.com/agents/mcp/oauth/callback`
-3. In **Dashboard → Plugins → Configure**, set **HubSpot Client ID** and **HubSpot Client Secret** from that app.
-4. Complete the HubSpot OAuth login when Cursor prompts. Select the account to connect and grant permissions.
+3. Claude Code prompts for plugin settings at install time. Set **HubSpot Client ID** and **HubSpot Client Secret** from that app.
+4. Complete the HubSpot OAuth login when Claude Code prompts. Select the account to connect and grant permissions.
 
 On a team marketplace an admin sets the client ID and secret once for everyone; each member still completes their own HubSpot OAuth login, so tool calls run with that member's HubSpot permissions.
 

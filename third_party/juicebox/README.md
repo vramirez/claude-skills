@@ -1,16 +1,17 @@
 # Juicebox
 
-Cursor plugin that connects agents to [Juicebox](https://juicebox.ai) through Juicebox's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Juicebox](https://juicebox.ai) through Juicebox's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Query recruiting analytics, search project shortlists, look up projects, and create or manage sourcing agents in the signed-in Juicebox workspace.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Juicebox**.
-3. Click **Install**, then complete the Juicebox sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install juicebox@claude-skills
+```
 
-Or run `/add-plugin juicebox` in chat.
+After installing, complete the Juicebox sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin juicebox` in chat.
 }
 ```
 
-Auth is OAuth 2.0 against Juicebox with Dynamic Client Registration (DCR). Cursor registers itself and prompts for Juicebox sign-in when the plugin connects — there is no API key or client ID to configure.
+Auth is OAuth 2.0 against Juicebox with Dynamic Client Registration (DCR). Claude Code registers itself and prompts for Juicebox sign-in when the plugin connects — there is no API key or client ID to configure.
 
 ## Before you connect
 

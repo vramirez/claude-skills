@@ -1,0 +1,37 @@
+{
+  "name": "docusign",
+  "displayName": "Docusign",
+  "version": "1.0.0",
+  "description": "Manage envelopes, templates, workflows, and agreements.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://developers.docusign.com/platform/mcp-server/",
+  "repository": "https://github.com/vramirez/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "docusign",
+    "esignature",
+    "agreements",
+    "mcp",
+    "envelopes",
+    "contracts"
+  ],
+  "userConfig": {
+    "CLIENT_ID": {
+      "type": "string",
+      "title": "Docusign Integration Key",
+      "description": "Integration Key from Docusign Apps and Keys (Settings → Apps and Keys → your app).",
+      "sensitive": true,
+      "required": true
+    },
+    "CLIENT_SECRET": {
+      "type": "string",
+      "title": "Docusign Secret Key",
+      "description": "Secret Key from the same Docusign Apps and Keys app.",
+      "sensitive": true,
+      "required": true
+    }
+  }
+}

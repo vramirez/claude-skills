@@ -1,16 +1,17 @@
 # Google Cloud BigQuery
 
-Cursor plugin that connects agents to [Google Cloud BigQuery](https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp) through Google Cloud BigQuery's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Google Cloud BigQuery](https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp) through Google Cloud BigQuery's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Explore datasets and tables and run SQL queries.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Google Cloud BigQuery**.
-3. Click **Install**, then complete the Google Cloud BigQuery sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install google-cloud-bigquery@claude-skills
+```
 
-Or run `/add-plugin google-cloud-bigquery` in chat.
+After installing, complete the Google Cloud BigQuery sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin google-cloud-bigquery` in chat.
 }
 ```
 
-Auth is OAuth. Cursor prompts for Google Cloud BigQuery sign-in when the plugin connects — there is no client ID or personal access token to configure.
+Auth is OAuth. Claude Code prompts for Google Cloud BigQuery sign-in when the plugin connects — there is no client ID or personal access token to configure.
 
 ## Before you connect
 

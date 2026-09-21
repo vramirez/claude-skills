@@ -1,0 +1,21 @@
+{
+  "name": "outlook-calendar",
+  "displayName": "Outlook Calendar",
+  "version": "1.0.0",
+  "description": "List, create, update, and cancel Microsoft Outlook calendar events.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://github.com/vramirez/claude-skills/tree/main/third_party/outlook-calendar",
+  "repository": "https://github.com/vramirez/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "outlook-calendar",
+    "calendar",
+    "outlook",
+    "microsoft",
+    "mcp",
+    "events"
+  ]
+}

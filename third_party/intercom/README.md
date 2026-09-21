@@ -1,16 +1,17 @@
 # Intercom
 
-Cursor plugin that connects agents to [Intercom](https://www.intercom.com) through Intercom's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Intercom](https://www.intercom.com) through Intercom's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Search conversations and contacts, look up companies, and list, search, create, or update Help Center articles in the signed-in Intercom workspace.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Intercom**.
-3. Click **Install**, then complete the Intercom sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install intercom@claude-skills
+```
 
-Or run `/add-plugin intercom` in chat.
+After installing, complete the Intercom sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin intercom` in chat.
 }
 ```
 
-Auth is OAuth 2.0 against Intercom with Dynamic Client Registration (DCR) and PKCE. Cursor registers itself and prompts for Intercom sign-in when the plugin connects — there is no API key or client ID to configure.
+Auth is OAuth 2.0 against Intercom with Dynamic Client Registration (DCR) and PKCE. Claude Code registers itself and prompts for Intercom sign-in when the plugin connects — there is no API key or client ID to configure.
 
 ## Regions
 

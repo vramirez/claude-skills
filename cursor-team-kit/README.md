@@ -5,7 +5,8 @@ Internal-style workflows for CI, code review, shipping, and test reliability. Th
 ## Installation
 
 ```bash
-/add-plugin cursor-team-kit
+/plugin marketplace add vramirez/claude-skills
+/plugin install cursor-team-kit@claude-skills
 ```
 
 ## Components

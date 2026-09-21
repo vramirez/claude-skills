@@ -1,11 +1,12 @@
 # Create plugin
 
-Meta workflows for creating Cursor plugins that are marketplace-ready.
+Meta workflows for creating Claude Code plugins that are marketplace-ready.
 
 ## Installation
 
 ```bash
-/add-plugin create-plugin
+/plugin marketplace add vramirez/claude-skills
+/plugin install create-plugin@claude-skills
 ```
 
 ## Components

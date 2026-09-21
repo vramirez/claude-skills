@@ -1,0 +1,23 @@
+{
+  "name": "interactive-brokers",
+  "displayName": "Interactive Brokers",
+  "version": "1.0.0",
+  "description": "Review positions, balances, P&L, and draft trade instructions.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://www.interactivebrokers.com/en/trading/ai-integrations.php",
+  "repository": "https://github.com/vramirez/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "interactive brokers",
+    "ibkr",
+    "brokerage",
+    "trading",
+    "portfolio",
+    "positions",
+    "market data",
+    "mcp"
+  ]
+}

@@ -1,16 +1,17 @@
 # Otter.ai
 
-Cursor plugin that connects agents to [Otter.ai](https://otter.ai) through Otter.ai's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Otter.ai](https://otter.ai) through Otter.ai's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Search your Otter meeting history and pull full transcripts into the editor to summarize decisions and pull out action items.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Otter.ai**.
-3. Click **Install**, then complete the Otter.ai sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install otter@claude-skills
+```
 
-Or run `/add-plugin otter` in chat.
+After installing, complete the Otter.ai sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin otter` in chat.
 }
 ```
 
-Auth is OAuth. Cursor prompts for Otter sign-in when the plugin connects. Otter does not offer a public API key, so OAuth is the only path.
+Auth is OAuth. Claude Code prompts for Otter sign-in when the plugin connects. Otter does not offer a public API key, so OAuth is the only path.
 
 ## What agents can do
 

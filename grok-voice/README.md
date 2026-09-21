@@ -1,6 +1,6 @@
 # Grok Voice
 
-Cursor plugin with four skills for building voice features on Grok: realtime speech-to-speech, speech-to-text dictation, text-to-speech read-aloud, and a debug loop for voice sessions.
+Claude Code plugin with four skills for building voice features on Grok: realtime speech-to-speech, speech-to-text dictation, text-to-speech read-aloud, and a debug loop for voice sessions.
 
 ## What it includes
 

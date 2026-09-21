@@ -5,7 +5,8 @@ Teaching workflows: skill mapping, practice plans, and feedback loops.
 ## Installation
 
 ```bash
-/add-plugin teaching
+/plugin marketplace add vramirez/claude-skills
+/plugin install teaching@claude-skills
 ```
 
 ## Components

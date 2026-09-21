@@ -1,16 +1,17 @@
 # X
 
-Cursor plugin that connects agents to the [X API](https://docs.x.com) through X's official hosted [Model Context Protocol](https://modelcontextprotocol.io/) server at `https://api.x.com/mcp`.
+Claude Code plugin that connects agents to the [X API](https://docs.x.com) through X's official hosted [Model Context Protocol](https://modelcontextprotocol.io/) server at `https://api.x.com/mcp`.
 
 This plugin signs you in with OAuth as your own X account. It is no longer read-only: alongside searching and reading public X data, agents can manage your lists, bookmarks, blocks, and mutes, and call X Chat endpoints.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **X**.
-3. Click **Install**, then complete the OAuth sign-in when prompted.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install x@claude-skills
+```
 
-Or run `/add-plugin x` in chat.
+After installing, complete the OAuth sign-in when prompted.
 
 ## MCP
 
@@ -66,7 +67,7 @@ Posting is not included: the plugin does not request the `tweet.write` scope, so
 
 ## Setup
 
-No token to paste — the plugin ships with X's OAuth client ID and requests the scopes above. On first use, Cursor opens a browser window where you sign in to X and approve access. The `offline.access` scope lets Cursor refresh the session automatically, so you only sign in once.
+No token to paste — the plugin ships with X's OAuth client ID and requests the scopes above. On first use, Claude Code opens a browser window where you sign in to X and approve access. The `offline.access` scope lets Claude Code refresh the session automatically, so you only sign in once.
 
 Requests run in your user context, so they count against your account's rate limits. You can revoke access at any time from your X account's connected apps settings.
 

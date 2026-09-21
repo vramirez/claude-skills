@@ -1,6 +1,6 @@
 # Docs Canvas
 
-Cursor plugin for rendering documentation — architecture notes, API references, runbooks, and codebase walkthroughs — as a navigable Cursor Canvas instead of a flat markdown file.
+Claude Code plugin for rendering documentation — architecture notes, API references, runbooks, and codebase walkthroughs — as a navigable Cursor Canvas instead of a flat markdown file.
 
 ## Status
 
@@ -31,7 +31,7 @@ Those are a floor, not a ceiling — the skill encourages reaching for whatever 
 
 ## Requirements
 
-- Cursor with Canvas enabled.
+- A Canvas-capable client. Claude Code renders the output as markdown when Canvas is unavailable.
 - Source material: a directory of markdown files, a single doc URL, an inline outline, or a codebase question to answer.
 
 ## License

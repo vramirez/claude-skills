@@ -2,16 +2,14 @@
 
 # Shared helpers for the Advisor hooks. Source this file; do not run it.
 #
-# State lives in $CURSOR_PROJECT_DIR/.cursor/advisor/:
+# State lives in $CLAUDE_PROJECT_DIR/.claude/advisor/:
 #   state.json          written by the advisor skill, kept current here
 #   pending             marker: files were edited since the last consult
-#   last-response.txt   tail of the latest assistant message
 #   log.md              one entry per completed consult
 
-ADVISOR_DIR="${CURSOR_PROJECT_DIR:-.}/.cursor/advisor"
+ADVISOR_DIR="${CLAUDE_PROJECT_DIR:-.}/.claude/advisor"
 STATE_FILE="$ADVISOR_DIR/state.json"
 PENDING_FILE="$ADVISOR_DIR/pending"
-LAST_RESPONSE_FILE="$ADVISOR_DIR/last-response.txt"
 LOG_FILE="$ADVISOR_DIR/log.md"
 
 # Exit quietly unless advisor mode is on and jq is available.
@@ -34,21 +32,21 @@ advisor_state_update() {
   fi
 }
 
-# Bind the state to the first conversation that touches it and keep transcript_path
-# current. Returns 1 when the hook input belongs to a different conversation, so
-# callers can stay out of conversations that did not enable the advisor.
-# A fresh bind also drops per-conversation markers so a re-bind cannot inherit
-# the previous conversation's pending edits.
-advisor_bind_conversation() {
+# Bind the state to the first session that touches it and keep transcript_path
+# current. Returns 1 when the hook input belongs to a different session, so
+# callers can stay out of sessions that did not enable the advisor.
+# A fresh bind also drops per-session markers so a re-bind cannot inherit
+# the previous session's pending edits.
+advisor_bind_session() {
   local input="$1"
-  local conv bound transcript current
-  conv=$(jq -r '.conversation_id // empty' <<< "$input")
-  bound=$(jq -r '.conversation_id // empty' "$STATE_FILE")
-  if [[ -n "$conv" ]]; then
+  local session bound transcript current
+  session=$(jq -r '.session_id // empty' <<< "$input")
+  bound=$(jq -r '.session_id // empty' "$STATE_FILE")
+  if [[ -n "$session" ]]; then
     if [[ -z "$bound" ]]; then
-      advisor_state_update '.conversation_id = $conv' --arg conv "$conv"
-      rm -f "$PENDING_FILE" "$LAST_RESPONSE_FILE"
-    elif [[ "$bound" != "$conv" ]]; then
+      advisor_state_update '.session_id = $session' --arg session "$session"
+      rm -f "$PENDING_FILE"
+    elif [[ "$bound" != "$session" ]]; then
       return 1
     fi
   fi

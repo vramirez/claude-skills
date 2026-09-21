@@ -1,0 +1,21 @@
+{
+  "name": "google-calendar",
+  "displayName": "Google Calendar",
+  "version": "1.0.0",
+  "description": "Search events and schedule meetings.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://github.com/vramirez/claude-skills/tree/main/third_party/google-calendar",
+  "repository": "https://github.com/vramirez/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "google-calendar",
+    "calendar",
+    "google",
+    "mcp",
+    "events",
+    "workspace"
+  ]
+}

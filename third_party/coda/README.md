@@ -1,16 +1,17 @@
 # Coda
 
-Cursor plugin that connects agents to [Coda](https://coda.io) through Coda's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Coda](https://coda.io) through Coda's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Search and read Coda docs, pages, and tables, and create or update pages and rows with the same access the signed-in user has.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Coda**.
-3. Click **Install**, then complete the Coda sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install coda@claude-skills
+```
 
-Or run `/add-plugin coda` in chat.
+After installing, complete the Coda sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin coda` in chat.
 }
 ```
 
-Auth is OAuth 2 with PKCE. Cursor prompts for sign-in when the plugin connects. An OAuth connection is automatically scoped to both read and write.
+Auth is OAuth 2 with PKCE. Claude Code prompts for sign-in when the plugin connects. An OAuth connection is automatically scoped to both read and write.
 
 ## Before you connect
 
@@ -48,7 +49,7 @@ The hosted runtime is the source of truth for tool names and schemas.
 
 - Tool calls run as the user who authorizes the connection.
 - The older `https://coda.io/apis/mcp` address still serves existing connections, but Superhuman's changelog says new setups should use `docs.superhuman.com/apis/mcp` — so that is what this plugin ships.
-- Superhuman also accepts a personal access token sent as `Authorization: Bearer <token>`, which lets you pick read-only, write-only, or read+write instead of OAuth's read+write. The token must be created with restriction type **MCP** or the server returns 401. Superhuman currently recommends the token path for Cursor because of refresh-token handling.
+- Superhuman also accepts a personal access token sent as `Authorization: Bearer <token>`, which lets you pick read-only, write-only, or read+write instead of OAuth's read+write. The token must be created with restriction type **MCP** or the server returns 401. Superhuman currently recommends the token path for Claude Code because of refresh-token handling.
 - The `coda-mcp` npm package is a community local server by a third-party maintainer, unrelated to this hosted endpoint.
 
 ## Docs

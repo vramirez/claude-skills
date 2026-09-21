@@ -1,16 +1,17 @@
 # Customer.io
 
-Cursor plugin that connects agents to [Customer.io](https://customer.io) through Customer.io's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Customer.io](https://customer.io) through Customer.io's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Inspect workspace data, build and manage campaigns and one-time sends, work with segments and people, and query the Journeys and Data Pipelines APIs in the signed-in Customer.io workspace.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Customer.io**.
-3. Click **Install**, then complete the Customer.io sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install customer-io@claude-skills
+```
 
-Or run `/add-plugin customer-io` in chat.
+After installing, complete the Customer.io sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin customer-io` in chat.
 }
 ```
 
-Auth is OAuth 2.1 with PKCE and Dynamic Client Registration. Cursor registers itself and prompts for Customer.io sign-in when the plugin connects — there is no API key or client ID to configure. During the flow you choose which workspaces and scopes to grant.
+Auth is OAuth 2.1 with PKCE and Dynamic Client Registration. Claude Code registers itself and prompts for Customer.io sign-in when the plugin connects — there is no API key or client ID to configure. During the flow you choose which workspaces and scopes to grant.
 
 ## Before you connect
 

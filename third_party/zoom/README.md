@@ -1,16 +1,17 @@
 # Zoom
 
-Cursor plugin that connects agents to [Zoom](https://zoom.us) through Zoom's official hosted [Model Context Protocol](https://modelcontextprotocol.io/) servers.
+Claude Code plugin that connects agents to [Zoom](https://zoom.us) through Zoom's official hosted [Model Context Protocol](https://modelcontextprotocol.io/) servers.
 
 Search meetings and recordings, pull summaries and transcripts, and work with Zoom Docs from chat.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Zoom**.
-3. Click **Install**, then set the client ID and secret (below) and complete the Zoom sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install zoom@claude-skills
+```
 
-Or run `/add-plugin zoom` in chat.
+After installing, set the client ID and secret (below) and complete the Zoom sign-in prompt.
 
 ## MCP
 
@@ -31,15 +32,15 @@ Or run `/add-plugin zoom` in chat.
 
 ## Setup
 
-Zoom's MCP servers only support manual client registration — Dynamic Client Registration and Client ID Metadata Documents are not accepted — so an administrator has to register Cursor as a Zoom app before anyone can connect.
+Zoom's MCP servers only support manual client registration — Dynamic Client Registration and Client ID Metadata Documents are not accepted — so an administrator has to register Claude Code as a Zoom app before anyone can connect.
 
 1. A Zoom admin or developer logs into the [Zoom App Marketplace](https://marketplace.zoom.us) and creates a **General app** under **Develop → Build app**.
 2. Add the scopes listed for each tool in [Zoom's MCP server docs](https://developers.zoom.us/docs/mcp/servers/). Meeting search and recordings need `ai_companion:read:search` for cross-Zoom search.
 3. Under **Basic Information → OAuth Information**, register both redirect URIs:
    - Desktop: `http://localhost:8787/callback`
    - Web and Cloud Agents: `https://www.cursor.com/agents/mcp/oauth/callback`
-4. In **Dashboard → Plugins → Configure**, set **Zoom Client ID** and **Zoom Client Secret** from that app's **App Credentials**.
-5. Complete the Zoom OAuth login when Cursor prompts.
+4. Claude Code prompts for plugin settings at install time. Set **Zoom Client ID** and **Zoom Client Secret** from that app's **App Credentials**.
+5. Complete the Zoom OAuth login when Claude Code prompts.
 
 Each member needs a license for the Zoom products they want to reach. On a team marketplace an admin sets the client ID and secret once for everyone; each member still completes their own Zoom OAuth login, so tool calls run with that member's Zoom permissions.
 

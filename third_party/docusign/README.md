@@ -1,16 +1,17 @@
 # Docusign
 
-Cursor plugin that connects agents to [Docusign](https://www.docusign.com) through Docusign's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server (beta).
+Claude Code plugin that connects agents to [Docusign](https://www.docusign.com) through Docusign's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server (beta).
 
 Work with eSignature envelopes and templates, Maestro workflows, and Navigator agreement data from the signed-in Docusign account.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Docusign**.
-3. Click **Install**, then set the Integration Key and Secret Key (below) and complete the Docusign sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install docusign@claude-skills
+```
 
-Or run `/add-plugin docusign` in chat.
+After installing, set the Integration Key and Secret Key (below) and complete the Docusign sign-in prompt.
 
 ## MCP
 
@@ -38,8 +39,8 @@ Docusign MCP requires a confidential OAuth app (Authorization Code Grant). Creat
 3. Register both redirect URIs on that app:
    - Desktop: `http://localhost:8787/callback`
    - Web and Cloud Agents: `https://www.cursor.com/agents/mcp/oauth/callback`
-4. In **Dashboard → Plugins → Configure**, set **Docusign Integration Key** and **Docusign Secret Key** from that app.
-5. Complete the Docusign OAuth login when Cursor prompts.
+4. Claude Code prompts for plugin settings at install time. Set **Docusign Integration Key** and **Docusign Secret Key** from that app.
+5. Complete the Docusign OAuth login when Claude Code prompts.
 
 On a team marketplace an admin can set the credentials once for everyone; each member still completes their own Docusign OAuth login, so tool calls run with that member's permissions.
 

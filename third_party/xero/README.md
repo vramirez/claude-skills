@@ -1,16 +1,17 @@
 # Xero
 
-Cursor plugin that connects agents to [Xero](https://www.xero.com) through Xero's official [Model Context Protocol](https://modelcontextprotocol.io/) server, run locally by Cursor.
+Claude Code plugin that connects agents to [Xero](https://www.xero.com) through Xero's official [Model Context Protocol](https://modelcontextprotocol.io/) server, run locally by Claude Code.
 
 Read and write a Xero organisation's accounting and payroll data — invoices, contacts, chart of accounts, payments, quotes, journals, reports, and timesheets.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Xero**.
-3. Click **Install**, then set the Xero client ID and client secret (below).
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install xero@claude-skills
+```
 
-Or run `/add-plugin xero` in chat.
+After installing, set the Xero client ID and client secret (below).
 
 ## MCP
 
@@ -59,8 +60,8 @@ The server is the source of truth for tool names and schemas.
 
 ## Notes
 
-- This is a local stdio server, so `npx` has to be available on the machine running Cursor. It downloads `@xeroapi/xero-mcp-server` on first run.
-- Xero's own FAQ says the server works with any client supporting local stdio servers, and that its testing was done with Claude Desktop and Cursor.
+- This is a local stdio server, so `npx` has to be available on the machine running Claude Code. It downloads `@xeroapi/xero-mcp-server` on first run.
+- Xero's own FAQ says the server works with any client supporting local stdio servers, and that its testing was done with Claude Desktop and Claude Code.
 - Tool calls run with the scopes granted to the Custom Connection, against the one organisation it is bound to. To work with several organisations, create a connection per organisation.
 - To narrow the surface further, add a space-separated `XERO_SCOPES` value to the server's `env` — for example `accounting.invoices accounting.contacts accounting.settings`.
 - `xero-mcp` by john-zhang-dev is a community package, and JAX is Xero's in-product assistant. Neither is this server.

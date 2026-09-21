@@ -1,16 +1,17 @@
 # Clay
 
-Cursor plugin that connects agents to [Clay](https://www.clay.com) through Clay's official hosted [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Clay](https://www.clay.com) through Clay's official hosted [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Find and enrich people and companies across 150+ data providers, run AI research agents (Claygent), and trigger your team's approved Clay workflows from the signed-in Clay workspace.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Clay**.
-3. Click **Install**, then complete the Clay sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install clay@claude-skills
+```
 
-Or run `/add-plugin clay` in chat.
+After installing, complete the Clay sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin clay` in chat.
 }
 ```
 
-Auth is OAuth 2.1 against Clay with Dynamic Client Registration (DCR) and PKCE. Cursor registers itself and prompts for Clay sign-in when the plugin connects — there is no API key or client ID to configure.
+Auth is OAuth 2.1 against Clay with Dynamic Client Registration (DCR) and PKCE. Claude Code registers itself and prompts for Clay sign-in when the plugin connects — there is no API key or client ID to configure.
 
 ## Before you connect
 
@@ -46,7 +47,7 @@ Your Clay workspace admin may need to allow MCP client connections under Clay wo
 
 - Tool calls run as the Clay user who authorizes the connection and cannot exceed that user's permissions.
 - Workflow triggers are limited to workflows approved for MCP access in the Clay workspace.
-- Connections appear in your Clay workspace's MCP client list, labeled with the Cursor client name.
+- Connections appear in your Clay workspace's MCP client list, labeled with the Claude Code client name.
 - Revoke access at any time from Clay workspace **Settings → MCP**.
 
 ## Docs

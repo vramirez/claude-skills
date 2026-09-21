@@ -1,16 +1,17 @@
 # Profound
 
-Cursor plugin that connects agents to [Profound](https://www.tryprofound.com) through Profound's official hosted [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Profound](https://www.tryprofound.com) through Profound's official hosted [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Retrieve AI visibility, sentiment, and citation reports, access agent analytics, and build or run Profound Agents in the signed-in Profound account.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Profound**.
-3. Click **Install**, then complete the Profound sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install profound@claude-skills
+```
 
-Or run `/add-plugin profound` in chat.
+After installing, complete the Profound sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin profound` in chat.
 }
 ```
 
-Auth is OAuth 2.1 against Profound. Cursor prompts for Profound sign-in when the plugin connects — there is no API key or client ID to configure.
+Auth is OAuth 2.1 against Profound. Claude Code prompts for Profound sign-in when the plugin connects — there is no API key or client ID to configure.
 
 ## What agents can do
 

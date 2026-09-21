@@ -1,18 +1,19 @@
 # Hunter
 
-Cursor plugin that connects agents to [Hunter](https://hunter.io) through Hunter's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Hunter](https://hunter.io) through Hunter's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Find and verify professional email addresses, list the contacts behind any company domain, discover companies that match a profile, enrich people and companies, and save contacts as leads.
 
-Official Cursor setup: https://hunter.io/agents.md
+Official Claude Code setup: https://hunter.io/agents.md
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Hunter**.
-3. Click **Install**, then set your Hunter API key (below).
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install hunter@claude-skills
+```
 
-Or run `/add-plugin hunter` in chat.
+After installing, set your Hunter API key (below).
 
 ## MCP
 
@@ -53,7 +54,7 @@ The hosted runtime is the source of truth for tool names and schemas.
 ## Notes
 
 - Tool calls run with the permissions and credits attached to the API key. Domain Search, Email Finder, Email Verifier, and Enrichment calls cost credits the same way they do in the Hunter app; Discover is free.
-- This plugin follows Hunter's official Cursor packaging: Streamable HTTP at `https://mcp.hunter.io/mcp` with `X-API-Key`. Hunter also documents OAuth for some clients; do not use OAuth for this plugin.
+- This plugin follows Hunter's official Claude Code packaging: Streamable HTTP at `https://mcp.hunter.io/mcp` with `X-API-Key`. Hunter also documents OAuth for some clients; do not use OAuth for this plugin.
 - Hunter's `test-api-key` only works against the REST API; the MCP server rejects it with a 401.
 - The `hunter-io/hunter-mcp` GitHub repository is Hunter's old local (stdio) server and is archived. Hunter directs all clients to the remote server above.
 

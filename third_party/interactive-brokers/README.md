@@ -1,16 +1,17 @@
 # Interactive Brokers
 
-Cursor plugin that connects agents to [Interactive Brokers](https://www.interactivebrokers.com/en/trading/ai-integrations.php) through Interactive Brokers's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Interactive Brokers](https://www.interactivebrokers.com/en/trading/ai-integrations.php) through Interactive Brokers's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Review positions, balances, P&L, and draft trade instructions.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Interactive Brokers**.
-3. Click **Install**, then complete the Interactive Brokers sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install interactive-brokers@claude-skills
+```
 
-Or run `/add-plugin interactive-brokers` in chat.
+After installing, complete the Interactive Brokers sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin interactive-brokers` in chat.
 }
 ```
 
-Auth is OAuth. Cursor prompts for Interactive Brokers sign-in when the plugin connects — there is no client ID or personal access token to configure.
+Auth is OAuth. Claude Code prompts for Interactive Brokers sign-in when the plugin connects — there is no client ID or personal access token to configure.
 
 ## Before you connect
 

@@ -18,7 +18,7 @@ Use from `continual-learning` when transcript deltas may produce durable memory 
    - `## Learned User Preferences`
    - `## Learned Workspace Facts`
 2. Load the incremental index if present.
-3. Inspect only transcript files under `~/.cursor/projects/<workspace-slug>/agent-transcripts/` that are new or have newer mtimes than the index.
+3. Inspect only transcript files under `~/.claude/projects/<project-slug>/` (one `.jsonl` file per session) that are new or have newer mtimes than the index.
 4. Pull out only durable, reusable items:
    - recurring user preferences or corrections
    - stable workspace facts
@@ -43,5 +43,5 @@ Use from `continual-learning` when transcript deltas may produce durable memory 
 
 ## Output
 
-- Updated `AGENTS.md` and `.cursor/hooks/state/continual-learning-index.json` when needed
+- Updated `AGENTS.md` and `.claude/hooks/state/continual-learning-index.json` when needed
 - Otherwise exactly `No high-signal memory updates.`

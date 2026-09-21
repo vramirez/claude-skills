@@ -1,6 +1,6 @@
 # Navan
 
-Cursor plugin that connects agents to [Navan](https://navan.com) through Navan's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Navan](https://navan.com) through Navan's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Query expenses and spend trends, analyze travel bookings across flights, hotels, and ground transport, ask about policies, approval flows, and flag/decline reasons, and look up card details for the signed-in Navan user.
 
@@ -10,11 +10,12 @@ A Navan admin must enable MCP for your organization first: **Navan → Configura
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Navan**.
-3. Click **Install**, then complete the Navan SSO sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install navan@claude-skills
+```
 
-Or run `/add-plugin navan` in chat.
+After installing, complete the Navan SSO sign-in prompt.
 
 ## MCP
 

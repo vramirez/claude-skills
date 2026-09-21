@@ -1,16 +1,17 @@
 # Salesforce
 
-Cursor plugin that connects agents to [Salesforce](https://www.salesforce.com) through [Salesforce Hosted MCP](https://developer.salesforce.com/docs/platform/hosted-mcp-servers/), Salesforce's first-party [Model Context Protocol](https://modelcontextprotocol.io/) service.
+Claude Code plugin that connects agents to [Salesforce](https://www.salesforce.com) through [Salesforce Hosted MCP](https://developer.salesforce.com/docs/platform/hosted-mcp-servers/), Salesforce's first-party [Model Context Protocol](https://modelcontextprotocol.io/) service.
 
 Run SOQL and SOSL, inspect object schemas, traverse relationships, and create, update, or delete records — all under the signed-in user's own permissions and field-level security.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Salesforce**.
-3. Click **Install**, then set the server URL and consumer key (below) and complete the Salesforce sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install salesforce@claude-skills
+```
 
-Or run `/add-plugin salesforce` in chat.
+After installing, set the server URL and consumer key (below) and complete the Salesforce sign-in prompt.
 
 ## MCP
 
@@ -52,7 +53,7 @@ Under **OAuth Scopes**, select exactly these two and nothing broader:
 
 The second one is easy to miss because the picker labels scopes by description rather than by value. Without it the plugin cannot refresh, and every user has to re-authenticate when their access token expires. Do not add **Full access** (`full`) — Hosted MCP does not need it.
 
-Under **Security**, select **Issue JSON Web Token (JWT)-based access tokens for named users**. This is required: without it Salesforce issues opaque tokens and every tool call fails with `JWT Token is required`. Leave **Require Secret for Web Server Flow** off — Cursor authenticates as a public client using PKCE, so no client secret is involved. Do not enable the **JWT Bearer Flow**, which is a different feature and needs a certificate.
+Under **Security**, select **Issue JSON Web Token (JWT)-based access tokens for named users**. This is required: without it Salesforce issues opaque tokens and every tool call fails with `JWT Token is required`. Leave **Require Secret for Web Server Flow** off — Claude Code authenticates as a public client using PKCE, so no client secret is involved. Do not enable the **JWT Bearer Flow**, which is a different feature and needs a certificate.
 
 Finally, copy the **Consumer Key** from **Settings → Consumer Key and Secret**.
 
@@ -71,7 +72,7 @@ Salesforce ships several standard servers with different blast radii — `sobjec
 
 ### 3. Configure the plugin
 
-In **Dashboard → Plugins → Configure**, set **Salesforce MCP server URL** and **Salesforce Consumer Key**, then complete the Salesforce login when Cursor prompts.
+Claude Code prompts for plugin settings at install time. Set **Salesforce MCP server URL** and **Salesforce Consumer Key**, then complete the Salesforce login when Claude Code prompts.
 
 On a team marketplace an admin sets both values once. Each member still authenticates individually, so tools run with that member's own object and field permissions.
 

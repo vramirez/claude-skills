@@ -1,0 +1,953 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "claude-skills",
+  "description": "Claude Code plugin marketplace: developer tools, agent skills, and MCP integrations",
+  "owner": {
+    "name": "Victor Ramirez"
+  },
+  "plugins": [
+    {
+      "name": "teaching",
+      "source": "./teaching",
+      "description": "Skill mapping, practice plans, and learning retrospectives.",
+      "category": "utilities",
+      "tags": [
+        "teaching",
+        "education",
+        "practice"
+      ]
+    },
+    {
+      "name": "continual-learning",
+      "source": "./continual-learning",
+      "description": "Incremental transcript-driven memory updates for AGENTS.md using high-signal bullet points only.",
+      "category": "developer-tools",
+      "tags": [
+        "automation",
+        "memory",
+        "transcripts"
+      ]
+    },
+    {
+      "name": "cursor-team-kit",
+      "source": "./cursor-team-kit",
+      "description": "Internal team workflows for CI, code review, shipping, local automation, and verification.",
+      "category": "developer-tools",
+      "tags": [
+        "internal-workflows",
+        "quality",
+        "delivery",
+        "review",
+        "automation"
+      ]
+    },
+    {
+      "name": "thermos",
+      "source": "./thermos",
+      "description": "Thermo-nuclear branch review: deep security/correctness audits, harsh code-quality rubrics, parallel subagents, thermos orchestration, and optional merge-ready PR flows.",
+      "category": "developer-tools",
+      "tags": [
+        "review",
+        "quality",
+        "shipping",
+        "automation"
+      ]
+    },
+    {
+      "name": "create-plugin",
+      "source": "./create-plugin",
+      "description": "Scaffold and validate new agent plugins.",
+      "category": "developer-tools",
+      "tags": [
+        "meta",
+        "authoring",
+        "templates"
+      ]
+    },
+    {
+      "name": "ralph-loop",
+      "source": "./ralph-loop",
+      "description": "Iterative self-referential AI loops using the Ralph Wiggum technique.",
+      "category": "developer-tools",
+      "tags": [
+        "automation",
+        "iteration",
+        "agent-loop"
+      ]
+    },
+    {
+      "name": "agent-compatibility",
+      "source": "./agent-compatibility",
+      "description": "CLI-backed repo compatibility scans plus agents that audit startup, validation, and docs against reality.",
+      "category": "developer-tools",
+      "tags": [
+        "agents",
+        "compatibility",
+        "quality",
+        "workflow"
+      ]
+    },
+    {
+      "name": "cli-for-agent",
+      "source": "./cli-for-agent",
+      "description": "Patterns for designing CLIs that coding agents can run reliably: flags, help with examples, pipelines, errors, idempotency, dry-run.",
+      "category": "developer-tools",
+      "tags": [
+        "cli",
+        "agents",
+        "automation",
+        "developer-tools"
+      ]
+    },
+    {
+      "name": "pr-review-canvas",
+      "source": "./pr-review-canvas",
+      "description": "Render PR diffs as review canvases grouped by importance.",
+      "category": "developer-tools",
+      "tags": [
+        "canvas",
+        "code-review",
+        "pull-request",
+        "workflow"
+      ]
+    },
+    {
+      "name": "docs-canvas",
+      "source": "./docs-canvas",
+      "description": "Render documentation as a navigable canvas.",
+      "category": "developer-tools",
+      "tags": [
+        "canvas",
+        "documentation",
+        "workflow"
+      ]
+    },
+    {
+      "name": "cursor-sdk",
+      "source": "./cursor-sdk",
+      "description": "Build apps, scripts, and automations with the TypeScript SDK.",
+      "category": "developer-tools",
+      "tags": [
+        "sdk",
+        "agents",
+        "automation",
+        "developer-tools"
+      ]
+    },
+    {
+      "name": "orchestrate",
+      "source": "./orchestrate",
+      "description": "Fan large tasks out across parallel cloud agents with planners, workers, verifiers, and structured handoffs.",
+      "category": "developer-tools",
+      "tags": [
+        "agents",
+        "automation",
+        "developer-tools",
+        "sdk"
+      ]
+    },
+    {
+      "name": "pstack",
+      "source": "./pstack",
+      "description": "if you want to go fast, go deep first. pstack helps you write less, but higher quality code. rigorous agent workflows you can parallelize with confidence.",
+      "category": "developer-tools",
+      "tags": [
+        "workflow",
+        "principles",
+        "review",
+        "planning"
+      ]
+    },
+    {
+      "name": "grok-voice",
+      "source": "./grok-voice",
+      "description": "Add Grok voice to an app: realtime speech-to-speech, speech-to-text dictation, text-to-speech read-aloud, and a log-driven fix loop for voice sessions.",
+      "category": "developer-tools",
+      "tags": [
+        "voice",
+        "grok",
+        "ai",
+        "developer-tools"
+      ]
+    },
+    {
+      "name": "advisor",
+      "source": "./advisor",
+      "description": "Consult a stronger model before major decisions, when stuck, and before declaring done.",
+      "category": "developer-tools",
+      "tags": [
+        "agents",
+        "quality",
+        "review",
+        "automation"
+      ]
+    },
+    {
+      "name": "gmail",
+      "source": "./third_party/gmail",
+      "description": "Search, read, draft, and manage email.",
+      "category": "productivity",
+      "tags": [
+        "gmail",
+        "email",
+        "mcp",
+        "google-workspace"
+      ]
+    },
+    {
+      "name": "google-drive",
+      "source": "./third_party/google-drive",
+      "description": "Search, read, create, and share files.",
+      "category": "productivity",
+      "tags": [
+        "drive",
+        "files",
+        "mcp",
+        "google-workspace"
+      ]
+    },
+    {
+      "name": "google-calendar",
+      "source": "./third_party/google-calendar",
+      "description": "Search events and schedule meetings.",
+      "category": "productivity",
+      "tags": [
+        "calendar",
+        "events",
+        "mcp",
+        "google-workspace"
+      ]
+    },
+    {
+      "name": "gong",
+      "source": "./third_party/gong",
+      "description": "Pull account summaries, deal insights, and call briefs.",
+      "category": "integrations",
+      "tags": [
+        "mcp",
+        "sales",
+        "revenue-intelligence"
+      ]
+    },
+    {
+      "name": "salesforce",
+      "source": "./third_party/salesforce",
+      "description": "Query, create, and update records in your org.",
+      "category": "integrations",
+      "tags": [
+        "mcp",
+        "crm",
+        "sales"
+      ]
+    },
+    {
+      "name": "playwright",
+      "source": "./third_party/playwright",
+      "description": "Navigate, click, screenshot, and test in a real browser.",
+      "category": "integrations",
+      "tags": [
+        "playwright",
+        "browser",
+        "automation",
+        "testing",
+        "e2e",
+        "mcp"
+      ]
+    },
+    {
+      "name": "github",
+      "source": "./third_party/github",
+      "description": "Manage repos, issues, pull requests, and Actions.",
+      "category": "integrations",
+      "tags": [
+        "github",
+        "git",
+        "mcp",
+        "repositories"
+      ]
+    },
+    {
+      "name": "ashby",
+      "source": "./third_party/ashby",
+      "description": "Search candidates, prep interviews, and manage pipeline tasks.",
+      "category": "integrations",
+      "tags": [
+        "ashby",
+        "recruiting",
+        "ats",
+        "mcp"
+      ]
+    },
+    {
+      "name": "hubspot",
+      "source": "./third_party/hubspot",
+      "description": "Search and update contacts, companies, deals, and tickets.",
+      "category": "integrations",
+      "tags": [
+        "mcp",
+        "crm",
+        "sales",
+        "hubspot"
+      ]
+    },
+    {
+      "name": "intercom",
+      "source": "./third_party/intercom",
+      "description": "Search conversations, contacts, and Help Center articles.",
+      "category": "integrations",
+      "tags": [
+        "intercom",
+        "support",
+        "mcp",
+        "crm"
+      ]
+    },
+    {
+      "name": "zoom",
+      "source": "./third_party/zoom",
+      "description": "Search meetings, pull transcripts, and work with Zoom Docs.",
+      "category": "integrations",
+      "tags": [
+        "mcp",
+        "meetings",
+        "productivity"
+      ]
+    },
+    {
+      "name": "x",
+      "source": "./third_party/x",
+      "description": "Search posts, read timelines, pull trends, manage bookmarks, and access X Chat.",
+      "category": "integrations",
+      "tags": [
+        "x",
+        "social",
+        "search",
+        "mcp"
+      ]
+    },
+    {
+      "name": "clay",
+      "source": "./third_party/clay",
+      "description": "Enrich people and companies, run AI research agents.",
+      "category": "integrations",
+      "tags": [
+        "clay",
+        "sales",
+        "enrichment",
+        "mcp"
+      ]
+    },
+    {
+      "name": "circleback",
+      "source": "./third_party/circleback",
+      "description": "Search meetings, transcripts, action items, and emails.",
+      "category": "integrations",
+      "tags": [
+        "circleback",
+        "meetings",
+        "mcp",
+        "productivity"
+      ]
+    },
+    {
+      "name": "docusign",
+      "source": "./third_party/docusign",
+      "description": "Manage envelopes, templates, workflows, and agreements.",
+      "category": "integrations",
+      "tags": [
+        "mcp",
+        "docusign",
+        "agreements",
+        "esignature"
+      ]
+    },
+    {
+      "name": "navan",
+      "source": "./third_party/navan",
+      "description": "Query expenses, travel bookings, policies, and cards.",
+      "category": "integrations",
+      "tags": [
+        "navan",
+        "travel",
+        "expenses",
+        "mcp"
+      ]
+    },
+    {
+      "name": "profound",
+      "source": "./third_party/profound",
+      "description": "Track AI visibility, sentiment, and citations.",
+      "category": "integrations",
+      "tags": [
+        "profound",
+        "mcp",
+        "analytics",
+        "aeo"
+      ]
+    },
+    {
+      "name": "juicebox",
+      "source": "./third_party/juicebox",
+      "description": "Query recruiting analytics, shortlists, and sourcing agents.",
+      "category": "integrations",
+      "tags": [
+        "juicebox",
+        "recruiting",
+        "mcp",
+        "sourcing"
+      ]
+    },
+    {
+      "name": "outreach",
+      "source": "./third_party/outreach",
+      "description": "Search sequences, prospects, and Kaia meetings.",
+      "category": "integrations",
+      "tags": [
+        "outreach",
+        "sales",
+        "mcp",
+        "sequences"
+      ]
+    },
+    {
+      "name": "amplemarket",
+      "source": "./third_party/amplemarket",
+      "description": "Search people and companies, enrich leads, run sequences.",
+      "category": "integrations",
+      "tags": [
+        "amplemarket",
+        "sales",
+        "mcp",
+        "prospecting"
+      ]
+    },
+    {
+      "name": "klaviyo",
+      "source": "./third_party/klaviyo",
+      "description": "Manage profiles, segments, campaigns, and flows.",
+      "category": "integrations",
+      "tags": [
+        "klaviyo",
+        "marketing",
+        "mcp",
+        "email"
+      ]
+    },
+    {
+      "name": "customer-io",
+      "source": "./third_party/customer-io",
+      "description": "Build campaigns, manage segments, and query people.",
+      "category": "integrations",
+      "tags": [
+        "customer-io",
+        "marketing",
+        "mcp",
+        "campaigns"
+      ]
+    },
+    {
+      "name": "mailerlite",
+      "source": "./third_party/mailerlite",
+      "description": "Manage subscribers, groups, campaigns, and automations.",
+      "category": "integrations",
+      "tags": [
+        "mailerlite",
+        "email",
+        "mcp",
+        "marketing"
+      ]
+    },
+    {
+      "name": "brevo",
+      "source": "./third_party/brevo",
+      "description": "Manage contacts, email and SMS campaigns, and CRM deals.",
+      "category": "integrations",
+      "tags": [
+        "brevo",
+        "email",
+        "mcp",
+        "marketing"
+      ]
+    },
+    {
+      "name": "typeform",
+      "source": "./third_party/typeform",
+      "description": "Build forms, analyze responses, and manage contacts.",
+      "category": "integrations",
+      "tags": [
+        "typeform",
+        "forms",
+        "mcp",
+        "surveys"
+      ]
+    },
+    {
+      "name": "jotform",
+      "source": "./third_party/jotform",
+      "description": "Create and edit forms, then read submissions.",
+      "category": "integrations",
+      "tags": [
+        "jotform",
+        "forms",
+        "mcp",
+        "submissions"
+      ]
+    },
+    {
+      "name": "semrush",
+      "source": "./third_party/semrush",
+      "description": "Research keywords, backlinks, traffic, and competitors.",
+      "category": "integrations",
+      "tags": [
+        "semrush",
+        "seo",
+        "mcp",
+        "marketing"
+      ]
+    },
+    {
+      "name": "ahrefs",
+      "source": "./third_party/ahrefs",
+      "description": "Research keywords, backlinks, rankings, and site health.",
+      "category": "integrations",
+      "tags": [
+        "ahrefs",
+        "seo",
+        "mcp",
+        "backlinks"
+      ]
+    },
+    {
+      "name": "godaddy",
+      "source": "./third_party/godaddy",
+      "description": "Brainstorm domain names and check availability.",
+      "category": "integrations",
+      "tags": [
+        "godaddy",
+        "domains",
+        "mcp"
+      ]
+    },
+    {
+      "name": "upwork",
+      "source": "./third_party/upwork",
+      "description": "Search talent, post jobs, and manage contracts.",
+      "category": "integrations",
+      "tags": [
+        "upwork",
+        "hiring",
+        "mcp",
+        "freelance"
+      ]
+    },
+    {
+      "name": "workable",
+      "source": "./third_party/workable",
+      "description": "Search candidates, move pipelines, and manage HR records.",
+      "category": "integrations",
+      "tags": [
+        "workable",
+        "recruiting",
+        "mcp",
+        "ats"
+      ]
+    },
+    {
+      "name": "brex",
+      "source": "./third_party/brex",
+      "description": "Query expenses, receipts, bills, cards, and travel.",
+      "category": "integrations",
+      "tags": [
+        "brex",
+        "finance",
+        "mcp",
+        "expenses"
+      ]
+    },
+    {
+      "name": "mercury",
+      "source": "./third_party/mercury",
+      "description": "Read balances, transactions, statements, and cards.",
+      "category": "integrations",
+      "tags": [
+        "mercury",
+        "finance",
+        "mcp",
+        "banking"
+      ]
+    },
+    {
+      "name": "todoist",
+      "source": "./third_party/todoist",
+      "description": "Create, find, and complete tasks and projects.",
+      "category": "integrations",
+      "tags": [
+        "todoist",
+        "tasks",
+        "mcp",
+        "productivity"
+      ]
+    },
+    {
+      "name": "calendly",
+      "source": "./third_party/calendly",
+      "description": "Check availability and book, cancel, or reschedule.",
+      "category": "integrations",
+      "tags": [
+        "calendly",
+        "scheduling",
+        "mcp",
+        "calendar"
+      ]
+    },
+    {
+      "name": "smartsheet",
+      "source": "./third_party/smartsheet",
+      "description": "Query and update sheets, rows, and workspaces.",
+      "category": "integrations",
+      "tags": [
+        "smartsheet",
+        "project-management",
+        "mcp"
+      ]
+    },
+    {
+      "name": "wrike",
+      "source": "./third_party/wrike",
+      "description": "Search projects, create tasks, and post comments.",
+      "category": "integrations",
+      "tags": [
+        "wrike",
+        "project-management",
+        "mcp",
+        "tasks"
+      ]
+    },
+    {
+      "name": "coda",
+      "source": "./third_party/coda",
+      "description": "Search docs, read pages, and update tables.",
+      "category": "integrations",
+      "tags": [
+        "coda",
+        "docs",
+        "mcp",
+        "knowledge"
+      ]
+    },
+    {
+      "name": "guru",
+      "source": "./third_party/guru",
+      "description": "Search company knowledge and draft verified answers.",
+      "category": "integrations",
+      "tags": [
+        "guru",
+        "knowledge",
+        "mcp",
+        "search"
+      ]
+    },
+    {
+      "name": "fireflies",
+      "source": "./third_party/fireflies",
+      "description": "Search meeting transcripts, summaries, and action items.",
+      "category": "integrations",
+      "tags": [
+        "fireflies",
+        "meetings",
+        "mcp",
+        "transcripts"
+      ]
+    },
+    {
+      "name": "otter",
+      "source": "./third_party/otter",
+      "description": "Search meeting history and pull full transcripts.",
+      "category": "integrations",
+      "tags": [
+        "otter",
+        "meetings",
+        "mcp",
+        "transcripts"
+      ]
+    },
+    {
+      "name": "fathom",
+      "source": "./third_party/fathom",
+      "description": "Search meetings and pull transcripts and summaries.",
+      "category": "integrations",
+      "tags": [
+        "fathom",
+        "meetings",
+        "mcp",
+        "transcripts"
+      ]
+    },
+    {
+      "name": "craft",
+      "source": "./third_party/craft",
+      "description": "Search, create, and update documents and daily notes.",
+      "category": "integrations",
+      "tags": [
+        "craft",
+        "notes",
+        "mcp",
+        "documents"
+      ]
+    },
+    {
+      "name": "mem",
+      "source": "./third_party/mem",
+      "description": "Capture, search, and organize notes and collections.",
+      "category": "integrations",
+      "tags": [
+        "mem",
+        "notes",
+        "mcp",
+        "knowledge"
+      ]
+    },
+    {
+      "name": "readwise",
+      "source": "./third_party/readwise",
+      "description": "Search highlights and Reader documents, save articles.",
+      "category": "integrations",
+      "tags": [
+        "readwise",
+        "reading",
+        "mcp",
+        "highlights"
+      ]
+    },
+    {
+      "name": "similarweb",
+      "source": "./third_party/similarweb",
+      "description": "Analyze website traffic, audiences, and competitors.",
+      "category": "integrations",
+      "tags": [
+        "similarweb",
+        "analytics",
+        "mcp",
+        "research"
+      ]
+    },
+    {
+      "name": "xero",
+      "source": "./third_party/xero",
+      "description": "Read and write invoices, contacts, reports, and payroll.",
+      "category": "integrations",
+      "tags": [
+        "xero",
+        "accounting",
+        "mcp",
+        "finance"
+      ]
+    },
+    {
+      "name": "outlook",
+      "source": "./third_party/outlook",
+      "description": "Search, read, and send Microsoft Outlook email, and look up contacts.",
+      "category": "productivity",
+      "tags": [
+        "outlook",
+        "email",
+        "mcp",
+        "microsoft-365"
+      ]
+    },
+    {
+      "name": "outlook-calendar",
+      "source": "./third_party/outlook-calendar",
+      "description": "List, create, update, and cancel Microsoft Outlook calendar events.",
+      "category": "productivity",
+      "tags": [
+        "calendar",
+        "events",
+        "mcp",
+        "microsoft-365"
+      ]
+    },
+    {
+      "name": "onedrive",
+      "source": "./third_party/onedrive",
+      "description": "Browse, search, and read Microsoft OneDrive files.",
+      "category": "productivity",
+      "tags": [
+        "onedrive",
+        "files",
+        "mcp",
+        "microsoft-365"
+      ]
+    },
+    {
+      "name": "sharepoint",
+      "source": "./third_party/sharepoint",
+      "description": "Search and read Microsoft SharePoint sites, document libraries, files, and lists.",
+      "category": "productivity",
+      "tags": [
+        "sharepoint",
+        "files",
+        "mcp",
+        "microsoft-365"
+      ]
+    },
+    {
+      "name": "teams",
+      "source": "./third_party/teams",
+      "description": "Search, read, and send Microsoft Teams chats and channel messages.",
+      "category": "productivity",
+      "tags": [
+        "teams",
+        "chat",
+        "mcp",
+        "microsoft-365"
+      ]
+    },
+    {
+      "name": "finance",
+      "source": "./third_party/finance",
+      "description": "Securely connect your accounts so Grok can help with questions about your spending, subscriptions, balances, and investments.",
+      "category": "integrations",
+      "tags": [
+        "finance",
+        "accounts",
+        "grok",
+        "mcp"
+      ]
+    },
+    {
+      "name": "x-ads",
+      "source": "./third_party/x-ads",
+      "description": "Manage ad campaigns, create ads, track conversions, and pull performance stats.",
+      "category": "integrations",
+      "tags": [
+        "x",
+        "ads",
+        "advertising",
+        "mcp"
+      ]
+    },
+    {
+      "name": "attio",
+      "source": "./third_party/attio",
+      "description": "Search and update CRM records, lists, notes, and tasks.",
+      "category": "integrations",
+      "tags": [
+        "attio",
+        "crm",
+        "sales",
+        "mcp"
+      ]
+    },
+    {
+      "name": "hunter",
+      "source": "./third_party/hunter",
+      "description": "Find and verify emails, discover companies, and save leads.",
+      "category": "integrations",
+      "tags": [
+        "hunter",
+        "sales",
+        "prospecting",
+        "enrichment",
+        "mcp"
+      ]
+    },
+    {
+      "name": "gamma",
+      "source": "./third_party/gamma",
+      "description": "Generate presentations, documents, and webpages.",
+      "category": "integrations",
+      "tags": [
+        "gamma",
+        "presentations",
+        "productivity",
+        "mcp"
+      ]
+    },
+    {
+      "name": "webull",
+      "source": "./third_party/webull",
+      "description": "View accounts, positions, orders, watchlists, and market data.",
+      "category": "integrations",
+      "tags": [
+        "webull",
+        "finance",
+        "trading",
+        "mcp"
+      ]
+    },
+    {
+      "name": "sp-global",
+      "source": "./third_party/sp-global",
+      "description": "Query S&P Capital IQ financials, prices, and transcripts.",
+      "category": "integrations",
+      "tags": [
+        "s&p global",
+        "kensho",
+        "finance",
+        "mcp"
+      ]
+    },
+    {
+      "name": "interactive-brokers",
+      "source": "./third_party/interactive-brokers",
+      "description": "Review positions, balances, P&L, and draft trade instructions.",
+      "category": "integrations",
+      "tags": [
+        "ibkr",
+        "finance",
+        "trading",
+        "mcp"
+      ]
+    },
+    {
+      "name": "meltwater",
+      "source": "./third_party/meltwater",
+      "description": "Search media and social mentions and pull analytics.",
+      "category": "integrations",
+      "tags": [
+        "meltwater",
+        "media",
+        "pr",
+        "mcp"
+      ]
+    },
+    {
+      "name": "daloopa",
+      "source": "./third_party/daloopa",
+      "description": "Pull source-linked fundamentals, KPIs, filings, and prices.",
+      "category": "integrations",
+      "tags": [
+        "daloopa",
+        "finance",
+        "research",
+        "mcp"
+      ]
+    },
+    {
+      "name": "excalidraw",
+      "source": "./third_party/excalidraw",
+      "description": "Draw and export hand-drawn diagrams from chat.",
+      "category": "integrations",
+      "tags": [
+        "excalidraw",
+        "diagrams",
+        "productivity",
+        "mcp"
+      ]
+    },
+    {
+      "name": "google-cloud-bigquery",
+      "source": "./third_party/google-cloud-bigquery",
+      "description": "Explore datasets and tables and run SQL queries.",
+      "category": "integrations",
+      "tags": [
+        "bigquery",
+        "google cloud",
+        "analytics",
+        "sql",
+        "mcp"
+      ]
+    }
+  ]
+}

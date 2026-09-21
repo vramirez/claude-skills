@@ -1,16 +1,17 @@
 # Fireflies
 
-Cursor plugin that connects agents to [Fireflies](https://fireflies.ai) through Fireflies's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Fireflies](https://fireflies.ai) through Fireflies's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Search and retrieve Fireflies meeting transcripts, summaries, action items, and soundbites, and manage meeting sharing and channels.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Fireflies**.
-3. Click **Install**, then complete the Fireflies sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install fireflies@claude-skills
+```
 
-Or run `/add-plugin fireflies` in chat.
+After installing, complete the Fireflies sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin fireflies` in chat.
 }
 ```
 
-Auth is OAuth against your Fireflies, Google, or Microsoft account. Cursor prompts for sign-in when the plugin connects.
+Auth is OAuth against your Fireflies, Google, or Microsoft account. Claude Code prompts for sign-in when the plugin connects.
 
 ## What agents can do
 

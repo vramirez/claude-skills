@@ -1,16 +1,17 @@
 # Outlook Calendar
 
-Cursor plugin that connects agents to [Outlook Calendar](https://outlook.com/calendar) through Cursor's remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Outlook Calendar](https://outlook.com/calendar) through Claude Code's remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 List upcoming events, check schedules, and create, update, or cancel meetings in the signed-in Microsoft account.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Outlook Calendar**.
-3. Click **Install**, then complete the Microsoft sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install outlook-calendar@claude-skills
+```
 
-Or run `/add-plugin outlook-calendar` in chat.
+After installing, complete the Microsoft sign-in prompt.
 
 ## MCP
 
@@ -25,14 +26,14 @@ Or run `/add-plugin outlook-calendar` in chat.
 }
 ```
 
-Auth is OAuth 2.0 against Microsoft (Entra ID). Cursor prompts for Microsoft sign-in when the plugin connects.
+Auth is OAuth 2.0 against Microsoft (Entra ID). Claude Code prompts for Microsoft sign-in when the plugin connects.
 
 ## Docs
 
 - Outlook calendar API (Microsoft Graph): https://learn.microsoft.com/en-us/graph/api/resources/calendar
 - Microsoft Graph overview: https://learn.microsoft.com/en-us/graph/overview
 
-Logo is Microsoft's official Outlook Calendar product icon (`OutlookCalendar_24x`), placed on a white tile with padding so it reads well in the Cursor UI. Microsoft's Fluent brand icon CDN (`res-1.cdn.office.net/files/fabric-cdn-prod_*/assets/brand-icons/product/svg/`) does not ship a standalone calendar icon, so this uses the Outlook Calendar icon from Microsoft's product icon set.
+Logo is Microsoft's official Outlook Calendar product icon (`OutlookCalendar_24x`), placed on a white tile with padding so it reads well in the marketplace UI. Microsoft's Fluent brand icon CDN (`res-1.cdn.office.net/files/fabric-cdn-prod_*/assets/brand-icons/product/svg/`) does not ship a standalone calendar icon, so this uses the Outlook Calendar icon from Microsoft's product icon set.
 
 ## License
 

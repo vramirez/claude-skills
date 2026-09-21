@@ -1,16 +1,17 @@
 # Todoist
 
-Cursor plugin that connects agents to [Todoist](https://www.todoist.com) through Todoist's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Todoist](https://www.todoist.com) through Todoist's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Create, find, update, and complete tasks, and manage projects, sections, labels, and due dates in the signed-in Todoist account.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Todoist**.
-3. Click **Install**, then complete the Todoist sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install todoist@claude-skills
+```
 
-Or run `/add-plugin todoist` in chat.
+After installing, complete the Todoist sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin todoist` in chat.
 }
 ```
 
-Auth is OAuth. Cursor prompts for Todoist sign-in on the first tool call — there is no API key to configure.
+Auth is OAuth. Claude Code prompts for Todoist sign-in on the first tool call — there is no API key to configure.
 
 ## What agents can do
 

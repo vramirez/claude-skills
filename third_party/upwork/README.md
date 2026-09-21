@@ -1,16 +1,17 @@
 # Upwork
 
-Cursor plugin that connects agents to [Upwork](https://www.upwork.com) through Upwork's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Upwork](https://www.upwork.com) through Upwork's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Search and shortlist talent, post and edit jobs, handle invitations and proposals, and manage active contracts in the signed-in Upwork account.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Upwork**.
-3. Click **Install**, then complete the Upwork sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install upwork@claude-skills
+```
 
-Or run `/add-plugin upwork` in chat.
+After installing, complete the Upwork sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin upwork` in chat.
 }
 ```
 
-Auth is OAuth 2.1 with Dynamic Client Registration. Cursor registers itself and prompts for Upwork sign-in when the plugin connects — there is no API key or client ID to configure.
+Auth is OAuth 2.1 with Dynamic Client Registration. Claude Code registers itself and prompts for Upwork sign-in when the plugin connects — there is no API key or client ID to configure.
 
 ## Before you connect
 

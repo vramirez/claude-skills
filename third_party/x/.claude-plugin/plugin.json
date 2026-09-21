@@ -1,0 +1,26 @@
+{
+  "name": "x",
+  "displayName": "X",
+  "version": "2.5.0",
+  "description": "Search posts, read timelines, pull trends, manage bookmarks, and access X Chat.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://docs.x.com/tools/mcp",
+  "repository": "https://github.com/vramirez/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "x",
+    "twitter",
+    "posts",
+    "search",
+    "trends",
+    "news",
+    "lists",
+    "bookmarks",
+    "chat",
+    "social",
+    "mcp"
+  ]
+}

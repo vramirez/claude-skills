@@ -1,16 +1,17 @@
 # Wrike
 
-Cursor plugin that connects agents to [Wrike](https://www.wrike.com) through Wrike's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Wrike](https://www.wrike.com) through Wrike's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Search a Wrike workspace, navigate folder and project hierarchies, and create or update tasks, projects, and comments.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Wrike**.
-3. Click **Install**, then set your Wrike permanent access token (below).
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install wrike@claude-skills
+```
 
-Or run `/add-plugin wrike` in chat.
+After installing, set your Wrike permanent access token (below).
 
 ## MCP
 
@@ -30,7 +31,7 @@ Or run `/add-plugin wrike` in chat.
 
 Auth is a Wrike **permanent access token** sent as a bearer token. Create one under **Apps & Integrations → API**, then set it in **Dashboard → Plugins → Configure**.
 
-Wrike's MCP server does not offer Dynamic Client Registration, so a token is the supported path for clients like Cursor rather than a browser OAuth flow.
+Wrike's MCP server does not offer Dynamic Client Registration, so a token is the supported path for clients like Claude Code rather than a browser OAuth flow.
 
 ## Before you connect
 

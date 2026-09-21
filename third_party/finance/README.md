@@ -7,7 +7,7 @@ Securely connect your accounts so Grok can help with questions about your spendi
 ## Who can use it
 
 - Grok Bot **0.49** or newer.
-- Not available in Cursor. Cursor must not list or install this plugin.
+- Not available in Claude Code. Claude Code must not list or install this plugin.
 
 ## MCP
 
@@ -22,7 +22,7 @@ Securely connect your accounts so Grok can help with questions about your spendi
 }
 ```
 
-The server is hosted by xAI and authenticates with the Grok account linked to the caller. There is no sign-in prompt in the client: the Cursor backend attaches the linked account's credential when it dials this URL. Linking accounts on grok.com (Plaid) happens on grok.com; until an account is linked, the connector reports that it needs authorization.
+The server is hosted by xAI and authenticates with the Grok account linked to the caller. There is no sign-in prompt in the client: the Claude Code backend attaches the linked account's credential when it dials this URL. Linking accounts on grok.com (Plaid) happens on grok.com; until an account is linked, the connector reports that it needs authorization.
 
 ## About this connector
 

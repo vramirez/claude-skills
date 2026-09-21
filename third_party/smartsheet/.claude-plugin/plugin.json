@@ -1,0 +1,30 @@
+{
+  "name": "smartsheet",
+  "displayName": "Smartsheet",
+  "version": "1.0.0",
+  "description": "Query and update sheets, rows, and workspaces.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://developers.smartsheet.com/ai-mcp/smartsheet/mcp-server",
+  "repository": "https://github.com/vramirez/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "smartsheet",
+    "sheets",
+    "project-management",
+    "work-management",
+    "rows",
+    "mcp"
+  ],
+  "userConfig": {
+    "SMARTSHEET_API_TOKEN": {
+      "type": "string",
+      "title": "Smartsheet API token",
+      "description": "API access token generated in Smartsheet under Account → Personal Settings → API Access.",
+      "sensitive": true,
+      "required": true
+    }
+  }
+}

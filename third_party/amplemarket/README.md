@@ -1,16 +1,17 @@
 # Amplemarket
 
-Cursor plugin that connects agents to [Amplemarket](https://www.amplemarket.com) through Amplemarket's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Amplemarket](https://www.amplemarket.com) through Amplemarket's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Search people and companies, enrich contacts, manage lead lists and sequences, and pull analytics in the signed-in Amplemarket account.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Amplemarket**.
-3. Click **Install**, then complete the Amplemarket sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install amplemarket@claude-skills
+```
 
-Or run `/add-plugin amplemarket` in chat.
+After installing, complete the Amplemarket sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin amplemarket` in chat.
 }
 ```
 
-Auth is OAuth 2.0 against Amplemarket. Cursor prompts for Amplemarket sign-in when the plugin connects — there is no API key or client ID to configure.
+Auth is OAuth 2.0 against Amplemarket. Claude Code prompts for Amplemarket sign-in when the plugin connects — there is no API key or client ID to configure.
 
 ## Before you connect
 

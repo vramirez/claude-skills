@@ -1,0 +1,22 @@
+{
+  "name": "brex",
+  "displayName": "Brex",
+  "version": "1.0.0",
+  "description": "Query expenses, receipts, bills, cards, and travel.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://developer.brex.com/docs/mcp",
+  "repository": "https://github.com/vramirez/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "brex",
+    "expenses",
+    "spend",
+    "corporate-cards",
+    "finance",
+    "travel",
+    "mcp"
+  ]
+}

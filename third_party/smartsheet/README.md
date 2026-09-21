@@ -1,16 +1,17 @@
 # Smartsheet
 
-Cursor plugin that connects agents to [Smartsheet](https://www.smartsheet.com) through Smartsheet's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Smartsheet](https://www.smartsheet.com) through Smartsheet's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Find sheets, read and update rows and columns, and work with discussions and workspaces in your Smartsheet account.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Smartsheet**.
-3. Click **Install**, then set your Smartsheet API token (below).
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install smartsheet@claude-skills
+```
 
-Or run `/add-plugin smartsheet` in chat.
+After installing, set your Smartsheet API token (below).
 
 ## MCP
 
@@ -51,7 +52,7 @@ The hosted runtime is the source of truth for tool names and schemas.
 ## Notes
 
 - Tool calls run with the permissions of the user who owns the API token.
-- Smartsheet's own Cursor instructions route through `npx mcp-remote`. That is unnecessary here — Cursor speaks streamable HTTP natively and sends the `Authorization` header directly.
+- Smartsheet's own Claude Code instructions route through `npx mcp-remote`. That is unnecessary here — Claude Code speaks streamable HTTP natively and sends the `Authorization` header directly.
 - `smartsheet-platform/smar-mcp` on GitHub is a deprecated local server that aggregators still list. This plugin uses the hosted server Smartsheet now supports.
 
 ## Docs

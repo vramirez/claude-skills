@@ -14,7 +14,7 @@ Add Grok Speech to Speech to an existing app. Run on `/add-voice`, typed **Voice
 
 ## Goal
 
-Working duplex path: user-app mic in, audio out, `wss://api.x.ai/v1/realtime?model=grok-voice-latest`, safe auth. Cursor has no native mic; wire the **app** (or a sample client), not the IDE.
+Working duplex path: user-app mic in, audio out, `wss://api.x.ai/v1/realtime?model=grok-voice-latest`, safe auth. Claude Code has no native mic; wire the **app** (or a sample client), not the terminal.
 
 ## Protocol first
 

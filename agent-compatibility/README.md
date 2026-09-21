@@ -1,6 +1,6 @@
 # Agent Compatibility
 
-Cursor plugin for checking how well a repo holds up under agent workflows. It pairs the published `agent-compatibility` CLI with focused reviews for startup, validation, and docs reliability.
+Claude Code plugin for checking how well a repo holds up under agent workflows. It pairs the published `agent-compatibility` CLI with focused reviews for startup, validation, and docs reliability.
 
 By default, the full pass returns one overall score and one short list of the highest-leverage fixes. If the user wants the full breakdown, the agents can expose the component scores and the reasoning behind them.
 
@@ -83,5 +83,5 @@ The scanner is heuristic. It scores repo signals and surfaces likely friction, b
 If you want to use this plugin directly, symlink this directory into:
 
 ```bash
-~/.cursor/plugins/local/agent-compatibility
+~/.claude/plugins/local/agent-compatibility
 ```

@@ -1,16 +1,17 @@
 # Meltwater
 
-Cursor plugin that connects agents to [Meltwater](https://developer.meltwater.com/guides/meltwater-mcp/overview) through Meltwater's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Meltwater](https://developer.meltwater.com/guides/meltwater-mcp/overview) through Meltwater's official remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Search media and social mentions and pull analytics.
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **Meltwater**.
-3. Click **Install**, then complete the Meltwater sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install meltwater@claude-skills
+```
 
-Or run `/add-plugin meltwater` in chat.
+After installing, complete the Meltwater sign-in prompt.
 
 ## MCP
 
@@ -25,7 +26,7 @@ Or run `/add-plugin meltwater` in chat.
 }
 ```
 
-Auth is OAuth. Cursor prompts for Meltwater sign-in when the plugin connects — there is no client ID or API token to configure.
+Auth is OAuth. Claude Code prompts for Meltwater sign-in when the plugin connects — there is no client ID or API token to configure.
 
 ## Before you connect
 

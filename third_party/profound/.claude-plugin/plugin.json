@@ -1,0 +1,23 @@
+{
+  "name": "profound",
+  "displayName": "Profound",
+  "version": "1.0.0",
+  "description": "Track AI visibility, sentiment, and citations.",
+  "author": {
+    "name": "Cursor",
+    "email": "plugins@cursor.com"
+  },
+  "homepage": "https://docs.tryprofound.com/mcp/overview",
+  "repository": "https://github.com/vramirez/claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "profound",
+    "mcp",
+    "aeo",
+    "visibility",
+    "citations",
+    "sentiment",
+    "agents",
+    "analytics"
+  ]
+}

@@ -1,6 +1,6 @@
 # SharePoint
 
-Cursor plugin that connects agents to [Microsoft SharePoint](https://www.microsoft.com/microsoft-365/sharepoint/collaboration) through Cursor's remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
+Claude Code plugin that connects agents to [Microsoft SharePoint](https://www.microsoft.com/microsoft-365/sharepoint/collaboration) through Claude Code's remote [Model Context Protocol](https://modelcontextprotocol.io/) server.
 
 Search for sites, browse a site's document libraries and folders, search and read files, and read SharePoint lists and list items in the signed-in Microsoft account.
 
@@ -10,11 +10,12 @@ The [OneDrive plugin](../onedrive/) reaches the signed-in user's **personal driv
 
 ## Install
 
-1. Open **Cursor Settings → Plugins**.
-2. Search for **SharePoint**.
-3. Click **Install**, then complete the Microsoft sign-in prompt.
+```
+/plugin marketplace add vramirez/claude-skills
+/plugin install sharepoint@claude-skills
+```
 
-Or run `/add-plugin sharepoint` in chat.
+After installing, complete the Microsoft sign-in prompt.
 
 ## MCP
 
@@ -29,7 +30,7 @@ Or run `/add-plugin sharepoint` in chat.
 }
 ```
 
-Auth is OAuth 2.0 against Microsoft (Entra ID). Cursor prompts for Microsoft sign-in when the plugin connects.
+Auth is OAuth 2.0 against Microsoft (Entra ID). Claude Code prompts for Microsoft sign-in when the plugin connects.
 
 The plugin is read-only. It requests the delegated `Sites.Read.All` scope, which Microsoft classifies as high-impact, so most work or school tenants require an administrator to consent once before members can connect.
 
@@ -46,7 +47,7 @@ The plugin is read-only. It requests the delegated `Sites.Read.All` scope, which
 - SharePoint sites API (Microsoft Graph): https://learn.microsoft.com/en-us/graph/api/resources/sharepoint
 - Microsoft Graph overview: https://learn.microsoft.com/en-us/graph/overview
 
-Logo is the official Microsoft SharePoint product icon from Microsoft's Fluent brand icon CDN, placed on a white tile with padding so it reads well in the Cursor UI:
+Logo is the official Microsoft SharePoint product icon from Microsoft's Fluent brand icon CDN, placed on a white tile with padding so it reads well in the marketplace UI:
 https://res-1.cdn.office.net/files/fabric-cdn-prod_20240411.001/assets/brand-icons/product/svg/sharepoint_48x1.svg
 
 ## License
