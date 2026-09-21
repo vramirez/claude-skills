@@ -4,7 +4,7 @@ Ralph Loop runs Claude Code in a self-referential loop, feeding the same prompt 
 
 ## How it works
 
-A single `Stop` hook drives the loop. When Claude Code finishes a turn, the hook checks the last assistant message for a `<promise>` tag matching the completion phrase. If the promise has not been detected and the iteration limit has not been reached, the hook blocks the stop and sends the original prompt back as the next turn. Claude Code sees its own previous edits in the working tree and git history, iterates on them, and repeats. The prompt never changes. The code does.
+A single `Stop` hook drives the loop. When Claude Code finishes a turn, the hook scans the turn's assistant messages for a `<promise>` tag matching the completion phrase, so a promise followed by a closing summary still ends the loop. If the promise has not been detected and the iteration limit has not been reached, the hook blocks the stop and sends the original prompt back as the next turn. Claude Code sees its own previous edits in the working tree and git history, iterates on them, and repeats. The prompt never changes. The code does.
 
 ## Installation
 
@@ -19,13 +19,29 @@ A single `Stop` hook drives the loop. When Claude Code finishes a turn, the hook
 
 Claude Code will implement the API, run tests, see failures, fix them, and repeat until all requirements are met.
 
+## Unattended run length
+
+Claude Code force-ends a turn after `CLAUDE_CODE_STOP_HOOK_BLOCK_CAP` consecutive stop-hook continuations, which defaults to 8. The loop therefore pauses after 8 iterations and prints why, keeping its state. Any message resumes it with the iteration count intact.
+
+To run longer without interruption, raise or remove the cap in the `env` block of your `settings.json`, where 0 means no cap:
+
+```json
+{
+  "env": {
+    "CLAUDE_CODE_STOP_HOOK_BLOCK_CAP": "0"
+  }
+}
+```
+
+`--max-iterations 50` with the default cap means six pauses along the way, not 50 turns unattended.
+
 ## Skills
 
 **ralph-loop** starts the loop. Provide a prompt and options:
 
 > Start a ralph loop: "Refactor the cache layer" --max-iterations 20 --completion-promise "DONE"
 
-- `--max-iterations <N>` stops after N iterations (default: unlimited)
+- `--max-iterations <N>` stops after N iterations (default: unlimited, subject to the pause described above)
 - `--completion-promise <text>` sets the phrase that signals completion
 
 **cancel-ralph** removes the state file and stops the loop.

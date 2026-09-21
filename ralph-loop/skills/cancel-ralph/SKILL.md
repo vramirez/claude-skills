@@ -17,7 +17,7 @@ The user wants to cancel or stop an active Ralph loop.
 
 3. **If it exists**:
    - Read `.claude/ralph/scratchpad.md` to get the current iteration from the `iteration:` field.
-   - Remove the state file and any done flag:
+   - Remove the state file:
      ```bash
      rm -rf .claude/ralph
      ```
