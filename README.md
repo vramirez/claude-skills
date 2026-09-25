@@ -150,7 +150,7 @@ Cursor concepts map to Claude Code as follows:
 | agent `is_background` | `background` |
 | agent `model: fast` | `model: haiku` |
 
-A few plugins remain tied to Cursor services and are kept for reference: `cursor-sdk`, `orchestrate` (Cursor cloud agents and `CURSOR_API_KEY`), the pstack `benny` automations (Cursor Automations), and the Canvas rendering in `docs-canvas` and `pr-review-canvas`.
+A few plugins remain tied to Cursor services and are kept for reference: `cursor-sdk`, `orchestrate` (Cursor cloud agents and `CURSOR_API_KEY`), and the Canvas rendering in `docs-canvas` and `pr-review-canvas`.
 
 ## License
 
