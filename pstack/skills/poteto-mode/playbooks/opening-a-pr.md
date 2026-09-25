@@ -8,7 +8,7 @@ Invoked at the end of every other playbook.
 
 **PRs.** Run `/deslop` from `cursor-team-kit` over the diff before commit. Run `/no-comments` before review. Write every PR title, PR description, and commit body with `/technical-writing`, then apply `/unslop`. Apply every technical-writing layer except Diátaxis. Use one word for each action, keep articles, and avoid `-ing` when a plain verb works.
 
-**Titles.** Read the last five merged PRs in the target repository before you write the title or the body: `gh pr list --state merged --limit 5` then `gh pr view <number>`, or the `origin` equivalents per the resolved forge. Their titles set the convention. Match their form, whether Conventional Commits `type(scope): subject` or a plain imperative sentence, including capitalization and whether a trailing period is used. Inside that form, keep the subject short and imperative and name a real symbol when one carries the change. When the repository has no merged PRs, use a plain imperative sentence with no trailing period.
+**Titles.** Read the last five merged PRs in the target repository before you write the title or the body: `gh pr list --state merged --limit 5` then `gh pr view <number>`. Their titles set the convention. Match their form, whether Conventional Commits `type(scope): subject` or a plain imperative sentence, including capitalization and whether a trailing period is used. Inside that form, keep the subject short and imperative and name a real symbol when one carries the change. When the repository has no merged PRs, use a plain imperative sentence with no trailing period.
 
 **Descriptions.** The same PRs set the body pattern. Reuse the headings, order, and depth they share. Structure varies by repository, so do not carry a layout in from elsewhere. When the five disagree, follow the majority. When the repository has fewer than five merged PRs, use the ones that exist. When it has none, write plain paragraphs.
 
@@ -16,11 +16,11 @@ Inside that structure, the body describes the change. It is a briefing, not the 
 
 Attach videos or screenshots when they prove a claim. Do not paste full SHAs, swarm or arena lane recitals, lever-correction essays, file-by-file checklists, or "CLEAN" verdicts. Put these details in a linked artifact. A commit body does not restate its subject.
 
-**Forge.** Resolve the forge before the first PR operation and keep that choice for create, edit, view, watch, and merge. GitHub CLI (`gh`) is the default. If `command -v origin` succeeds and Origin can resolve the repository, prefer `origin pr ...`. If Origin is absent or cannot resolve the repository, stay on `gh` and record the fallback. Do not require Graphite (`gt`).
+**Forge.** Use GitHub CLI (`gh`) for create, edit, view, watch, and merge. Do not require Graphite (`gt`).
 
-**Size and stacks.** Prefer five narrow PRs to one large PR. A stack is a base-branch chain. The root PR targets trunk. Each child branch rebases onto its parent's exact tip and its PR targets the parent branch. Create a child with `origin pr create --status open --base <parent-branch>` or `gh pr create --base <parent-branch>` according to the resolved forge. Retarget an existing child with `origin pr edit <pr> --base <parent-branch>` or `gh pr edit <pr> --base <parent-branch>`. Branch from trunk only for independent work. Rebase on trunk before substantial stack work.
+**Size and stacks.** Prefer five narrow PRs to one large PR. A stack is a base-branch chain. The root PR targets trunk. Each child branch rebases onto its parent's exact tip and its PR targets the parent branch. Create a child with `gh pr create --base <parent-branch>`. Retarget an existing child with `gh pr edit <pr> --base <parent-branch>`. Branch from trunk only for independent work. Rebase on trunk before substantial stack work.
 
-**Readiness.** Open every PR ready, never as a draft. With Origin, pass `--status open`. With `gh`, omit `--draft`. Cloud-agent PR tools default to draft, so set `draft: false` on every PR creation call. If a PR still opens as a draft, run `origin pr ready <number>` or `gh pr ready <number>` according to the resolved forge. Run `origin pr view <number>` or `gh pr view <number>` before you refer to PR status.
+**Readiness.** Open every PR ready, never as a draft, so omit `--draft`. If a PR still opens as a draft, run `gh pr ready <number>`. Run `gh pr view <number>` before you refer to PR status.
 
 **Babysit.** Opening a PR does not start a babysit. Post the URL and keep building. Finish the phase or stack first. Run a separate babysit pass only when the user asks for one after the whole stack exists. A babysit for each new PR stalls the build and spends checks on commits that later waves restart. Push back when feedback drifts from intent.
 
