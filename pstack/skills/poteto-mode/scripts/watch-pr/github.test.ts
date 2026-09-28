@@ -192,7 +192,7 @@ describe("closed enum parsing", () => {
   });
 });
 
-it("annotates Bugbot threads with distinct review-pass counts", () => {
+it("annotates review-bot threads with distinct review-pass counts", () => {
   const response = {
     data: {
       repository: {
@@ -205,11 +205,12 @@ it("annotates Bugbot threads with distinct review-pass counts", () => {
                 comments: {
                   nodes: [
                     {
-                      body: "RUN_ID: run-1",
+                      body: "finding",
                       createdAt: "now",
-                      path: "a.ts",
-                      line: 1,
-                      author: { login: "bugbot" },
+                      path: null,
+                      line: null,
+                      author: { login: "copilot-pull-request-reviewer", __typename: "Bot" },
+                      pullRequestReview: { id: "review-1" },
                     },
                   ],
                 },
@@ -220,11 +221,28 @@ it("annotates Bugbot threads with distinct review-pass counts", () => {
                 comments: {
                   nodes: [
                     {
-                      body: "CURSOR_AUTOMATION_ID: run-2 severity high",
+                      body: "finding",
                       createdAt: "now",
                       path: null,
                       line: null,
-                      author: { login: "cursor" },
+                      author: { login: "claude", __typename: "Bot" },
+                      pullRequestReview: { id: "review-2" },
+                    },
+                  ],
+                },
+              },
+              {
+                id: "human",
+                isResolved: false,
+                comments: {
+                  nodes: [
+                    {
+                      body: "finding",
+                      createdAt: "now",
+                      path: null,
+                      line: null,
+                      author: { login: "alice", __typename: "User" },
+                      pullRequestReview: { id: "review-4" },
                     },
                   ],
                 },
@@ -235,11 +253,12 @@ it("annotates Bugbot threads with distinct review-pass counts", () => {
                 comments: {
                   nodes: [
                     {
-                      body: "RUN_ID: run-3",
+                      body: "finding",
                       createdAt: "now",
                       path: null,
                       line: null,
-                      author: { login: "bugbot" },
+                      author: { login: "claude", __typename: "Bot" },
+                      pullRequestReview: { id: "review-3" },
                     },
                   ],
                 },
@@ -251,9 +270,9 @@ it("annotates Bugbot threads with distinct review-pass counts", () => {
     },
   };
   const threads = parseReviewThreads(response);
-  expect(threads).toHaveLength(2);
-  expect(threads.map((thread) => thread.isBugbot)).toEqual([true, true]);
-  expect(threads.map((thread) => thread.bugbotReviewPasses)).toEqual([3, 3]);
+  expect(threads.map((thread) => thread.id)).toEqual(["one", "two", "human"]);
+  expect(threads.map((thread) => thread.isReviewBot)).toEqual([true, true, false]);
+  expect(threads.map((thread) => thread.reviewBotPasses)).toEqual([3, 3, 3]);
 });
 
 describe("context and stack discovery", () => {
