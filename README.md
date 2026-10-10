@@ -31,10 +31,6 @@ claude --plugin-dir ./<name>
 | `ralph-loop` | [Ralph Loop](ralph-loop/) | Cursor (original) | Developer Tools | Iterative self-referential AI loops using the Ralph Wiggum technique. |
 | `agent-compatibility` | [Agent Compatibility](agent-compatibility/) | Cursor (original) | Developer Tools | CLI-backed repo compatibility scans plus agents that audit startup, validation, and docs against reality. |
 | `cli-for-agent` | [CLI for Agents](cli-for-agent/) | Eric Zakariasson (original) | Developer Tools | Patterns for designing CLIs that coding agents can run reliably: flags, help with examples, pipelines, errors, idempotency, dry-run. |
-| `pr-review-canvas` | [PR Review Canvas](pr-review-canvas/) | Cursor (original) | Developer Tools | Render PR diffs as review canvases grouped by importance. |
-| `docs-canvas` | [Docs Canvas](docs-canvas/) | Cursor (original) | Developer Tools | Render documentation as a navigable canvas. |
-| `cursor-sdk` | [Cursor SDK](cursor-sdk/) | Cursor (original) | Developer Tools | Build apps, scripts, and automations with the TypeScript SDK. |
-| `orchestrate` | [Orchestrate](orchestrate/) | Cursor (original) | Developer Tools | Fan large tasks out across parallel cloud agents with planners, workers, verifiers, and structured handoffs. |
 | `pstack` | [pstack](pstack/) | Lauren Tan | Developer Tools | if you want to go fast, go deep first. pstack helps you write less, but higher quality code. rigorous agent workflows you can parallelize with confidence. |
 | `advisor` | [Advisor](advisor/) | Cursor (original) | Developer Tools | Consult a stronger model before major decisions, when stuck, and before declaring done. |
 | `grok-voice` | [Grok Voice](grok-voice/) | Eric Zakariasson (original) | Developer Tools | Add Grok voice to an app: realtime speech-to-speech, speech-to-text dictation, text-to-speech read-aloud, and a log-driven fix loop for voice sessions. |
@@ -89,8 +85,6 @@ claude --plugin-dir ./<name>
 | `attio` | [Attio](third_party/attio/) | Cursor (original) | Integrations | Search and update CRM records, lists, notes, and tasks. |
 | `hunter` | [Hunter](third_party/hunter/) | Cursor (original) | Integrations | Find and verify emails, discover companies, and save leads. |
 | `gamma` | [Gamma](third_party/gamma/) | Cursor (original) | Integrations | Generate presentations, documents, and webpages. |
-| `teams` | [Teams](third_party/teams/) | Cursor (original) | Productivity | Search, read, and send Microsoft Teams chats and channel messages. |
-| `sharepoint` | [SharePoint](third_party/sharepoint/) | Cursor (original) | Productivity | Search and read Microsoft SharePoint sites, document libraries, files, and lists. |
 | `finance` | [Finance](third_party/finance/) | Cursor (original) | Integrations | Securely connect your accounts so Grok can help with questions about your spending, subscriptions, balances, and investments. |
 | `webull` | [Webull](third_party/webull/) | Cursor (original) | Integrations | View accounts, positions, orders, watchlists, and market data. |
 | `sp-global` | [S&P Global](third_party/sp-global/) | Cursor (original) | Integrations | Query S&P Capital IQ financials, prices, and transcripts. |
@@ -150,7 +144,7 @@ Cursor concepts map to Claude Code as follows:
 | agent `is_background` | `background` |
 | agent `model: fast` | `model: haiku` |
 
-A few plugins remain tied to Cursor services and are kept for reference: `cursor-sdk`, `orchestrate` (Cursor cloud agents and `CURSOR_API_KEY`), and the Canvas rendering in `docs-canvas` and `pr-review-canvas`.
+Plugins that only work inside Cursor or through Cursor services were dropped: `cursor-sdk` and `orchestrate` (Cursor cloud agents and `CURSOR_API_KEY`), `docs-canvas` and `pr-review-canvas` (Cursor Canvas), and the Microsoft `teams`, `sharepoint`, `outlook`, `outlook-calendar`, and `onedrive` MCPs (served through a Cursor-authenticated proxy).
 
 ## License
 
