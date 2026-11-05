@@ -16,9 +16,9 @@ Work in a scratch folder outside the repo. Write a TLA+ spec and its config. The
 <skill dir>/scripts/statechart SPEC.tla [--config FILE] [--view FILE] [--out DIR]
 ```
 
-`<skill dir>` is the folder that holds this SKILL.md. `scripts/statechart.ts` is TypeScript, and the launcher runs it with Node 22.18 or later, Bun 1.1.5 or later, or Deno 2.0 or later. If none is installed, say so to the user.
+`<skill dir>` is the folder that holds this SKILL.md. `scripts/statechart.ts` is TypeScript, and the launcher `scripts/statechart` runs it with the first Node, Bun, or Deno it finds that is new enough. The version checks live in the launcher, so read it for the current minimums rather than trusting any copy of them. To check this machine, run `node --version`, `bun --version`, and `deno --version` and compare. If the launcher exits with code 127, it prints the versions it accepts; tell the user which runtime to install.
 
-The first run installs TLC and Java with mise and needs the network. Without mise, set `TLA2TOOLS` to the path of `tla2tools.jar` and `JAVA` to a Java 11 or later binary.
+The first run installs TLC and Java with mise and needs the network. The pinned TLC and Java versions are in `scripts/run.ts`. Without mise, set `TLA2TOOLS` to the path of `tla2tools.jar` and `JAVA` to a Java binary. When mise is missing, the error message names the Java version it needs.
 
 ## Write the spec
 
