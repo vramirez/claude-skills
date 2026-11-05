@@ -16,16 +16,19 @@ const SETUP = join(PSTACK, "skills", "setup-pstack", "SKILL.md");
 // Commands that ship with Claude Code, not in this repository. Nothing here can verify them, so add a name only after a
 // public Claude Code doc shows it.
 const EXTERNAL = new Set(["code-review", "goal", "loop", "plugin"]);
+// Subagent types that ship with Claude Code. A pstack agent must be written `pstack:<name>`, because Claude Code
+// prefixes plugin agents.
+const BUILTIN_AGENTS = new Set(["general-purpose", "Explore"]);
 
 const SMALL = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split(" ");
 const TENS = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
 // "The twenty-three playbooks" claims the whole set. "Three playbooks scale it up" names a subset, so it is not checked.
 const CLAIM = /\b(?:(all|has|of|ships|the|with) )?(\d+|[a-z]+(?:-[a-z]+)?) (short )?(skills|principles|playbooks|agents)\b/gi;
-const SLASH = /(?<=^|[\s`(|"'>])\/(?:pstack:)?([a-z][a-z0-9-]*)(?![\w/<-])/gm;
+const SLASH = /(?<=^|[\s`(|"'>])\/(?:pstack:)?([a-z][a-z0-9-]*)(?![\w/<-]|:<)/gm;
 const LINK = /\]\(<?([^)\s>]+)>?(?:\s+"[^"]*")?\)/g;
-const AGENT = /subagent_type: "pstack:([^"]+)"/g;
+const AGENT = /subagent_type: "([^"]+)"/g;
 const MODEL_ID = /\b(?:claude-[a-z]+|grok|gpt)-\d(?:[\w.-]*\w)?/g;
-const MODEL_PROSE = /\b(opus|sonnet|grok) (\d+(?:\.\d+)?)\b/gi;
+const MODEL_PROSE = /\b(opus|sonnet|haiku|fable) (\d+(?:\.\d+)?)\b/gi;
 
 function names(dir, keep) {
   return existsSync(dir) ? readdirSync(dir).filter((name) => keep(join(dir, name))).sort() : [];
@@ -109,14 +112,17 @@ for (const [doc, body] of text) {
       fail(doc, index, `links to ${href}, but ${path} has no heading with that anchor`);
     }
   }
-  for (const { 1: name, index } of body.matchAll(AGENT)) {
-    if (!agents.includes(name)) fail(doc, index, `names subagent_type "${name}", which pstack/agents does not ship`);
+  for (const { 1: type, index } of body.matchAll(AGENT)) {
+    const shipped = type.startsWith("pstack:") && agents.includes(type.slice("pstack:".length));
+    if (!shipped && !BUILTIN_AGENTS.has(type)) {
+      fail(doc, index, `names subagent_type "${type}", which is neither pstack:<agent> for a shipped agent nor a built-in`);
+    }
   }
   for (const { 0: id, index } of body.matchAll(MODEL_ID)) {
     if (!setup.includes(id)) fail(doc, index, `names model ${id}, which setup-pstack does not use`);
   }
   for (const { 0: match, 1: family, 2: version, index } of body.matchAll(MODEL_PROSE)) {
-    const prefix = family.toLowerCase() === "grok" ? `grok-${version}` : `claude-${family.toLowerCase()}-${version.replace(".", "-")}`;
+    const prefix = `claude-${family.toLowerCase()}-${version.replace(".", "-")}`;
     if (!setup.includes(prefix)) fail(doc, index, `says "${match}", but setup-pstack has no ${prefix} default`);
   }
 }

@@ -13,7 +13,7 @@ In a Claude Code session, run:
 
 Claude Code confirms the plugin is installed.
 
-Claude Code prefixes plugin commands, so each command in this guide takes a `pstack:` prefix when you type it, such as `/pstack:setup-pstack`. The guide writes the short name.
+Claude Code prefixes plugin commands, so each pstack command in this guide takes a `pstack:` prefix when you type it, such as `/pstack:setup-pstack`. The guide writes the short name. Claude Code's own commands, such as `/loop`, take no prefix.
 
 Claude Code leaves auto-update off for third-party marketplaces, so pstack stays on the version you installed. To turn it on, run `/plugin`, open the **Marketplaces** tab, select `claude-skills`, and choose **Enable auto-update**. To update once by hand, run `claude plugin update pstack@claude-skills`.
 
@@ -27,7 +27,7 @@ Run:
 
 [`/setup-pstack`](../../skills/setup-pstack/SKILL.md) asks for a reasoning budget, shows you each role (code delegates, judgment, the review panels) with its Claude model, one of `sonnet`, `opus`, `haiku`, or `fable`, and asks what you want. Answer the questions. It writes `~/.claude/rules/pstack-models.md`, a small rule every pstack skill reads.
 
-The budget sets the effort each subagent starts from. `unlimited` starts at `max`, `large` at `xhigh`, `medium` at `high`, and `small` at `medium`. The defaults start at `xhigh`, the same as `large`, and a rule with no budget line does too. `/poteto-mode` then moves each subagent's effort a step up for the hardest work and down for routine work, without changing its model. A role can also pin its own effort, such as `opus max`. `medium` and `small` spend fewer tokens.
+The budget sets the effort each subagent starts from. `unlimited` starts at `max`, `large` at `xhigh`, `medium` at `high`, and `small` at `medium`. The defaults start at `xhigh`, the same as `large`, and a rule with no budget line does too. A role can set its own starting effort instead, such as `opus max`, but a rerun of `/setup-pstack` resets it to the budget's effort. `/poteto-mode` then raises each subagent's effort one step for the hardest work and lowers it for judgment and routine work, without changing its model. `medium` and `small` spend fewer tokens.
 
 You only override what you care about. A role with no line in the rule keeps the skill's default. To restore a default, delete that role's line. A rerun of `/setup-pstack` keeps any role whose model differs from the default. When a default changes, a rule written before the change still pins the old default, so delete those role lines, or delete the file, then run `/setup-pstack` again.
 
