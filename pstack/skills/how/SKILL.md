@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Explore the codebase to answer "how does X work?" questions. Produce architectural explanations at the level of a senior engineer onboarding onto a subsystem, enough to build a working mental model, not so much that it reads like annotated source code.
 
-Every spawn is an Agent subagent with `subagent_type: "general-purpose"`. Tell each one it is read only and must not edit files. Explorers use the `how explorer` line in `~/.claude/rules/pstack-models.md` (default `sonnet`), and every explainer uses the `how explainer` line (default `opus`). Set `model` to the model in that line's value, or to the default if the rule or the line is missing. Leave `model` unset when the value is `inherit-parent`. If the Agent tool rejects a model, use the default and say so. Pick each subagent's effort for the job, per the Subagents section of the **poteto-mode** skill.
+Every spawn is an Agent subagent with `subagent_type: "general-purpose"`. Tell each one it is read only and must not edit files. Explorers use the `how explorer` line in `~/.claude/rules/pstack-models.md` (default `sonnet`), and every explainer uses the `how explainer` line (default `opus`). Set `model` to the model in that line's value, or to the default if the rule or the line is missing. Leave `model` unset when the value is `inherit-parent`. If the Agent tool rejects a model, use the default and say so. If it rejects the default too, omit `model` and say so. Pick each subagent's effort for the job, per the Subagents section of the **poteto-mode** skill.
 
 ## 1. Assess complexity
 

@@ -15,16 +15,16 @@ Invoke when the user says "reflect" or "/reflect". Skip when the conversation is
 Before fanning out, find this conversation's transcript in the active project's directory, `~/.claude/projects/<slug>/`, where `<slug>` is the workspace path with `/`, `.` and `_` turned into `-`. Do not glob across `~/.claude/projects/*/`. That crosses workspace boundaries and reads private chats from unrelated projects.
 
 ```bash
-ls -t <transcripts-dir>/*.jsonl <transcripts-dir>/*/*.jsonl <transcripts-dir>/*/subagents/*.jsonl 2>/dev/null | head -10
+ls -t <transcripts-dir>/*.jsonl <transcripts-dir>/*/subagents/*.jsonl 2>/dev/null | head -10
 ```
 
-That covers the legacy flat (`<id>.jsonl`), current nested (`<id>/<id>.jsonl`), and subagent (`<parent>/subagents/<child>.jsonl`) layouts. For each candidate, read the first JSONL line. Take the file whose `message.content[0].text` contains the conversation's opening user prompt. If none matches, pass a tight digest of the session instead.
+That covers the conversation layout (`<session-id>.jsonl`) and the subagent layout (`<session-id>/subagents/<child>.jsonl`). A transcript's first lines are metadata (`mode`, `ai-title`, and the like), not the prompt, so match on content: `grep -lF '<a distinctive phrase from the conversation's opening user prompt>'` over the candidates. Take the matching `<session-id>.jsonl`. If none matches, pass a tight digest of the session instead.
 
 ## 2. Spawn three reviewers in parallel
 
 One message, three `Agent` calls, `subagent_type: "general-purpose"`. Reviewers need MCP access to look up the tickets, chat threads, and observability traces the transcript references.
 
-Each reviewer and the synthesizer name a role line in `~/.claude/rules/pstack-models.md` and a default. Set `model` to the model in that line's value, or to the default if the rule or the line is missing. Leave `model` unset when the value is `inherit-parent`. If the Agent tool rejects a model, use the default and say so. Pick each subagent's effort for the job, per the Subagents section of the **poteto-mode** skill.
+Each reviewer and the synthesizer name a role line in `~/.claude/rules/pstack-models.md` and a default. Set `model` to the model in that line's value, or to the default if the rule or the line is missing. Leave `model` unset when the value is `inherit-parent`. If the Agent tool rejects a model, use the default and say so. If it rejects the default too, omit `model` and say so. Pick each subagent's effort for the job, per the Subagents section of the **poteto-mode** skill.
 
 | Lens | Role line | Default `model` | Prompt template |
 |---|---|---|---|
@@ -48,7 +48,7 @@ Present the synthesizer's full Accepted / Rejected / Backlog output and wait for
 
 File each Backlog item to your team's devex or backlog tracker without waiting. Only the Accepted list waits for approval.
 
-Never edit a skill under `~/.claude/plugins/cache/`. Before approval, show its destination, `.claude/skills/<skill>/` or `~/.claude/skills/<skill>/`. After approval, copy the skill folder there and edit the copy. Never open a PR or push.
+Never edit a skill under `~/.claude/plugins/cache/`. Before approval, show its destination, `.claude/skills/<skill>/` or `~/.claude/skills/<skill>/`. After approval, copy the skill folder there and edit the copy. The copy loads as its own skill, `/<skill>`, next to the plugin's `/<plugin>:<skill>`, which keeps the unedited text. Say so when you show the destination. Never open a PR or push.
 
 Follow each approved row's Routing exactly:
 

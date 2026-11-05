@@ -8,9 +8,9 @@ disable-model-invocation: true
 
 Investigate the motivation and intent behind code. The companion `how` skill answers what the code does and how it works. `why` answers what forces led to its shape.
 
-Each spawn below names a role line in `~/.claude/rules/pstack-models.md` and a default. Set `model` to the model in that line's value, or to the default if the rule or the line is missing. Leave `model` unset when the value is `inherit-parent`. If the Agent tool rejects a model, use the default and say so. Pick each subagent's effort for the job, per the Subagents section of the **poteto-mode** skill.
+Each spawn below names a role line in `~/.claude/rules/pstack-models.md` and a default. Set `model` to the model in that line's value, or to the default if the rule or the line is missing. Leave `model` unset when the value is `inherit-parent`. If the Agent tool rejects a model, use the default and say so. If it rejects the default too, omit `model` and say so. Pick each subagent's effort for the job, per the Subagents section of the **poteto-mode** skill.
 
-Every spawn is `subagent_type: "general-purpose"`. **Do not use `Explore`.** Investigators need MCP access, and the synthesizer spot-checks citations through MCP. Investigators still shouldn't write anything.
+Every spawn is `subagent_type: "general-purpose"`. **Do not use `Explore`.** It reads excerpts to locate code. Investigators read each source in full through MCP, and the synthesizer spot-checks citations through MCP. Investigators still shouldn't write anything.
 
 ## Operating Posture
 
@@ -32,7 +32,7 @@ Before spawning investigators, build the seed context inline: file paths and lin
 
 ### Discovery
 
-Before spawning investigators, list the available MCPs from the Claude Code environment. Use the available-tools map when present. Otherwise inspect the MCP servers Claude Code exposes for enabled MCP servers.
+Before spawning investigators, list the available MCPs from the Claude Code environment. Use the available-tools map when present. Otherwise list the session's MCP tools, named `mcp__<server>__<tool>`. Count deferred tools too: they appear by name only until ToolSearch loads them.
 
 Map each available MCP to one evidence category:
 
