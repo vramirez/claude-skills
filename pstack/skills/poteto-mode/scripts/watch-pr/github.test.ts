@@ -463,6 +463,39 @@ describe("context and stack discovery", () => {
     ]);
     expect(ordered.map((item) => Number(item.number))).toEqual([41, 42, 43]);
   });
+  it("keeps a trunk stack intact when main is long-lived", () => {
+    const ordered = orderStack(context, [
+      { number: parsePrNumber(41), headRefName: "base-feature", baseRefName: "main", isCrossRepository: false },
+      { number: context.number, headRefName: "feature", baseRefName: "base-feature", isCrossRepository: false },
+    ], new Set(["main"]));
+    expect(ordered.map((item) => Number(item.number))).toEqual([41, 42]);
+  });
+
+  it("does not stack a feature on a main -> production release PR", () => {
+    const ordered = orderStack(context, [
+      { number: parsePrNumber(11), headRefName: "main", baseRefName: "production", isCrossRepository: false },
+      { number: context.number, headRefName: "feature", baseRefName: "main", isCrossRepository: false },
+    ], new Set(["main", "production"]));
+    expect(ordered.map((item) => Number(item.number))).toEqual([42]);
+  });
+
+  it("does not stack a git-flow feature on a develop -> main release PR", () => {
+    const ordered = orderStack(context, [
+      { number: parsePrNumber(10), headRefName: "develop", baseRefName: "main", isCrossRepository: false },
+      { number: context.number, headRefName: "feature", baseRefName: "develop", isCrossRepository: false },
+    ], new Set(["develop", "main"]));
+    expect(ordered.map((item) => Number(item.number))).toEqual([42]);
+  });
+
+  it("does not pull every feature into a watched release PR's stack", () => {
+    const release = { ...context, number: parsePrNumber(11) };
+    const ordered = orderStack(release, [
+      { number: parsePrNumber(11), headRefName: "main", baseRefName: "production", isCrossRepository: false },
+      { number: context.number, headRefName: "feature", baseRefName: "main", isCrossRepository: false },
+    ], new Set(["main", "production"]));
+    expect(ordered.map((item) => Number(item.number))).toEqual([11]);
+  });
+
   it("does not use a fork's same-named head as a stack parent", () => {
     const ordered = orderStack(context, [
       { number: parsePrNumber(41), headRefName: "base-feature", baseRefName: "main", isCrossRepository: true },
@@ -532,6 +565,42 @@ printf '%s\\n' '[{"number":42,"headRefName":"feature","baseRefName":"main","isCr
     } finally {
       rmSync(directory, { recursive: true, force: true });
     }
+  });
+
+  const longLivedFromFakeGh = (protectedScript: string): unknown => {
+    const directory = mkdtempSync(join(tmpdir(), "watch-pr-branches-"));
+    try {
+      writeFileSync(join(directory, "gh"), `#!/bin/sh
+case "$*" in
+  *protected=true*) ${protectedScript} ;;
+  "api repos/owner/repo") printf '%s\\n' '{"default_branch":"trunk"}' ;;
+  *) exit 2 ;;
+esac
+`, { mode: 0o755 });
+      const program = `import { GhGitHubReader } from ${JSON.stringify(import.meta.dir + "/github.ts")};
+        console.log(JSON.stringify([...await new GhGitHubReader().longLivedBranches({ owner: "owner", repo: "repo" })]));`;
+      const child = spawnSync(process.execPath, ["-e", program], {
+        encoding: "utf8", timeout: 2000,
+        env: { ...process.env, PATH: directory + ":" + process.env.PATH },
+      });
+      expect(child.error).toBeUndefined();
+      expect(child.status).toBe(0);
+      return JSON.parse(child.stdout);
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
+    }
+  };
+
+  it("reads the default branch and protected branches as long-lived", () => {
+    expect(longLivedFromFakeGh("printf 'trunk\\nproduction\\n'")).toEqual(["trunk", "production"]);
+  });
+
+  it("ignores a blanket protection rule that covers feature branches", () => {
+    expect(longLivedFromFakeGh("seq 1 11 | sed 's/^/feature-/'")).toEqual(["trunk"]);
+  });
+
+  it("falls back to the default branch when protection cannot be read", () => {
+    expect(longLivedFromFakeGh("echo 'HTTP 403' >&2; exit 1")).toEqual(["trunk"]);
   });
 
 });

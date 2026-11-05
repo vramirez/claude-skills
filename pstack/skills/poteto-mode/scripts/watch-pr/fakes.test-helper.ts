@@ -106,6 +106,10 @@ export function fakeReader(
       calls.push("openPullRequests");
       return options.openPullRequests ?? [];
     },
+    async longLivedBranches() {
+      calls.push("longLivedBranches");
+      return new Set(["main"]);
+    },
     async checksFastPath() {
       calls.push("checksFastPath");
       return options.fastPath ?? { kind: "checks", checks: [passingCheck()] };
