@@ -492,6 +492,22 @@ describe("context and stack discovery", () => {
     expect(JSON.parse(child.stdout).map((item: { number: number }) => item.number)).toEqual([42]);
   });
 
+  it("terminates when two same-repo PRs target each other", () => {
+    // Bound the subprocess so this regression reports a failure instead of hanging the suite.
+    const program = `import { orderStack } from ${JSON.stringify(import.meta.dir + "/github.ts")};
+      console.log(JSON.stringify(orderStack(${JSON.stringify(context)}, [
+        { number: 10, headRefName: "develop", baseRefName: "main", isCrossRepository: false },
+        { number: 11, headRefName: "main", baseRefName: "develop", isCrossRepository: false },
+        { number: 42, headRefName: "feature", baseRefName: "develop", isCrossRepository: false }
+      ])));`;
+    const child = spawnSync(process.execPath, ["-e", program], { encoding: "utf8", timeout: 2000 });
+    expect(child.error).toBeUndefined();
+    expect(child.status).toBe(0);
+    const numbers: number[] = JSON.parse(child.stdout).map((item: { number: number }) => item.number);
+    expect(numbers.at(-1)).toBe(42);
+    expect(new Set(numbers).size).toBe(numbers.length);
+  });
+
   it("requests and parses fork identity from gh before stack discovery", () => {
     const directory = mkdtempSync(join(tmpdir(), "watch-pr-fork-"));
     try {

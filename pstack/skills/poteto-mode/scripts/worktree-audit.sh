@@ -21,6 +21,7 @@ while [ $# -gt 0 ]; do
 	*) break ;;
 	esac
 done
+[ $# -le 1 ] || { echo "error: unexpected argument: $2 (options go before repo-path)" >&2; exit 2; }
 
 repo="${1:-$(git rev-parse --show-toplevel 2>/dev/null)}"
 [ -z "$repo" ] && { echo "not in a git repo; pass a repo path" >&2; exit 1; }
@@ -64,11 +65,18 @@ if raw=$(gh pr list --author "@me" --state all --limit 1000 \
 fi
 [ -s "$prs" ] || echo "[]" > "$prs"
 
-# Transcripts dir: ~/.claude/projects/<slugified-repo-path>.
+# Transcripts dir: ~/.claude/projects/<slugified-path>.
 # Claude Code maps '/', '_' and '.' in the path to '-', keeping the leading dash.
-slug=$(printf '%s' "$main_wt" | sed 's#[/_.]#-#g')
-transcripts="$HOME/.claude/projects/$slug"
+# A chat started inside a worktree files its transcript under that worktree's
+# own slug, so each row searches that dir as well as the main one.
+slugify() { printf '%s' "$1" | sed 's#[/_.]#-#g'; }
+transcripts="$HOME/.claude/projects/$(slugify "$main_wt")"
 now=$(date +%s)
+
+# rg is often absent from PATH (an interactive shell function does not reach
+# this script), so fall back to grep. Fixed strings, since paths hold '.'.
+if command -v rg >/dev/null 2>&1; then search() { rg -l -F "$@"; }
+else search() { grep -rlF "$@"; }; fi
 
 echo "# base: $base"
 printf "SIZE\tAGE\tMERGED\tDIRTY\tREMOTE\tPR\tLAST_CHAT\tBUCKET\tWORKTREE\n"
@@ -107,8 +115,10 @@ git worktree list --porcelain | awk '/^worktree /{print $2}' | while read -r wt;
 	# Most recent chat whose transcript operated in this worktree. Match path
 	# followed by "/" or a quote so glint-482 does not match glint-482-r37.
 	last="-"; last_ts=0
-	if [ -d "$transcripts" ]; then
-		f=$(rg -l -e "${wt}/" -e "${wt}\"" "$transcripts" 2>/dev/null \
+	dirs=()
+	for d in "$transcripts" "$HOME/.claude/projects/$(slugify "$wt")"; do [ -d "$d" ] && dirs+=("$d"); done
+	if [ ${#dirs[@]} -gt 0 ]; then
+		f=$(search -e "${wt}/" -e "${wt}\"" "${dirs[@]}" 2>/dev/null \
 			| xargs stat "${stat_fmt[@]}" 2>/dev/null | sort -rn | head -1)
 		if [ -n "$f" ]; then last_ts=$(echo "$f" | awk '{print $1}')
 			last=$(fmt_day "$last_ts" 2>/dev/null); fi
@@ -116,7 +126,7 @@ git worktree list --porcelain | awk '/^worktree /{print $2}' | while read -r wt;
 	recent=$([ "$last_ts" -gt 0 ] 2>/dev/null && [ $(( (now - last_ts) / 86400 )) -le 4 ] && echo yes || echo no)
 
 	case "$dirty" in wip:*) bucket=hold-wip ;; *)
-		case "$pr" in */open|*/draft) bucket=hold-open-pr ;; *)
+		case "$pr" in */open) bucket=hold-open-pr ;; *)
 			if [ "$recent" = yes ]; then bucket=verify-recent-chat
 			elif [ "$merged" = YES ] || [ "$pr" != "-" ]; then bucket=safe
 			else bucket=review; fi ;;
