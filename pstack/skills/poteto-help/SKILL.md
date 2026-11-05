@@ -49,9 +49,9 @@ This pstack is a Claude Code-only fork of poteto's pstack. Other tools can read 
 
 `/pstack:poteto-mode` matches the task to a playbook, copies the playbook's steps into the todo list, and runs the other skills as the steps need them. A step it skips stays in the list as `skip: <reason>`. A good prompt states the goal and how to tell it's done. It doesn't list skills, because a hand-written sequence tends to drop or reorder steps the playbook would keep. Read [`references/prompting.md`](references/prompting.md) before you help word one. [Guide page 2](../../docs/guide/02-poteto-mode.md) has examples.
 
-Claude Code has no Custom Modes. Typing `/pstack:poteto-mode` loads the skill into the chat, where it stays until the chat is cleared or compacted, but its pull fades as the chat moves on. Start each new task with `/pstack:poteto-mode`.
+Claude Code has no Custom Modes. Typing `/pstack:poteto-mode` loads the skill into the chat, where it stays until the chat is cleared, but its pull fades as the chat moves on. Start each new task with `/pstack:poteto-mode`.
 
-Link [guide page 2](../../docs/guide/02-poteto-mode.md) when this comes up. Mid-chat, "new task" makes the mode match a fresh playbook. `/pstack:poteto-mode` already uses `pstack:poteto-agent` for the subagents its playbook steps spawn. To get the same style from a subagent of your own, spawn it with `subagent_type: "pstack:poteto-agent"`.
+Link [guide page 1](../../docs/guide/01-setup.md#run-your-first-task) when this comes up. Mid-chat, "new task" makes the mode match a fresh playbook. `/pstack:poteto-mode` already uses `pstack:poteto-agent` for the subagents its playbook steps spawn. To get the same style from a subagent of your own, spawn it with `subagent_type: "pstack:poteto-agent"`.
 
 ## Pick a skill
 

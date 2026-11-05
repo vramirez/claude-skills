@@ -34,10 +34,10 @@ For a call between options, give every option the work weighed, each with what i
 
 ## Visuals
 
-A visual is a picture: a screenshot, a video, a Mermaid diagram or chart, or a generated image. A Markdown table is not a visual, even with before and after columns.
+A visual is a picture: a screenshot, a video, or a diagram or chart. A Markdown table is not a visual, even with before and after columns.
 
 When something is easier to grasp as a picture than as sentences, draw it: how a design or system works, a PR stack or dependency chain with each PR's state, a before and after of a fix, or options side by side. Never draw a status list, a list of action items, or boxes with nothing connecting them. Never give a fact twice, in text or across visuals.
 
 Keep each visual small enough to read at a glance: at most six boxes, with at most eight words in each. Write labels as plain words a person would say, not tags like "Tests: pass". A fact that needs a sentence belongs in the text, or nowhere.
 
-Show screenshots and videos when the change is visible. The Claude Code terminal shows no images or video in a reply, so link each one by its absolute file path, next to the line it proves. If a visible change has none, mark its summary line "No screenshot yet," and say there what changed on screen. Draw diagrams and charts from facts you have: a Mermaid diagram for how things connect and a Mermaid `xychart-beta` chart for numbers. Never invent a number, and never draw or generate a picture of a screen you did not capture. Link only artifacts that exist.
+Show screenshots and videos when the change is visible. The Claude Code terminal shows no images or video in a reply, so link each one by its absolute file path. If a visible change has none, mark its summary line "No screenshot yet," and say there what changed on screen. Draw diagrams and charts from facts you have. While the reply cannot show images, draw them as plain text in a code block: boxes and arrows for how things connect, and bars for numbers. Once Claude Code can show an image in a reply, draw them as images instead. Never invent a number, and never draw a picture of a screen you did not capture. Link only artifacts that exist.
