@@ -439,6 +439,7 @@ function graphqlArgs(
   ];
 }
 
+const MAX_INTEGRATION_BRANCHES = 10;
 export class GhGitHubReader implements T.GitHubReader {
   async originRepo(): Promise<T.Repository | null> {
     const result = await run(["git", "remote", "get-url", "origin"]);
@@ -503,6 +504,26 @@ export class GhGitHubReader implements T.GitHubReader {
         ),
       };
     });
+  }
+  async longLivedBranches(
+    repository: T.Repository
+  ): Promise<ReadonlySet<string>> {
+    const slug = `${repository.owner}/${repository.repo}`;
+    const info = record(await runJson(["gh", "api", `repos/${slug}`]), "repository");
+    const names = new Set([string(info.default_branch, "repository.default_branch")]);
+    // Protection is optional. Without it, the default branch alone is the floor.
+    const result = await run([
+      "gh", "api", "--paginate",
+      `repos/${slug}/branches?protected=true&per_page=100`,
+      "--jq", ".[].name",
+    ]);
+    if (result.code !== 0) return names;
+    const protectedNames = result.stdout.split("\n").filter(Boolean);
+    // A long list means a blanket rule that also covers feature branches
+    // (cli/cli protects ~260), so protection says nothing about integration.
+    if (protectedNames.length <= MAX_INTEGRATION_BRANCHES)
+      for (const name of protectedNames) names.add(name);
+    return names;
   }
   async checksFastPath(context: T.PrContext): Promise<T.ChecksFastPath> {
     const result = await run([
@@ -655,13 +676,18 @@ export async function resolveContext(args: {
 }
 export function orderStack(
   context: T.PrContext,
-  open: readonly T.OpenPullRequest[]
+  open: readonly T.OpenPullRequest[],
+  longLived: ReadonlySet<string> = new Set()
 ): T.NonEmpty<T.PrContext> {
   const byNumber = new Map(open.map((pr) => [pr.number, pr]));
   // A base ref belongs to this repository. A fork head with the same name
-  // cannot be its parent, even when that name is the default branch.
+  // cannot be its parent, even when that name is the default branch. A
+  // long-lived head (main in main -> prod, develop in develop -> main) is an
+  // integration branch, so its PR is a release, not a stack parent.
+  const outsideStack = (pr: T.OpenPullRequest): boolean =>
+    pr.isCrossRepository || longLived.has(pr.headRefName);
   const byHead = new Map(
-    open.filter((pr) => !pr.isCrossRepository).map((pr) => [pr.headRefName, pr])
+    open.filter((pr) => !outsideStack(pr)).map((pr) => [pr.headRefName, pr])
   );
   const children = new Map<string, T.OpenPullRequest[]>();
   for (const pr of open)
@@ -682,7 +708,7 @@ export function orderStack(
   }
   const up: T.OpenPullRequest[] = [];
   const visit = (parent: T.OpenPullRequest): void => {
-    if (parent.isCrossRepository) return;
+    if (outsideStack(parent)) return;
     for (const child of children.get(parent.headRefName) ?? []) {
       if (seen.has(child.number)) continue;
       seen.add(child.number);
@@ -704,5 +730,9 @@ export async function discoverStack(
   reader: T.GitHubReader,
   context: T.PrContext
 ): Promise<T.NonEmpty<T.PrContext>> {
-  return orderStack(context, await reader.openPullRequests(context));
+  const [open, longLived] = await Promise.all([
+    reader.openPullRequests(context),
+    reader.longLivedBranches(context),
+  ]);
+  return orderStack(context, open, longLived);
 }

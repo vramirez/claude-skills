@@ -396,6 +396,10 @@ export interface GitHubReader {
   currentPr(pr: PrNumber | null): Promise<PrContext>;
   pullRequest(context: PrContext): Promise<PullRequestFacts>;
   openPullRequests(repository: Repository): Promise<readonly OpenPullRequest[]>;
+  /** The default branch plus protected branches (unless protection is a
+   *  blanket rule): the repo's integration branches, which a stack sits on
+   *  but never contains. */
+  longLivedBranches(repository: Repository): Promise<ReadonlySet<string>>;
   checksFastPath(context: PrContext): Promise<ChecksFastPath>;
   checkRollupPage(
     context: PrContext,
