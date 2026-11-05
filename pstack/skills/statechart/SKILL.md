@@ -16,9 +16,9 @@ Work in a scratch folder outside the repo. Write a TLA+ spec and its config. The
 <skill dir>/scripts/statechart SPEC.tla [--config FILE] [--view FILE] [--out DIR]
 ```
 
-`scripts/statechart.ts` is TypeScript, so run it with a runtime that can execute TypeScript.
+`<skill dir>` is the folder that holds this SKILL.md. `scripts/statechart.ts` is TypeScript, and the launcher runs it with Node 22.18 or later, Bun 1.1.5 or later, or Deno 2.0 or later. If none is installed, say so to the user.
 
-The first run installs TLC and Java with mise and needs the network.
+The first run installs TLC and Java with mise and needs the network. Without mise, set `TLA2TOOLS` to the path of `tla2tools.jar` and `JAVA` to a Java 11 or later binary.
 
 ## Write the spec
 
@@ -71,7 +71,7 @@ Aim for about 20 arrows or fewer, because a busier chart is hard to read. First 
 
 ## Show the chart
 
-Show `chart.mmd` to the user as a `mermaid` code block. The chart has a budget of 500 states, counted by TLC on the config as written. Above that, the chart draws only the paths to the rules that break, and when no rule breaks, the command writes no `chart.mmd`. It still checks each rule, and the report gives the state count and each bug path. To see the whole graph, make the model smaller.
+Show `chart.mmd` to the user as a `mermaid` code block. While Claude Code cannot show images in a reply, also render it to SVG as `references/render.md` says, and give the SVG's absolute path so the user can open it in a browser. The chart has a budget of 500 states, counted by TLC on the config as written. Above that, the chart draws only the paths to the rules that break, and when no rule breaks, the command writes no `chart.mmd`. It still checks each rule, and the report gives the state count and each bug path. To see the whole graph, make the model smaller.
 
 Render charts with Pele. When the user asks for an image, or a chart is too large to read as text, follow `references/render.md`. Do not use a different renderer unless the user asks for it.
 
