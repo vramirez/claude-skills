@@ -4,7 +4,7 @@
 
 The repo's rules live in its instruction files and its checks, never in a review-only rules file. Read them, run them, judge the rest.
 
-1. **Spawn the reviewer.** One subagent on the model your `hardest tasks` role maps to, the strongest you have. Never the agent that wrote the code, even when the parent already runs that model. Hand it file pointers, not pasted context: the diff range or PR number, the stated intent, and this playbook.
+1. **Spawn the reviewer.** One subagent on the model your `hardest tasks` role maps to, the strongest you have. Pick its effort for the job, per the Subagents section. Never the agent that wrote the code, even when the parent already runs that model. Hand it file pointers, not pasted context: the diff range or PR number, the stated intent, and this playbook.
 2. **Learn the repo's rules from the repo.** Read the instruction files (`CLAUDE.md`, `AGENTS.md`, nested ones on changed paths) and the CI config. A rule written there binds the review. A rule CI already enforces is not a finding.
 3. **Run the checks, don't re-derive them.** Run the tests and linters that cover the changed paths. A red check is a finding with its output as evidence.
 4. **Trace what the diff touches beyond itself.** Changed fields, enum choices, signatures, and public names go through the **blast-radius** skill. Callers in other modules count.
