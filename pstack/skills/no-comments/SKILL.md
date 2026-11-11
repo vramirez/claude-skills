@@ -14,6 +14,8 @@ Defer to Comment Sicko's fresh perspective.
 
 Use the caller's files or diff. Otherwise use the current diff against the base branch, default `main`, including the working tree.
 
+When no file in scope can hold a code comment, as with Markdown, JSON, or images, report `nothing in scope` and stop. Do not spawn.
+
 ## Steps
 
 1. Spawn an `Agent` with `subagent_type: "pstack:comment-sicko"`. Pass the scope. Run it at `effort: medium`, since the pass is a routine code edit, unless the Subagents section of the **poteto-mode** skill or a `/setup-pstack` rule sets another. Do not restate its rules.
