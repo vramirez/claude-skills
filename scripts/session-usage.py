@@ -6,6 +6,11 @@ Usage: session-usage.py <transcript-dir> [--skip SESSION_ID ...]
 <transcript-dir> is one project's folder under ~/.claude/projects/. Each session is
 `<id>.jsonl`, and its subagents are `<id>/subagents/*.jsonl`. The report reads token
 counters, tool names, and the inputs of Read and Agent calls. It prints no message text.
+`--skip` takes a full session id or the 8-character prefix that the report prints.
+
+A continued session replays the calls of the session before it. Each call counts once,
+in the first transcript that holds it. A `<synthetic>` row is an error notice that made
+no API call, so the report leaves it out.
 
 Context is the input side of one API call: fresh input plus cache writes plus cache
 reads, in tokens. `first_ctx` is the context of a transcript's first call, so it is what
@@ -28,14 +33,18 @@ CONTEXT_FIELDS = (
 )
 
 
+def context_of(usage):
+    return sum(usage.get(field) or 0 for field in CONTEXT_FIELDS)
+
+
 def read_transcript(path):
-    """Return the API calls and the tool uses of one transcript.
+    """Return the API calls and the tool uses of one transcript, each keyed by its id.
 
     A call streams as several rows that share a message id. The last row carries the
     final usage, and each row carries its own content blocks.
     """
     calls, tool_uses = {}, {}
-    with open(path, errors="replace") as transcript:
+    with open(path, encoding="utf-8", errors="replace") as transcript:
         for line in transcript:
             try:
                 row = json.loads(line)
@@ -46,6 +55,7 @@ def read_transcript(path):
                 row.get("type") != "assistant"
                 or not message.get("usage")
                 or not message.get("id")
+                or message.get("model") == "<synthetic>"
             ):
                 continue
             calls[message["id"]] = (
@@ -56,26 +66,38 @@ def read_transcript(path):
             for block in message.get("content") or []:
                 if block.get("type") == "tool_use":
                     tool_uses[block["id"]] = block
-    return calls.values(), tool_uses.values()
+    return calls, tool_uses
 
 
-def summarize(path):
+def take_uncounted(rows, counted):
+    """Return the rows that no earlier transcript held, and record every id as counted.
+
+    A continued session replays the rows of the session before it under the same ids.
+    """
+    uncounted = [row for row_id, row in rows.items() if row_id not in counted]
+    counted.update(rows)
+    return uncounted
+
+
+def summarize(path, counted):
     calls, tool_uses = read_transcript(path)
+    first_ctx = context_of(next(iter(calls.values()))[2]) if calls else 0
     contexts, efforts = [], collections.Counter()
     spawns, skill_reads = collections.Counter(), collections.Counter()
     output = thinking = 0
     model = "?"
-    for effort, model, usage in calls:
-        contexts.append(sum(usage.get(field) or 0 for field in CONTEXT_FIELDS))
+    for effort, model, usage in take_uncounted(calls, counted):
+        contexts.append(context_of(usage))
         output += usage.get("output_tokens") or 0
         thinking += (usage.get("output_tokens_details") or {}).get(
             "thinking_tokens"
         ) or 0
         efforts[str(effort)] += 1
-    for block in tool_uses:
+    for block in take_uncounted(tool_uses, counted):
         count_tool_use(block, spawns, skill_reads)
     return {
         "model": model,
+        "first_ctx": first_ctx,
         "contexts": contexts,
         "output": output,
         "thinking": thinking,
@@ -91,7 +113,7 @@ def count_tool_use(block, spawns, skill_reads):
         spawns[
             (
                 args.get("subagent_type", "default"),
-                args.get("model", "parent"),
+                args.get("model", "unset"),
                 args.get("effort", "unset"),
             )
         ] += 1
@@ -107,7 +129,7 @@ def print_row(label, summary):
         f"{effort}x{count}" for effort, count in summary["efforts"].items()
     )
     print(
-        f"{label:<22} {summary['model']:<18} calls={len(contexts):>4} first_ctx={contexts[0]:>7,} "
+        f"{label:<22} {summary['model']:<18} calls={len(contexts):>4} first_ctx={summary['first_ctx']:>7,} "
         f"mean_ctx={sum(contexts) // len(contexts):>7,} max_ctx={max(contexts):>7,} "
         f"output={summary['output']:>7,} thinking={share:>2}% effort={efforts}"
     )
@@ -115,7 +137,7 @@ def print_row(label, summary):
 
 def print_totals(summaries):
     context = sum(sum(s["contexts"]) for s in summaries)
-    fixed = sum(s["contexts"][0] * len(s["contexts"]) for s in summaries)
+    fixed = sum(s["first_ctx"] * len(s["contexts"]) for s in summaries)
     output = sum(s["output"] for s in summaries)
     print(
         f"\ncontext tokens {context:,}, output tokens {output:,}, "
@@ -136,10 +158,10 @@ def main():
     parser.add_argument("transcript_dir")
     parser.add_argument("--skip", nargs="*", default=[], metavar="SESSION_ID")
     args = parser.parse_args()
-    summaries = []
+    summaries, counted = [], set()
     for path in sorted(glob.glob(os.path.join(args.transcript_dir, "*.jsonl"))):
         session = os.path.basename(path)[: -len(".jsonl")]
-        if session in args.skip:
+        if session.startswith(tuple(args.skip)):
             continue
         subagents = sorted(
             glob.glob(
@@ -150,7 +172,7 @@ def main():
             (session[:8], path),
             *(("  subagent", sub) for sub in subagents),
         ]:
-            summary = summarize(transcript)
+            summary = summarize(transcript, counted)
             if summary["contexts"]:
                 print_row(label, summary)
                 summaries.append(summary)
