@@ -14,7 +14,7 @@ Defer to Comment Sicko's fresh perspective.
 
 Use the caller's files or diff. Otherwise use the current diff against the base branch, default `main`, including the working tree.
 
-When no file in scope can hold a code comment, as with Markdown, JSON, or images, report `nothing in scope` and stop. Do not spawn.
+When no file in scope can hold a code comment, as with Markdown, strict JSON, or images, report `nothing in scope` and stop. Do not spawn. JSON that allows comments, such as `tsconfig.json`, stays in scope.
 
 ## Steps
 
