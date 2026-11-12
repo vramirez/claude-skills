@@ -128,6 +128,6 @@ You might be wondering whether every change needs this. No. Most changes need no
 - A contested design that's expensive to reverse gets `/architect`, then `/interrogate` before shipping.
 - Work that spans several PRs gets a plan, written after the design settles.
 
-`/poteto-mode` already applies this ladder. Boundary-crossing work triggers `/architect` on its own, so you reach for these directly mainly when you want more or less scrutiny than the default.
+`/poteto-mode` already applies this ladder. It sizes each change first. A micro change (one file, about 20 lines) and a small change (up to three files, about 100 lines) skip `/architect`. Full-size work that crosses a function boundary triggers it on its own, so you reach for these directly mainly when you want more or less scrutiny than the default.
 
 Next: [Build and clean the change](./05-build-and-clean.md).

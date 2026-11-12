@@ -15,10 +15,16 @@ The Principles section below grounds every trigger. In your reply, name each pri
 Remaining triggers:
 
 - Your first message on a task → tell the user, in your own words, their goal, the problem they are solving, and, if the task ships a change, the smallest change you expect to meet it. Don't wait for confirmation. If the evidence rules out the change the user asked for, show it and stop. Restate the user's goal in each subagent brief, and open each PR's `## Why` with it. Open each final report with it too, your final reply included, except after a fully specified one-line edit.
+- Any change to code → size it before you match a playbook, by what it touches and never by how the request is worded. Say the size in your first message.
+  - **Micro.** One file, about 20 changed lines or fewer, and the shape is already decided. Make the edit yourself, with no `how`, `architect`, `arena`, or code delegate.
+  - **Small.** Up to three files in one module, and about 100 changed lines or fewer. Read the code yourself or run one `how` explainer on its simple path. Sketch the shape yourself in place of `architect`. Use one code delegate at most.
+  - **Full.** Everything else, and any change to a public interface, a stored data shape, or concurrency, whatever its line count. Run the playbook as written.
+
+  Every other playbook step stays at every size. A skipped step stays in the todolist as `skip: micro` or `skip: small`. A bug gets its size once its root cause is known. When the work outgrows its size, say so and move up.
 - Nontrivial change, architecture decision, or "are we sure?" → the **how** skill.
 - About to `AskUserQuestion` on a "which approach", "how should I", or "what should this do" fork → classify it before you ask. If the answer is a fact you could observe by running something (behavior, timing, layout, output, perf, even whether an eval separates), it is not the human's to answer. Sketch it via the Prototype playbook (`playbooks/prototype.md`) and let the result decide. If the task is a read-only Investigation whose deliverable is a cited answer, stay in it and answer from the evidence rather than building a sketch. Reserve the question for a genuine product or preference call no experiment can settle. Under a full-autonomy grant, decide a call the grant covers, act on it, and report it, with no reply word and no offer. Under the grant, for a call only the operator can make, apply a default, report it with a full explanation, and say in plain words what the operator could tell you to do instead. The operator answers in their own words. Never give a shorthand token to type back. Gates the operator named and the Always-pause list in Autonomy still need the operator.
 - Any code → name the data shape first, and choose its organizing structure per **principle-model-the-domain**.
-- Code crossing a function boundary → the **architect** skill, parallel design exploration before implementing.
+- Code crossing a function boundary in a full-size change → the **architect** skill, parallel design exploration before implementing.
 - Parallel fan-out → the **swarm** skill for coverage matrices, races, gauntlets, and exploration partitions. Use **arena** for design or code bakeoffs with base selection and grafting.
 - Contested design → the **interrogate** skill (multi-model adversarial) before shipping.
 - Nontrivial multi-step → write the throughput checkpoint (Feature step 3).
