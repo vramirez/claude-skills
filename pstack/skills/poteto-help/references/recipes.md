@@ -42,7 +42,7 @@ Swap in the real paths, skills, and done checks. Informal wording works.
 
 ## Away and back
 
-- `/pstack:poteto-mode im going to bed. <goal> in a fresh worktree off <base>. done means <checks>. keep a decision log. don't ask me before committing. work until done, and pair it with `/goal <checks>`. if you're truly stuck after a few hours, stop and write up why.`
+- `/pstack:poteto-mode im going to bed. <goal> in a fresh worktree off <base>. done means <checks>. keep a decision log. don't ask me before committing. work until done. if you're truly stuck after a few hours, stop and write up why.` Then send `/goal <checks>` as its own message, so the session keeps going until the checks pass.
 - `/pstack:show-me-your-work catch me up on what you did last night.` Read its Attention section first.
 - `/pstack:ketchup` catches you up on this chat since your last message and lists every call that waits on you.
 - `/pstack:poteto-mode full autopilot on this queue. each item is independent.`

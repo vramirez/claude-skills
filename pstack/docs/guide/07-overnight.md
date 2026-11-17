@@ -26,13 +26,19 @@ keep a decision log. don't ask me before committing.
 work until done. if you're truly stuck after a few hours, stop and write up why.
 ```
 
+Then send the finish condition as its own message. A slash command runs only at the start of a message, so `/goal` inside the prompt above would do nothing:
+
+```text
+/goal zero old callers, all parser fixtures pass, old api deleted
+```
+
 Walk through what each line buys you:
 
 - "im going to bed" is a session override. The agent stops asking and keeps going.
 - "done means..." turns the goal into checks every iteration can run.
 - "fresh worktree off `<base>`" keeps the run from colliding with anything else you have open.
 - "don't ask me before committing" pre-answers the permission the agent would otherwise block on.
-- Pair the prompt with Claude Code's built-in `/goal` command, not a pstack skill, and give it the same done checks. `/goal` keeps the session working until the condition holds.
+- "work until done" tells the agent not to stop early. `/goal` is Claude Code's built-in, not a pstack skill, and it keeps the session working until its condition holds, so give it the same checks as "done means".
 - `/loop` is Claude Code's built-in timer. The [Autonomous run playbook](../../skills/poteto-mode/playbooks/autonomous-run.md) uses it as a heartbeat to re-check progress between events.
 - The escape hatch lets it stop at a genuine dead end and write up why, which beats eight hours of creative goal reinterpretation.
 

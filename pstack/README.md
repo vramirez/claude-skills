@@ -23,7 +23,7 @@ fork it. improve it. make it yours. PRs are welcome!
 
 claude code leaves auto-update off for third-party marketplaces, so pstack stays on the version you installed. to turn it on, run `/plugin`, open the **marketplaces** tab, select `claude-skills`, and choose **enable auto-update**. to update once by hand, run `claude plugin update pstack@claude-skills`.
 
-claude code prefixes plugin commands and agents, so `/pstack:poteto-mode` is `/pstack:poteto-mode` when you type it. this readme and the guide write the short name. `/pstack:setup-pstack` writes your model choices to `~/.claude/rules/pstack-models.md`.
+claude code prefixes plugin commands and agents, so you type pstack commands with the `pstack:` prefix, such as `/pstack:poteto-mode`. this readme and the guide write every command that way. `/pstack:setup-pstack` writes your model choices to `~/.claude/rules/pstack-models.md`.
 
 ## get started
 
@@ -252,7 +252,7 @@ twenty-four short skills, one principle each. `poteto-mode` indexes them inline 
 
 a few things `poteto-mode` references but doesn't bundle:
 
-- `/cursor-team-kit:deslop` and the `deslop` skill ship in the `cursor-team-kit` plugin from this same marketplace.
+- `/cursor-team-kit:deslop` ships in the `cursor-team-kit` plugin from this same marketplace.
 - `control-cli` (for CLIs and TUIs) and `control-ui` (for browser, Electron, web) ship in `cursor-team-kit` too.
 - `skill-creator` ships in anthropic's `claude-plugins-official` marketplace.
 
