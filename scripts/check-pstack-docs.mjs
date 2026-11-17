@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 // Lists pstack's skills, playbooks, and agents from the tree and checks what pstack/README.md and pstack/docs/guide
-// say about them: slash commands, relative links and anchors, the README tables, counts, and model names.
-// Exits 1 when the docs drift from the tree.
+// say about them: slash commands, relative links and anchors, the README tables, counts, and model names. Slash
+// commands are also checked in every skill and agent file. Exits 1 when the docs drift from the tree.
 
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, join, posix } from "node:path";
@@ -15,7 +15,10 @@ const SETUP = join(PSTACK, "skills", "setup-pstack", "SKILL.md");
 
 // Commands that ship with Claude Code, not in this repository. Nothing here can verify them, so add a name only after a
 // public Claude Code doc shows it.
-const EXTERNAL = new Set(["code-review", "goal", "loop", "plugin"]);
+const EXTERNAL = new Set(["code-review", "goal", "loop", "mcp", "plugin"]);
+// Commands from other plugins whose prefix depends on where the user installed them, so the docs write them bare.
+// `orchestrate` is named only to say pstack has no such command.
+const ELSEWHERE = new Set(["orchestrate", "skill-creator"]);
 // Subagent types that ship with Claude Code. A pstack agent must be written `pstack:<name>`, because Claude Code
 // prefixes plugin agents.
 const BUILTIN_AGENTS = new Set(["general-purpose", "Explore"]);
@@ -24,7 +27,8 @@ const SMALL = "zero one two three four five six seven eight nine ten eleven twel
 const TENS = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
 // "The twenty-three playbooks" claims the whole set. "Three playbooks scale it up" names a subset, so it is not checked.
 const CLAIM = /\b(?:(all|has|of|ships|the|with) )?(\d+|[a-z]+(?:-[a-z]+)?) (short )?(skills|principles|playbooks|agents)\b/gi;
-const SLASH = /(?<=^|[\s`(|"'>])\/(?:pstack:)?([a-z][a-z0-9-]*)(?![\w/<-]|:<)/gm;
+// Not a command: a path segment such as `<id>/replies` or `/notes.md`, or a placeholder such as `/pstack:principle-<name>`.
+const SLASH = /(?<=^|[\s`(|"']|(?<![\w-])>)\/(?:(pstack|cursor-team-kit):)?([a-z][a-z0-9-]*)(?![\w/<:-]|\.\w)/gm;
 const LINK = /\]\(<?([^)\s>]+)>?(?:\s+"[^"]*")?\)/g;
 const AGENT = /subagent_type: "([^"]+)"/g;
 const MODEL_ID = /\b(?:claude-[a-z]+|grok|gpt)-\d(?:[\w.-]*\w)?/g;
@@ -35,6 +39,13 @@ function names(dir, keep) {
 }
 const isSkill = (path) => existsSync(join(path, "SKILL.md"));
 const isMarkdown = (path) => path.endsWith(".md") && statSync(path).isFile();
+function markdownUnder(dir, base) {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const rel = posix.join(base, entry.name);
+    if (entry.isDirectory()) return markdownUnder(join(dir, entry.name), rel);
+    return entry.name.endsWith(".md") ? [rel] : [];
+  });
+}
 
 const skills = names(join(PSTACK, "skills"), isSkill);
 const principles = skills.filter((name) => name.startsWith("principle-"));
@@ -44,10 +55,16 @@ const agents = names(join(PSTACK, "agents"), isMarkdown).map((name) => name.slic
 const teamKit = names(join(ROOT, "cursor-team-kit", "skills"), isSkill);
 const docs = ["README.md", ...names(join(PSTACK, GUIDE), isMarkdown).map((name) => `${GUIDE}/${name}`)];
 const text = new Map(docs.map((doc) => [doc, readFileSync(join(PSTACK, doc), "utf8")]));
+const skillText = new Map(
+  [...markdownUnder(join(PSTACK, "skills"), "skills"), ...markdownUnder(join(PSTACK, "agents"), "agents")].map((file) => [
+    file,
+    readFileSync(join(PSTACK, file), "utf8"),
+  ]),
+);
 const setup = readFileSync(SETUP, "utf8");
 
 const problems = [];
-const lineOf = (doc, index) => text.get(doc).slice(0, index).split("\n").length;
+const lineOf = (doc, index) => (text.get(doc) ?? skillText.get(doc)).slice(0, index).split("\n").length;
 const fail = (doc, index, message) => problems.push(`${doc}:${lineOf(doc, index)} ${message}`);
 
 function toNumber(word) {
@@ -75,6 +92,27 @@ function anchors(path) {
   return found;
 }
 
+// A command the reader types is written with its plugin prefix: `/pstack:how`, `/cursor-team-kit:deslop`. Claude Code's
+// own commands take none. Exempt: skill frontmatter (trigger phrases match what a user might say), image alt text, and
+// a phrase in double quotes, which quotes the user.
+function slashCommands(doc, body) {
+  const frontmatter = body.match(/^---\n[\s\S]*?\n---\n/)?.[0].length ?? 0;
+  const found = [];
+  for (const { 1: plugin, 2: name, index } of body.matchAll(SLASH)) {
+    if (index < frontmatter) continue;
+    const line = body.slice(body.lastIndexOf("\n", index) + 1, index);
+    if (/!\[[^\]]*$/.test(line) || body[index - 1] === '"') continue;
+    const owner = skills.includes(name) ? "pstack" : teamKit.includes(name) ? "cursor-team-kit" : EXTERNAL.has(name) || ELSEWHERE.has(name) ? "" : null;
+    if (owner === null) fail(doc, index, `names /${name}, which no pstack skill, cursor-team-kit skill, or listed built-in provides`);
+    else if ((plugin ?? "") !== owner) {
+      const written = plugin ? `${plugin}:${name}` : name;
+      fail(doc, index, `writes /${written}, but the command is typed ${owner ? `/${owner}:${name}` : `/${name}`}`);
+    }
+    found.push({ name, index });
+  }
+  return found;
+}
+
 const expected = {
   skills: [skills.length, commands.length],
   principles: [principles.length],
@@ -93,12 +131,9 @@ for (const [doc, body] of text) {
       fail(doc, index, `says "${match}", but the tree has ${expected[kind].join(" or ")}`);
     }
   }
-  for (const { 1: name, index } of body.matchAll(SLASH)) {
+  for (const { name, index } of slashCommands(doc, body)) {
     slashes++;
     if (skills.includes(name)) named.get(doc).add(name);
-    else if (!teamKit.includes(name) && !EXTERNAL.has(name)) {
-      fail(doc, index, `names /${name}, which no pstack skill, cursor-team-kit skill, or listed built-in provides`);
-    }
   }
   for (const { 1: href, index } of body.matchAll(LINK)) {
     if (/^[a-z][a-z0-9+.-]*:/i.test(href)) continue;
@@ -126,6 +161,8 @@ for (const [doc, body] of text) {
     if (!setup.includes(prefix)) fail(doc, index, `says "${match}", but setup-pstack has no ${prefix} default`);
   }
 }
+
+for (const [file, body] of skillText) slashCommands(file, body);
 
 const readme = text.get("README.md");
 for (const skill of skills) {

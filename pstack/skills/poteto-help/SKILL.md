@@ -1,6 +1,6 @@
 ---
 name: poteto-help
-description: Guides users through pstack setup, /poteto-mode, and picking the skill, playbook, or principle for a task. Type /poteto-help with a question.
+description: Guides users through pstack setup, /poteto-mode, and picking the skill, playbook, or principle for a task. Type /pstack:poteto-help with a question.
 disable-model-invocation: true
 ---
 
@@ -43,7 +43,7 @@ Installing changes nothing until the user invokes a skill. Only `/pstack:setup-p
 
 If cost is the worry, say where the tokens go and how to spend fewer. pstack spends extra tokens on subagents and review panels. Rerun `/pstack:setup-pstack` and pick a smaller budget or cheaper models. A role set to `inherit-parent` runs on the chat's model, which saves tokens when the chat runs on a cheaper model. A shorter panel list runs fewer subagents, one for each entry. Save `/pstack:poteto-mode` for work that needs rigor.
 
-This pstack is a Claude Code-only fork of poteto's pstack. Other tools can read the skills, because they use the Agent Skills format. But most workflow skills, including `/pstack:poteto-mode`, `/pstack:how`, `/pstack:why`, and `/pstack:teach`, spawn Claude Code subagents with per-role models, and `/loop` is a Claude Code command, so those parts may not work there.
+This pstack is a Claude Code-only fork of poteto's pstack. Other tools can read the skills, because they use the Agent Skills format. But most workflow skills, including `/pstack:poteto-mode`, `/pstack:how`, `/pstack:why`, and `/pstack:teach`, spawn Claude Code subagents with per-role models, and `/goal` and `/loop` are Claude Code commands, so those parts may not work there.
 
 ## Start a task with `/pstack:poteto-mode`
 
@@ -106,8 +106,8 @@ Close calls:
 
 Not in pstack:
 
-- `/deslop`, `control-cli`, and `control-ui` ship in the `cursor-team-kit` plugin, from the same `claude-skills` marketplace.
-- `/loop` is a Claude Code built-in. `skill-creator` ships in Anthropic's `claude-plugins-official` marketplace.
+- `/cursor-team-kit:deslop`, `control-cli`, and `control-ui` ship in the `cursor-team-kit` plugin, from the same `claude-skills` marketplace.
+- `/goal` and `/loop` are Claude Code built-ins. `skill-creator` ships in Anthropic's `claude-plugins-official` marketplace.
 - pstack has no `/orchestrate` skill. Orchestrate is a `/pstack:poteto-mode` playbook. If the slash menu shows `/orchestrate`, another plugin provides it.
 
 ## Playbooks and principles
@@ -137,7 +137,7 @@ Principles are one-rule skills that `/pstack:poteto-mode` reads and cites in its
 | Runs cost more than expected | See the cost paragraph under Get set up. |
 | A skill didn't load on its own | Only `/pstack:setup-pstack` loads from the user's words. The others load when the user types them or when `/pstack:poteto-mode` runs them, and it doesn't run every skill. |
 | Parallel agents overwrote each other | Give each agent its own worktree, with `isolation: "worktree"` on its `Agent` call. |
-| An overnight run moved but finished nothing | `/loop` needs a check that can pass or fail, not a duration. See [guide page 7](../../docs/guide/07-overnight.md). |
+| An overnight run moved but finished nothing | `/goal` needs a check that can pass or fail, not a duration. See [guide page 7](../../docs/guide/07-overnight.md). |
 | The reply claims success from a green build | Ask for the real command, flow, stored value, or profile. That's the prove-it-works principle. |
 
 For a run that drifts, [`references/prompting.md`](references/prompting.md) has one-line steers. [Guide page 10](../../docs/guide/10-recipes-and-pitfalls.md) has more pitfalls and the recipes worth copying.
