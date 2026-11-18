@@ -128,6 +128,6 @@ You might be wondering whether every change needs this. No. Most changes need no
 - A contested design that's expensive to reverse gets `/pstack:architect`, then `/pstack:interrogate` before shipping.
 - Work that spans several PRs gets a plan, written after the design settles.
 
-`/pstack:poteto-mode` already applies this ladder. Boundary-crossing work triggers `/pstack:architect` on its own, so you reach for these directly mainly when you want more or less scrutiny than the default.
+`/pstack:poteto-mode` already applies this ladder, after it sizes the change. A micro change (one file, about 20 lines, the shape already decided) and a small change (up to three files in one module, about 100 lines) skip `/pstack:architect`, even across a function boundary. A change to a public interface, a stored data shape, or concurrency is full size whatever its line count. Full-size work that crosses a function boundary triggers `/pstack:architect` on its own, so you reach for these skills directly mainly when you want more or less scrutiny than the default.
 
 Next: [Build and clean the change](./05-build-and-clean.md).
